@@ -1,9 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Splash">
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/text_loteca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loteca"
+        android:fontFamily="@font/noot"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:alpha="0.5"/>
+
+    <TextView
+        android:id="@+id/text_do"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noot"
+        android:text="@string/do_tola"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:alpha="0.5"/>
+
+    <TextView
+        android:id="@+id/text_betola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noot"
+        android:text="@string/betola"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:alpha="0.5"/>
+</LinearLayout>

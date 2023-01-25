@@ -82,4 +82,7 @@
     <string name="visualizar_apostas">VISUALIZAR APOSTAS</string>
     <string name="cadastre_se">CADASTRE-SE</string>
     <string name="pagar">PAGAR</string>
+    <string name="loteca">LOTECA</string>
+    <string name="do_tola">DO</string>
+    <string name="betola">BETOLA</string>
 </resources>

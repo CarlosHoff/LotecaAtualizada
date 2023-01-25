@@ -62,7 +62,7 @@ public class Pagamento extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        startActivity(new Intent(Pagamento.this, TelaErro01.class));
                     }
                 }
         ){

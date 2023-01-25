@@ -63,7 +63,7 @@ public class Cadastro extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Intent intent = new Intent(Cadastro.this, Login.class);
+                        Intent intent = new Intent(Cadastro.this, TelaErro01.class);
                         startActivity(intent);
                     }
                 }

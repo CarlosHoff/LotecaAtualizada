@@ -75,7 +75,7 @@ public class Jogo extends AppCompatActivity {
         finalizarApostas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cartelaDeApostas == null) {
+                if (!cartelaDeApostas.isEmpty()) {
                     Long[] mapper = {
                             cartelaDeApostas.get(0),
                             cartelaDeApostas.get(1),

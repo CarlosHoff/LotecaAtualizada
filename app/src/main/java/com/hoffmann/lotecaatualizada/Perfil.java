@@ -96,6 +96,7 @@ public class Perfil extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        startActivity(new Intent(Perfil.this, TelaErro01.class));
                     }
                 }
         ) {
