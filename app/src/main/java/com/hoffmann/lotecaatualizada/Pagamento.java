@@ -57,12 +57,13 @@ public class Pagamento extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        startActivity(new Intent(Pagamento.this, TelaSucesso.class));
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        startActivity(new Intent(Pagamento.this, TelaErro01.class));
+                        error.getMessage();
                     }
                 }
         ){
