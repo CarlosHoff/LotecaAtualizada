@@ -1,16 +1,16 @@
-package com.hoffmann.lotecaatualizada.response;
+package com.hoffmann.lotecaatualizada.domain.dto;
 
 import java.io.Serializable;
 
-public class ApostasUsuario implements Serializable {
+public class ApostasUsuarioDto implements Serializable {
 
     private Long[] dezenas;
     private boolean selected;
 
-    public ApostasUsuario() {
+    public ApostasUsuarioDto() {
     }
 
-    public ApostasUsuario(Long[] dezenas) {
+    public ApostasUsuarioDto(Long[] dezenas) {
         this.dezenas = dezenas;
     }
 

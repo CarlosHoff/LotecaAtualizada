@@ -1,16 +1,14 @@
 package com.hoffmann.lotecaatualizada;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.hoffmann.lotecaatualizada.response.ApostasUsuario;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,8 +30,7 @@ public class Jogo extends AppCompatActivity {
 
 
     List<Long> cartelaDeApostas = new ArrayList<>();
-    List<ApostasUsuario> cartelaDeApostasFinal;
-    private RequestQueue queue;
+    List<ApostasUsuarioDto> cartelaDeApostasFinal;
     private String email, token;
 
     @Override
@@ -59,7 +56,7 @@ public class Jogo extends AppCompatActivity {
                         cartelaDeApostas.get(8),
                         cartelaDeApostas.get(9),
                 };
-                cartelaDeApostasFinal.add(new ApostasUsuario(mapper));
+                cartelaDeApostasFinal.add(new ApostasUsuarioDto(mapper));
 
                 Intent refresh = new Intent(Jogo.this, Jogo.class);
                 refresh.putExtra("email", getIntent().getExtras().getString("email"));
@@ -88,7 +85,7 @@ public class Jogo extends AppCompatActivity {
                             cartelaDeApostas.get(8),
                             cartelaDeApostas.get(9),
                     };
-                    cartelaDeApostasFinal.add(new ApostasUsuario(mapper));
+                    cartelaDeApostasFinal.add(new ApostasUsuarioDto(mapper));
                 }
 
                 Intent intent = new Intent(Jogo.this, ListaDeApostas.class);
@@ -132,7 +129,7 @@ public class Jogo extends AppCompatActivity {
         super.onStart();
         token = getIntent().getExtras().getString("token");
         email = getIntent().getExtras().getString("email");
-        cartelaDeApostasFinal = (List<ApostasUsuario>) getIntent().getExtras().getSerializable("cartelaDeApostasFinal");
+        cartelaDeApostasFinal = (List<ApostasUsuarioDto>) getIntent().getExtras().getSerializable("cartelaDeApostasFinal");
 
         if (cartelaDeApostasFinal == null) {
             cartelaDeApostasFinal = new ArrayList<>();
@@ -393,7 +390,6 @@ public class Jogo extends AppCompatActivity {
         valorTotalAposta = findViewById(R.id.valor_total_aposta);
         botaoApostar = findViewById(R.id.botao_apostar);
         finalizarApostas = findViewById(R.id.botao_finalizar_apostas);
-        queue = Volley.newRequestQueue(Jogo.this);
         um = findViewById(R.id.button1);
         dois = findViewById(R.id.button2);
         tres = findViewById(R.id.button3);

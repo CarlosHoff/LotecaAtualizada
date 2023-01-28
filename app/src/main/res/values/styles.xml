@@ -4,11 +4,11 @@
     <style name="texto_cadastro_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">16dp</item>
+        <item name="android:padding">13dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">#54FFFFFF</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:layout_margin">16sp</item>
+        <item name="android:layout_margin">13sp</item>
     </style>
 
     <style name="container_components_cadastro_style">
@@ -22,7 +22,7 @@
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_margin">2dp</item>
         <item name="android:textSize">11sp</item>
         <item name="android:background">@drawable/botao_redondo_selector</item>
         <item name="android:textColor">@drawable/button_selector</item>

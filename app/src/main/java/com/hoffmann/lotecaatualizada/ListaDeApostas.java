@@ -1,13 +1,5 @@
 package com.hoffmann.lotecaatualizada;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,9 +7,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.hoffmann.lotecaatualizada.response.ApostasUsuario;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
 import com.hoffmann.lotecaatualizada.utilitario.ApostaAdapter;
 
 import java.io.Serializable;
@@ -27,9 +24,8 @@ import java.util.List;
 public class ListaDeApostas extends AppCompatActivity {
 
     private Button botaoIrPagamento;
-    private List<ApostasUsuario> cartelaDeApostasFinal;
+    private List<ApostasUsuarioDto> cartelaDeApostasFinal;
     private ApostaAdapter adapter;
-    private RequestQueue queue;
     private String email, token;
     private RecyclerView recyclerView;
     private ActionMode actionMode;
@@ -104,8 +100,8 @@ public class ListaDeApostas extends AppCompatActivity {
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
                     adapter.getSelectedItems().clear();
-                    List<ApostasUsuario> apostasUsuarios = adapter.getApostasUsuarios();
-                    for (ApostasUsuario aposta : apostasUsuarios){
+                    List<ApostasUsuarioDto> apostasUsuarioDtos = adapter.getApostasUsuarios();
+                    for (ApostasUsuarioDto aposta : apostasUsuarioDtos){
                         if (aposta.isSelected()){
                             aposta.setSelected(false);
                         }
@@ -127,11 +123,10 @@ public class ListaDeApostas extends AppCompatActivity {
     }
 
     private void inciaComponente() {
-        queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recicleViewId);
         botaoIrPagamento = findViewById(R.id.botaoIrPagamento);
         Bundle bundle = getIntent().getExtras();
-        cartelaDeApostasFinal = (List<ApostasUsuario>) bundle.getSerializable("cartelaDeApostasFinal");
+        cartelaDeApostasFinal = (List<ApostasUsuarioDto>) bundle.getSerializable("cartelaDeApostasFinal");
     }
 
     @Override

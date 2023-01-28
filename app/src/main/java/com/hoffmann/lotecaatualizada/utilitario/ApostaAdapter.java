@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hoffmann.lotecaatualizada.R;
-import com.hoffmann.lotecaatualizada.response.ApostasUsuario;
+import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
 public class ApostaAdapter extends RecyclerView.Adapter<ApostaAdapter.ApostaViewHolder> {
 
     private Context context;
-    private List<ApostasUsuario> apostasUsuarios;
+    private List<ApostasUsuarioDto> apostasUsuarioDtos;
     private ApostaAdapterListener listener;
     SparseBooleanArray selectedItems = new SparseBooleanArray();
     private int currentPosition;
 
-    public ApostaAdapter(Context context, List<ApostasUsuario> apostasUsuarios) {
+    public ApostaAdapter(Context context, List<ApostasUsuarioDto> apostasUsuarioDtos) {
         this.context = context;
-        this.apostasUsuarios = apostasUsuarios;
+        this.apostasUsuarioDtos = apostasUsuarioDtos;
     }
 
     @NonNull
@@ -38,7 +38,7 @@ public class ApostaAdapter extends RecyclerView.Adapter<ApostaAdapter.ApostaView
 
     @Override
     public void onBindViewHolder(@NonNull ApostaViewHolder holder, int position) {
-        ApostasUsuario aposta = apostasUsuarios.get(position);
+        ApostasUsuarioDto aposta = apostasUsuarioDtos.get(position);
             holder.dezenaUm.setText(String.valueOf(aposta.getDezenas()[0]));
             holder.dezenaDois.setText(String.valueOf(aposta.getDezenas()[1]));
             holder.dezenaTres.setText(String.valueOf(aposta.getDezenas()[2]));
@@ -74,29 +74,29 @@ public class ApostaAdapter extends RecyclerView.Adapter<ApostaAdapter.ApostaView
 
     @Override
     public int getItemCount() {
-        return apostasUsuarios.size();
+        return apostasUsuarioDtos.size();
     }
 
     public void toggleSelection(int position) {
         currentPosition = position;
         if (selectedItems.get(position)){
             selectedItems.delete(position);
-            apostasUsuarios.get(position).setSelected(true);
+            apostasUsuarioDtos.get(position).setSelected(true);
         } else {
             selectedItems.put(position, true);
-            apostasUsuarios.get(position).setSelected(true);
+            apostasUsuarioDtos.get(position).setSelected(true);
         }
         notifyItemChanged(position);
     }
 
     public void deletaApostas() {
-        List<ApostasUsuario> apostasDeletadas = new ArrayList<>();
-        for (ApostasUsuario aposta : this.apostasUsuarios) {
+        List<ApostasUsuarioDto> apostasDeletadas = new ArrayList<>();
+        for (ApostasUsuarioDto aposta : this.apostasUsuarioDtos) {
             if (aposta.isSelected()){
                 apostasDeletadas.add(aposta);
             }
         }
-        this.apostasUsuarios.removeAll(apostasDeletadas);
+        this.apostasUsuarioDtos.removeAll(apostasDeletadas);
         notifyDataSetChanged();
         currentPosition = -1;
     }
@@ -134,12 +134,12 @@ public class ApostaAdapter extends RecyclerView.Adapter<ApostaAdapter.ApostaView
         this.context = context;
     }
 
-    public List<ApostasUsuario> getApostasUsuarios() {
-        return apostasUsuarios;
+    public List<ApostasUsuarioDto> getApostasUsuarios() {
+        return apostasUsuarioDtos;
     }
 
-    public void setApostasUsuarios(List<ApostasUsuario> apostasUsuarios) {
-        this.apostasUsuarios = apostasUsuarios;
+    public void setApostasUsuarios(List<ApostasUsuarioDto> apostasUsuarioDtos) {
+        this.apostasUsuarioDtos = apostasUsuarioDtos;
     }
 
     public ApostaAdapterListener getListener() {

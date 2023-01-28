@@ -1,16 +1,13 @@
 package com.hoffmann.lotecaatualizada;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import org.json.JSONException;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 

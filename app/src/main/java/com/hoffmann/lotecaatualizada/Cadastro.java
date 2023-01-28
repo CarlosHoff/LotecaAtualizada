@@ -1,6 +1,6 @@
 package com.hoffmann.lotecaatualizada;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.USER_URL;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,24 +8,21 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.hoffmann.lotecaatualizada.utilitario.Utils;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.hoffmann.lotecaatualizada.client.UsuarioService;
+import com.hoffmann.lotecaatualizada.domain.request.CadastraUsuarioRequest;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Cadastro extends AppCompatActivity {
 
-    private TextView nome, email, celular, cpf, senha;
+    private TextView nome, apelido, email, celular, cpf, senha;
     private Button botaoCadastrar;
-    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,57 +39,54 @@ public class Cadastro extends AppCompatActivity {
         });
     }
 
-    private void requestCadastro(){
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                Utils.USER_URL + Utils.CADASTRO,
-                createRequestCadastro(),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(Cadastro.this, "Cadastro efetuado com sucesso, faça o login !!", Toast.LENGTH_LONG).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(Cadastro.this, Login.class);
-                                startActivity(intent);
-                            }
-                        }, 1000);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Intent intent = new Intent(Cadastro.this, TelaErro01.class);
-                        startActivity(intent);
-                    }
+    private void requestCadastro() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(USER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UsuarioService usuarioService = retrofit.create(UsuarioService.class);
+        Call<Void> cadastraUsuarioRequest = usuarioService.cadastraUsuario(createUsuarioRequest());
+
+        cadastraUsuarioRequest.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(Cadastro.this, Login.class);
+                            startActivity(intent);
+                        }
+                    }, 1000);
                 }
-        ){
-        };
-        queue.add(request);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
     }
 
-    private JSONObject createRequestCadastro() {
-        JSONObject object = new JSONObject();
-        try {
-            object.put("nome", nome.getText().toString());
-            object.put("email", email.getText().toString());
-            object.put("celular", celular.getText().toString());
-            object.put("cpf", cpf.getText().toString());
-            object.put("senha", senha.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return object;
+    private CadastraUsuarioRequest createUsuarioRequest() {
+        CadastraUsuarioRequest request = new CadastraUsuarioRequest();
+        request.setNome(nome.getText().toString());
+        request.setApelido(apelido.getText().toString());
+        request.setEmail(email.getText().toString());
+        request.setCelular(celular.getText().toString());
+        request.setCpf(cpf.getText().toString());
+        request.setSenha(senha.getText().toString());
+        return request;
     }
 
     private void iniciarComponentes() {
         nome = findViewById(R.id.nome_cadastro);
+        apelido = findViewById(R.id.apelido_cadastro);
         email = findViewById(R.id.email_cadastro);
         celular = findViewById(R.id.celular_cadastro);
         cpf = findViewById(R.id.cpf_cadastro);
         senha = findViewById(R.id.senha_cadastro);
         botaoCadastrar = findViewById(R.id.botao_cadastro);
-        queue = Volley.newRequestQueue(this);
     }
 }

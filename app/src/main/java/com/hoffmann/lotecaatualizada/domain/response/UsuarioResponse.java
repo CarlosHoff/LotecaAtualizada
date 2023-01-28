@@ -1,16 +1,18 @@
-package com.hoffmann.lotecaatualizada.response;
+package com.hoffmann.lotecaatualizada.domain.response;
 
-public class PerfilUsuario {
+public class UsuarioResponse {
 
     private String nome;
+    private String apelido;
     private String email;
     private String celular;
 
-    public PerfilUsuario() {
+    public UsuarioResponse() {
     }
 
-    public PerfilUsuario(String nome, String email, String celular) {
+    public UsuarioResponse(String nome, String apelido, String email, String celular) {
         this.nome = nome;
+        this.apelido = apelido;
         this.email = email;
         this.celular = celular;
     }
@@ -21,6 +23,14 @@ public class PerfilUsuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
     }
 
     public String getEmail() {

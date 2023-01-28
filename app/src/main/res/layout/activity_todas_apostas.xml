@@ -3,8 +3,7 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:padding="16dp"
     android:background="@drawable/card_view_todas_apostas"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/activity_lista_de_apostas">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,22 +12,12 @@
         android:background="@drawable/gradient_background">
 
         <TextView
-            android:id="@+id/numero_classificacao"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/contorno"
-            android:gravity="center"
-            android:textColor="@color/white"
-            tools:text="01" />
-
-        <TextView
             android:id="@+id/apelido"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginStart="10dp"
-            android:gravity="center_vertical"
-            android:layout_toEndOf="@+id/numero_classificacao"
-            android:layout_alignTop="@+id/numero_classificacao"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:layout_toStartOf="@+id/numero01"
             android:textColor="@color/white"
             android:text="BETOLA"/>
 
@@ -36,19 +25,18 @@
             android:id="@+id/nome"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:gravity="center_vertical"
+            android:gravity="center"
+            android:layout_marginEnd="3dp"
             android:layout_below="@+id/apelido"
             android:layout_alignStart="@+id/apelido"
-            android:layout_alignBottom="@+id/numero_classificacao"
+            android:layout_toStartOf="@+id/numero06"
             android:textColor="@color/white"
             android:text="BETOLA 2"/>
 
         <TextView
             android:id="@+id/numero01"
             style="@style/botao_quadrado_cardview"
-            android:layout_alignTop="@+id/numero_classificacao"
             android:layout_alignBottom="@+id/apelido"
-            android:layout_margin="3dp"
             android:layout_marginStart="3dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="3dp"
@@ -60,7 +48,6 @@
             android:id="@+id/numero02"
             style="@style/botao_quadrado_cardview"
             android:layout_margin="3dp"
-            android:layout_alignTop="@+id/numero_classificacao"
             android:layout_toStartOf="@+id/numero03"
             android:layout_alignBottom="@+id/apelido"
             android:text="02"/>
@@ -69,7 +56,6 @@
             android:id="@+id/numero03"
             style="@style/botao_quadrado_cardview"
             android:layout_margin="3dp"
-            android:layout_alignTop="@+id/numero_classificacao"
             android:layout_toStartOf="@+id/numero04"
             android:layout_alignBottom="@+id/apelido"
             android:text="03"/>
@@ -78,7 +64,6 @@
             android:id="@+id/numero04"
             style="@style/botao_quadrado_cardview"
             android:layout_margin="3dp"
-            android:layout_alignTop="@+id/numero_classificacao"
             android:layout_toStartOf="@+id/numero05"
             android:layout_alignBottom="@+id/apelido"
             android:text="04"/>
@@ -90,7 +75,6 @@
             android:layout_marginBottom="3dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="10dp"
-            android:layout_alignTop="@+id/numero_classificacao"
             android:layout_toStartOf="@+id/numero_acertos"
             android:layout_alignBottom="@+id/apelido"
             android:text="05"/>
@@ -104,7 +88,6 @@
             android:layout_below="@+id/numero01"
             android:layout_alignStart="@+id/numero01"
             android:layout_alignTop="@+id/nome"
-            android:layout_alignBottom="@+id/numero_classificacao"
             android:text="06"/>
         
         <TextView

@@ -87,4 +87,6 @@
     <string name="loteca">LOTECA</string>
     <string name="do_tola">DO</string>
     <string name="betola">BETOLA</string>
+    <string name="lista_geral_apostas">LISTA GERAL DE APOSTAS</string>
+    <string name="digite_seu_apelido">Digite seu apelido</string>
 </resources>

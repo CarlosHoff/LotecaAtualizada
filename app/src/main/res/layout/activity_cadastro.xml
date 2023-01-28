@@ -24,7 +24,7 @@
         android:text="@string/cadastre_se"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="@id/iv_logo"
         app:layout_constraintStart_toStartOf="@id/iv_logo"
         app:layout_constraintTop_toBottomOf="@id/iv_logo"/>
@@ -32,7 +32,7 @@
     <View
         android:id="@+id/form_cadastro_view"
         android:layout_width="wrap_content"
-        android:layout_height="340dp"
+        android:layout_height="370dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/texto_cadastro" />
@@ -48,6 +48,17 @@
         app:layout_constraintEnd_toEndOf="@id/form_cadastro_view"
         app:layout_constraintTop_toTopOf="@id/form_cadastro_view"/>
 
+    <EditText
+        android:id="@+id/apelido_cadastro"
+        style="@style/texto_cadastro_style"
+        android:hint="@string/digite_seu_apelido"
+        android:textAlignment="center"
+        android:inputType="text"
+        android:background="@drawable/cadastro_shape"
+        app:layout_constraintStart_toStartOf="@id/nome_cadastro"
+        app:layout_constraintEnd_toEndOf="@id/nome_cadastro"
+        app:layout_constraintTop_toBottomOf="@id/nome_cadastro"/>
+
 
     <EditText
         android:id="@+id/email_cadastro"
@@ -56,9 +67,9 @@
         android:maxLength="27"
         android:background="@drawable/cadastro_shape"
         android:hint="@string/digite_seu_email" android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/form_cadastro_view"
-        app:layout_constraintEnd_toEndOf="@id/form_cadastro_view"
-        app:layout_constraintTop_toBottomOf="@id/nome_cadastro"
+        app:layout_constraintStart_toStartOf="@id/apelido_cadastro"
+        app:layout_constraintEnd_toEndOf="@id/apelido_cadastro"
+        app:layout_constraintTop_toBottomOf="@id/apelido_cadastro"
         />
 
     <EditText
@@ -99,7 +110,7 @@
         android:id="@+id/botao_cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="144dp"
         android:layout_weight="1"
         android:background="@drawable/background_button_selector"
