@@ -1,4 +1,4 @@
-package com.hoffmann.lotecaatualizada.utilitario;
+package com.hoffmann.lotecaatualizada.adapters;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hoffmann.lotecaatualizada.client.ApostaService;
 import com.hoffmann.lotecaatualizada.domain.response.TodasApostasResponse;
-import com.hoffmann.lotecaatualizada.utilitario.ListaDeApostasAdapter;
+import com.hoffmann.lotecaatualizada.adapters.ListaDeApostasAdapter;
 
 import java.util.List;
 

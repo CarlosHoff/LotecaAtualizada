@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
-import com.hoffmann.lotecaatualizada.utilitario.ApostaAdapter;
+import com.hoffmann.lotecaatualizada.adapters.ApostaAdapter;
 
 import java.io.Serializable;
 import java.util.Collections;
