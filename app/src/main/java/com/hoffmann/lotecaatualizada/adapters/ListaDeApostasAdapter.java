@@ -27,7 +27,7 @@ public class ListaDeApostasAdapter extends RecyclerView.Adapter<ListaDeApostasAd
     @NonNull
     @Override
     public ListaDeApostaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemLista = LayoutInflater.from(context).inflate(R.layout.activity_todas_apostas, parent, false);
+        View itemLista = LayoutInflater.from(context).inflate(R.layout.todas_apostas_2, parent, false);
         return new ListaDeApostaViewHolder(itemLista);
     }
 

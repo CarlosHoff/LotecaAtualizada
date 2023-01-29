@@ -8,18 +8,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:background="@drawable/gradient_background"
         android:layout_margin="0.5dp">
 
         <TextView
-            android:id="@+id/classificacao"
+            android:id="@+id/numero_acertos"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:text="01"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"/>
 
@@ -27,14 +28,17 @@
             android:id="@+id/nome"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="BETOLA HOFFMANN (Betola)"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
             android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/classificacao"/>
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toLeftOf="@+id/numero_acertos"
+            android:gravity="center"
+            android:text="BETOLA HOFFMANN (Betola)"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/numero01"
@@ -138,12 +142,12 @@
             android:id="@+id/numero10"
             style="@style/botao_quadrado_cardview"
             android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="5dp"
             android:gravity="center"
             android:text="10"
             android:layout_alignTop="@+id/numero09"
             android:layout_alignBottom="@+id/numero09"
-            android:layout_toEndOf="@+id/numero09"/>
+            android:layout_toStartOf="@+id/numero_acertos"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
