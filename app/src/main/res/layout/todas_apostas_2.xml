@@ -2,25 +2,21 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:padding="16dp"
-    android:layout_marginBottom="2dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_marginBottom="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="75dp"
         android:background="@drawable/gradient_background"
-        android:layout_margin="0.5dp">
+        android:layout_margin="2dp">
 
         <TextView
             android:id="@+id/numero_acertos"
             android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:text="01"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"/>
 
@@ -32,122 +28,90 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toLeftOf="@+id/numero_acertos"
+            android:layout_toStartOf="@+id/numero_acertos"
             android:gravity="center"
-            android:text="BETOLA HOFFMANN (Betola)"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/numero01"
-            style="@style/botao_quadrado_cardview"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:layout_below="@+id/nome"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:text="01"/>
+            android:layout_alignStart="@id/nome"
+            android:layout_alignEnd="@id/nome">
 
-        <TextView
-            android:id="@+id/numero02"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="02"
-            android:layout_alignTop="@+id/numero01"
-            android:layout_alignBottom="@+id/numero01"
-            android:layout_toEndOf="@+id/numero01"/>
+            <TextView
+                android:id="@+id/numero01"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero03"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="03"
-            android:layout_alignTop="@+id/numero02"
-            android:layout_alignBottom="@+id/numero02"
-            android:layout_toEndOf="@+id/numero02"/>
+            <TextView
+                android:id="@+id/numero02"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero04"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="04"
-            android:layout_alignTop="@+id/numero03"
-            android:layout_alignBottom="@+id/numero03"
-            android:layout_toEndOf="@+id/numero03"/>
+            <TextView
+                android:id="@+id/numero03"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero05"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="05"
-            android:layout_alignTop="@+id/numero04"
-            android:layout_alignBottom="@+id/numero04"
-            android:layout_toEndOf="@+id/numero04"/>
+            <TextView
+                android:id="@+id/numero04"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero06"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="06"
-            android:layout_alignTop="@+id/numero05"
-            android:layout_alignBottom="@+id/numero05"
-            android:layout_toEndOf="@+id/numero05"/>
+            <TextView
+                android:id="@+id/numero05"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero07"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="07"
-            android:layout_alignTop="@+id/numero06"
-            android:layout_alignBottom="@+id/numero06"
-            android:layout_toEndOf="@+id/numero06"/>
+            <TextView
+                android:id="@+id/numero06"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero08"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="08"
-            android:layout_alignTop="@+id/numero07"
-            android:layout_alignBottom="@+id/numero07"
-            android:layout_toEndOf="@+id/numero07"/>
+            <TextView
+                android:id="@+id/numero07"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero09"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:text="09"
-            android:layout_alignTop="@+id/numero08"
-            android:layout_alignBottom="@+id/numero08"
-            android:layout_toEndOf="@+id/numero08"/>
+            <TextView
+                android:id="@+id/numero08"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/numero10"
-            style="@style/botao_quadrado_cardview"
-            android:layout_below="@+id/nome"
-            android:layout_marginEnd="5dp"
-            android:gravity="center"
-            android:text="10"
-            android:layout_alignTop="@+id/numero09"
-            android:layout_alignBottom="@+id/numero09"
-            android:layout_toStartOf="@+id/numero_acertos"/>
+            <TextView
+                android:id="@+id/numero09"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
 
+            <TextView
+                android:id="@+id/numero10"
+                style="@style/botao_quadrado_cardview"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

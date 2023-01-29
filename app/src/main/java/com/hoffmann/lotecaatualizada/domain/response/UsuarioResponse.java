@@ -1,6 +1,8 @@
 package com.hoffmann.lotecaatualizada.domain.response;
 
-public class UsuarioResponse {
+import java.io.Serializable;
+
+public class UsuarioResponse implements Serializable {
 
     private String nome;
     private String apelido;

@@ -13,6 +13,7 @@ import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.domain.response.TodasApostasResponse;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ListaDeApostasAdapter extends RecyclerView.Adapter<ListaDeApostasAdapter.ListaDeApostaViewHolder>{
 
@@ -34,17 +35,35 @@ public class ListaDeApostasAdapter extends RecyclerView.Adapter<ListaDeApostasAd
     @Override
     public void onBindViewHolder(@NonNull ListaDeApostaViewHolder holder, int position) {
         TodasApostasResponse aposta = listaTodasApostas.get(position);
-        holder.dezenaUm.setText(String.valueOf(aposta.getDezenaUm()));
-        holder.dezenaDois.setText(String.valueOf(aposta.getDezenaDois()));
-        holder.dezenaTres.setText(String.valueOf(aposta.getDezenaTres()));
-        holder.dezenaQuatro.setText(String.valueOf(aposta.getDezenaQuatro()));
-        holder.dezenaCinco.setText(String.valueOf(aposta.getDezenaCinco()));
-        holder.dezenaSeis.setText(String.valueOf(aposta.getDezenaSeis()));
-        holder.dezenaSete.setText(String.valueOf(aposta.getDezenaSete()));
-        holder.dezenaOito.setText(String.valueOf(aposta.getDezenaOito()));
-        holder.dezenaNove.setText(String.valueOf(aposta.getDezenaNove()));
-        holder.dezenaDez.setText(String.valueOf(aposta.getDezenaDez()));
-        holder.qtdAcertos.setText(String.valueOf(aposta.getQtdAcertos()));
+
+        holder.nome.setText(formataNome(aposta));
+        holder.dezenaUm.setText(addZerosCasoPrecise(aposta.getDezenaUm()));
+        holder.dezenaDois.setText(addZerosCasoPrecise(aposta.getDezenaDois()));
+        holder.dezenaTres.setText(addZerosCasoPrecise(aposta.getDezenaTres()));
+        holder.dezenaQuatro.setText(addZerosCasoPrecise(aposta.getDezenaQuatro()));
+        holder.dezenaCinco.setText(addZerosCasoPrecise(aposta.getDezenaCinco()));
+        holder.dezenaSeis.setText(addZerosCasoPrecise(aposta.getDezenaSeis()));
+        holder.dezenaSete.setText(addZerosCasoPrecise(aposta.getDezenaSete()));
+        holder.dezenaOito.setText(addZerosCasoPrecise(aposta.getDezenaOito()));
+        holder.dezenaNove.setText(addZerosCasoPrecise(aposta.getDezenaNove()));
+        holder.dezenaDez.setText(addZerosCasoPrecise(aposta.getDezenaDez()));
+        holder.qtdAcertos.setText(addZerosCasoPrecise(aposta.getQtdAcertos()));
+    }
+
+    private String formataNome(TodasApostasResponse aposta) {
+        String nome = aposta.getUsuario().getNome().toUpperCase(Locale.ROOT);
+        String apelido = aposta.getUsuario().getApelido();
+        return String.format("%s (%s)", nome, apelido);
+    }
+
+    private String addZerosCasoPrecise(Long dezena) {
+        String numeroFormatado;
+        if (dezena < 10) {
+            numeroFormatado = "0" + dezena;
+        } else {
+            numeroFormatado =  String.valueOf(dezena);
+        }
+        return numeroFormatado;
     }
 
     @Override
@@ -55,14 +74,13 @@ public class ListaDeApostasAdapter extends RecyclerView.Adapter<ListaDeApostasAd
 
     public static class ListaDeApostaViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nome, apelido, qtdAcertos, dezenaUm, dezenaDois, dezenaTres, dezenaQuatro, dezenaCinco,
+        TextView nome, qtdAcertos, dezenaUm, dezenaDois, dezenaTres, dezenaQuatro, dezenaCinco,
                 dezenaSeis, dezenaSete, dezenaOito, dezenaNove, dezenaDez;
 
         public ListaDeApostaViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nome = itemView.findViewById(R.id.nome);
-            apelido = itemView.findViewById(R.id.apelido);
             dezenaUm = itemView.findViewById(R.id.numero01);
             dezenaDois = itemView.findViewById(R.id.numero02);
             dezenaTres = itemView.findViewById(R.id.numero03);

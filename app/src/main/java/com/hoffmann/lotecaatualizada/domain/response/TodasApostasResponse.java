@@ -16,6 +16,8 @@ public class TodasApostasResponse implements Serializable {
     private Long dezenaDez;
     private Long qtdAcertos;
 
+    private UsuarioResponse usuario;
+
 
     public Long getDezenaUm() {
         return dezenaUm;
@@ -103,5 +105,13 @@ public class TodasApostasResponse implements Serializable {
 
     public void setQtdAcertos(Long qtdAcertos) {
         this.qtdAcertos = qtdAcertos;
+    }
+
+    public UsuarioResponse getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioResponse usuario) {
+        this.usuario = usuario;
     }
 }
