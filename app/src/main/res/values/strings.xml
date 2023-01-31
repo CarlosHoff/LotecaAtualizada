@@ -89,4 +89,10 @@
     <string name="betola">BETOLA</string>
     <string name="lista_geral_apostas">LISTA GERAL DE APOSTAS</string>
     <string name="digite_seu_apelido">Digite seu apelido</string>
+    <string name="perfil">Perfil</string>
+    <string name="jogos">Jogos</string>
+    <string name="minhas_apostas">Minhas apostas</string>
+    <string name="todas_apostas">Lista de apostas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">JOGOSSSS</string>
 </resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/menu_perfil">
+
+    <fragment
+        android:id="@+id/menu_perfil"
+        android:name="com.hoffmann.lotecaatualizada.fragments.Perfil"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/menu_jogos"
+        android:name="com.hoffmann.lotecaatualizada.fragments.Jogos"
+        android:label="fragment_jogos"
+        tools:layout="@layout/fragment_jogos" />
+
+    <fragment
+        android:id="@+id/menu_minhas_apostas"
+        android:name="com.hoffmann.lotecaatualizada.fragments.MinhasApostas"
+        android:label="fragment_minhas_apostas"
+        tools:layout="@layout/fragment_minhas_apostas" />
+
+    <fragment
+        android:id="@+id/menu_todas_apostas"
+        android:name="com.hoffmann.lotecaatualizada.fragments.ListaTodasApostas"
+        android:label="fragment_lista_todas_apostas"
+        tools:layout="@layout/fragment_lista_todas_apostas" />
+
+</navigation>

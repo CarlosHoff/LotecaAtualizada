@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">@color/roxo</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
 </resources>

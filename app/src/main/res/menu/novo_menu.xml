@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_perfil"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/perfil"/>
+
+    <item android:id="@+id/menu_jogos"
+        android:enabled="true"
+        android:icon="@drawable/ic_game"
+        android:title="@string/jogos"/>
+
+    <item android:id="@+id/menu_minhas_apostas"
+        android:enabled="true"
+        android:icon="@drawable/ic_aposta"
+        android:title="@string/minhas_apostas"/>
+
+    <item android:id="@+id/menu_todas_apostas"
+        android:enabled="true"
+        android:icon="@drawable/ic_lista_apostas"
+        android:title="@string/todas_apostas"/>
+
+</menu>
