@@ -13,10 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.hoffmann.lotecaatualizada.client.LoginService;
 import com.hoffmann.lotecaatualizada.domain.request.LoginRequest;
 import com.hoffmann.lotecaatualizada.domain.response.LoginResponse;
+import com.hoffmann.lotecaatualizada.fragments.Perfil;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,13 +75,12 @@ public class Login extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(Login.this, Perfil.class);
-                            startActivity(intent);
-                            intent.putExtra("token", response.body().getToken());
-                            intent.putExtra("email", response.body().getNome());
-                            startActivity(intent);
+                            Intent menu = new Intent(Login.this, Menu.class);
+                            menu.putExtra("token", Objects.requireNonNull(response.body()).getToken());
+                            menu.putExtra("email", response.body().getNome());
+                            startActivity(menu);
                         }
-                    }, 1500);
+                    }, 1000);
                 }
             }
 

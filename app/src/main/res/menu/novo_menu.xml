@@ -19,6 +19,6 @@
     <item android:id="@+id/menu_todas_apostas"
         android:enabled="true"
         android:icon="@drawable/ic_lista_apostas"
-        android:title="@string/todas_apostas"/>
+        android:title="@string/ranking"/>
 
 </menu>

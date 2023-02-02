@@ -19,10 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Splash"
-            android:exported="false" />
-        <activity
-            android:name=".ListaTodasApostas"
+            android:name=".Menu"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -40,10 +37,7 @@
             android:name=".ListaDeApostas"
             android:exported="false" />
         <activity
-            android:name=".Perfil"
-            android:exported="false" />
-        <activity
-            android:name=".Jogo"
+            android:name=".MegaTola"
             android:exported="false" />
         <activity
             android:name=".Cadastro"
@@ -52,7 +46,10 @@
             android:name=".TelaErro01"
             android:exported="false" />
         <activity
-            android:name=".PerfilMenu"
+            android:name=".fragments.Perfil"
+            android:exported="false" />
+        <activity
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jogo extends AppCompatActivity {
+public class MegaTola extends AppCompatActivity {
 
     private final Long VALOR_APOSTA_UNICA = 50L;
     private TextView valorTotalAposta;
@@ -36,7 +36,7 @@ public class Jogo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jogo);
+        setContentView(R.layout.activity_mega_tola);
 
         iniciarComponentes();
         CarregaOsComponentes();
@@ -58,7 +58,7 @@ public class Jogo extends AppCompatActivity {
                 };
                 cartelaDeApostasFinal.add(new ApostasUsuarioDto(mapper));
 
-                Intent refresh = new Intent(Jogo.this, Jogo.class);
+                Intent refresh = new Intent(MegaTola.this, MegaTola.class);
                 refresh.putExtra("email", getIntent().getExtras().getString("email"));
                 refresh.putExtra("token", getIntent().getExtras().getString("token"));
                 refresh.putExtra("cartelaDeApostasFinal", (Serializable) cartelaDeApostasFinal);
@@ -88,7 +88,7 @@ public class Jogo extends AppCompatActivity {
                     cartelaDeApostasFinal.add(new ApostasUsuarioDto(mapper));
                 }
 
-                Intent intent = new Intent(Jogo.this, ListaDeApostas.class);
+                Intent intent = new Intent(MegaTola.this, ListaDeApostas.class);
                 intent.putExtra("email", getIntent().getExtras().getString("email"));
                 intent.putExtra("token", getIntent().getExtras().getString("token"));
                 Bundle bundle = new Bundle();

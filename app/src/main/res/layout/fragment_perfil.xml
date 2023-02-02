@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_perfil"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Perfil">
 
@@ -95,41 +96,6 @@
             app:layout_constraintStart_toEndOf="@id/img_celular"
             app:layout_constraintTop_toTopOf="@id/img_celular"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botao_jogar"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/jogar"
-            android:textColor="@drawable/button_selector"
-            android:background="@drawable/background_button_selector"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_celular"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/lista_todas_apostas"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/lista_geral_apostas"
-            android:textColor="@drawable/button_selector"
-            android:background="@drawable/background_button_selector"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/botao_jogar"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botao_deslogar"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/deslogar"
-            android:textColor="@drawable/button_selector"
-            android:background="@drawable/background_button_selector"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lista_todas_apostas"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
