@@ -7,9 +7,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-
 import com.hoffmann.lotecaatualizada.databinding.ActivityMenuBinding;
-import com.hoffmann.lotecaatualizada.utilitario.UserArgs;
 
 import java.util.Objects;
 
@@ -30,14 +28,6 @@ public class Menu extends AppCompatActivity {
 
         initNavigation();
     }
-
-
-//    private void initNavigation(){
-//
-//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_fragment);
-//        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
-//        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
-//    }
 
     private void initNavigation(){
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_fragment);

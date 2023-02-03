@@ -3,19 +3,14 @@ package com.hoffmann.lotecaatualizada.fragments;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.USER_URL;
 
 import android.content.Intent;
-import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.hoffmann.lotecaatualizada.Login;
 import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.TelaErro01;
 import com.hoffmann.lotecaatualizada.client.UsuarioService;
@@ -32,7 +27,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Perfil extends Fragment {
 
-    private Button deslogar;
     private TextView nome, emailTela, celular;
     private String token, email;
 
@@ -50,8 +44,8 @@ public class Perfil extends Fragment {
         if (args != null) {
             email = args.getString("email");
             token = args.getString("token");
+            carregaPerfilUsuario(token, email);
         }
-        carregaPerfilUsuario(token, email);
 
     }
 
@@ -63,6 +57,10 @@ public class Perfil extends Fragment {
         nome = view.findViewById(R.id.nome_perfil);
         emailTela = view.findViewById(R.id.email_perfil);
         celular = view.findViewById(R.id.celular_perfil);
+
+        if (email != null) {
+            carregaPerfilUsuario(token, email);
+        }
 
         return view;
     }
