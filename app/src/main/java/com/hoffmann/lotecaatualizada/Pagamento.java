@@ -57,7 +57,7 @@ public class Pagamento extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                startActivity(new Intent(Pagamento.this, TelaErro01.class));
             }
         });
     }

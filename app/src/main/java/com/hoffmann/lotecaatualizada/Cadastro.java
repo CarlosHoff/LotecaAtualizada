@@ -64,7 +64,7 @@ public class Cadastro extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                startActivity(new Intent(Cadastro.this, TelaErro01.class));
             }
         });
     }

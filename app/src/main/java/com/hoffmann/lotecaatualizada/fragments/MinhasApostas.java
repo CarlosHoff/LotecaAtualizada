@@ -2,19 +2,19 @@ package com.hoffmann.lotecaatualizada.fragments;
 
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.LOTECA_URL;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hoffmann.lotecaatualizada.R;
+import com.hoffmann.lotecaatualizada.TelaErro01;
 import com.hoffmann.lotecaatualizada.adapters.MinhasApostasAdapter;
 import com.hoffmann.lotecaatualizada.client.ApostaService;
 import com.hoffmann.lotecaatualizada.domain.response.TodasApostasResponse;
@@ -79,7 +79,7 @@ public class MinhasApostas extends Fragment {
 
             @Override
             public void onFailure(Call<List<TodasApostasResponse>> call, Throwable t) {
-
+                startActivity(new Intent(getContext(), TelaErro01.class));
             }
         });
     }

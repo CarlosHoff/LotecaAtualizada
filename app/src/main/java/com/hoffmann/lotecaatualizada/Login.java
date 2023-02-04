@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.i("BETOLA", t.getMessage());
+                startActivity(new Intent(Login.this, TelaErro01.class));
             }
         });
 
