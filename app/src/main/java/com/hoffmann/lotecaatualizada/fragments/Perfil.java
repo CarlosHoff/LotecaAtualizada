@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.TelaErro01;
 import com.hoffmann.lotecaatualizada.client.UsuarioService;
 import com.hoffmann.lotecaatualizada.domain.response.UsuarioResponse;
-import com.hoffmann.lotecaatualizada.utilitario.UserArgs;
+import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
 import java.util.Objects;
 
@@ -29,38 +30,28 @@ public class Perfil extends Fragment {
 
     private TextView nome, emailTela, celular;
     private String token, email;
+    private SharedViewModel model;
 
     public Perfil() {
     }
 
-    private UserArgs args;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle args = getArguments();
-        if (args != null) {
-            email = args.getString("email");
-            token = args.getString("token");
-            carregaPerfilUsuario(token, email);
-        }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        model = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
+        model.getEmail().observe(getViewLifecycleOwner(), this::getEmail);
+        model.getToken().observe(getViewLifecycleOwner(), this::getToken);
+
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
         nome = view.findViewById(R.id.nome_perfil);
         emailTela = view.findViewById(R.id.email_perfil);
         celular = view.findViewById(R.id.celular_perfil);
-
-        if (email != null) {
-            carregaPerfilUsuario(token, email);
-        }
 
         return view;
     }
@@ -99,5 +90,16 @@ public class Perfil extends Fragment {
         nome.setText(usuarioResponse.getNome());
         emailTela.setText(usuarioResponse.getEmail());
         celular.setText(usuarioResponse.getCelular());
+    }
+
+    private void getToken(String token) {
+        this.token = token;
+        if (token != null) {
+            carregaPerfilUsuario(token, email);
+        }
+    }
+
+    private void getEmail(String email) {
+        this.email = email;
     }
 }

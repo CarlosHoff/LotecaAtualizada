@@ -3,12 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MinhasApostas">
+    android:id="@+id/fragment_minhas_apostas"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.Jogos">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MINHAS APOSTAS" />
+        android:background="@drawable/gradient_background">
+
+        <ImageView
+            android:id="@+id/iv_logo_games"
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logotipo_app"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/minhas_apostas"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="MINHAS APOSTAS"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo_games" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recicleViewMinhasApostas"
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:layout_margin="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/minhas_apostas"
+            tools:listitem="@layout/listagem_apostas"
+            tools:layout_editor_absoluteX="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

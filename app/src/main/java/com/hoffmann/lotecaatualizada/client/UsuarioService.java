@@ -16,7 +16,8 @@ import retrofit2.http.Query;
 public interface UsuarioService {
 
     @POST(CADASTRA_USUARIO)
-    Call<Void> cadastraUsuario(@Body CadastraUsuarioRequest request);
+    Call<Void> cadastraUsuario(
+            @Body CadastraUsuarioRequest request);
 
     @GET(BUSCA_USUARIO)
     Call<UsuarioResponse> buscaUsuario(

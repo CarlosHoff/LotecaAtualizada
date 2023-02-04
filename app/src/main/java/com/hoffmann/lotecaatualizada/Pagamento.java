@@ -47,7 +47,7 @@ public class Pagamento extends AppCompatActivity {
                 .build();
 
         ApostaService apostaService = retrofit.create(ApostaService.class);
-        Call<Void> apostaRequest = apostaService.cadastraApostas(createApostaRequest());
+        Call<Void> apostaRequest = apostaService.cadastraApostas(token, createApostaRequest());
 
         apostaRequest.enqueue(new Callback<Void>() {
             @Override

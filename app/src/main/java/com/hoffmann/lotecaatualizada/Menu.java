@@ -3,11 +3,17 @@ package com.hoffmann.lotecaatualizada;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.hoffmann.lotecaatualizada.databinding.ActivityMenuBinding;
+import com.hoffmann.lotecaatualizada.fragments.MinhasApostas;
+import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
 import java.util.Objects;
 
@@ -15,7 +21,7 @@ public class Menu extends AppCompatActivity {
 
     private ActivityMenuBinding binding;
     private String email, token;
-
+    private SharedViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,8 @@ public class Menu extends AppCompatActivity {
         token = getIntent().getExtras().getString("token");
         email = getIntent().getExtras().getString("email");
 
+        model = new ViewModelProvider(this).get(SharedViewModel.class);
+
         initNavigation();
     }
 
@@ -33,13 +41,10 @@ public class Menu extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_fragment);
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        Bundle args = new Bundle();
-        args.putString("email", email);
-        args.putString("token", token);
-        navController.setGraph(navController.getGraph(), args);
+        model.setEmail(email);
+        model.setToken(token);
 
-        navController.navigate(R.id.nav_main, args);
-
+        navController.navigate(R.id.nav_main);
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
     }
 
