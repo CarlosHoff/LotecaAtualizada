@@ -3,10 +3,18 @@ package com.hoffmann.lotecaatualizada;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.USER_URL;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,12 +79,42 @@ public class Cadastro extends AppCompatActivity {
 
     private CadastraUsuarioRequest createUsuarioRequest() {
         CadastraUsuarioRequest request = new CadastraUsuarioRequest();
-        request.setNome(nome.getText().toString());
-        request.setApelido(apelido.getText().toString());
-        request.setEmail(email.getText().toString());
-        request.setCelular(celular.getText().toString());
-        request.setCpf(cpf.getText().toString());
-        request.setSenha(senha.getText().toString());
+        TextView[] fields = {nome, apelido, email, celular, cpf, senha};
+        String[] fieldNames = {"nome", "apelido", "email", "celular", "CPF", "senha"};
+
+        for (int i = 0; i < fields.length; i++) {
+            TextView field = fields[i];
+            String fieldValue = field.getText().toString().trim();
+
+            SpannableString errorMessage = new SpannableString(" é obrigatório");
+            field.setError(errorMessage);
+
+            if (fieldValue.isEmpty()) {
+                field.setError(fieldNames[i] + errorMessage);
+            } else {
+                switch (i) {
+                    case 0:
+                        request.setNome(fieldValue);
+                        break;
+                    case 1:
+                        request.setApelido(fieldValue);
+                        break;
+                    case 2:
+                        request.setEmail(fieldValue);
+                        break;
+                    case 3:
+                        request.setCelular(fieldValue);
+                        break;
+                    case 4:
+                        request.setCpf(fieldValue);
+                        break;
+                    case 5:
+                        request.setSenha(fieldValue);
+                        break;
+                }
+            }
+        }
+
         return request;
     }
 
