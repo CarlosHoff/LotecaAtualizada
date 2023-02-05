@@ -47,10 +47,10 @@ public class ListaDeApostas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListaDeApostas.this, Pagamento.class);
-                intent.putExtra("email", getIntent().getExtras().getString("email"));
-                intent.putExtra("token", getIntent().getExtras().getString("token"));
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("cartelaDeApostasFinal", (Serializable) cartelaDeApostasFinal);
+                bundle.putString("email", getIntent().getExtras().getString("email"));
+                bundle.putString("token", getIntent().getExtras().getString("token"));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

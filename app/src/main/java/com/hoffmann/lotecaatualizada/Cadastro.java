@@ -9,6 +9,7 @@ import android.text.SpannableString;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,6 +57,7 @@ public class Cadastro extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            Toast.makeText(Cadastro.this, "Cadastro realizado com sucesso, faça o login", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Cadastro.this, Login.class);
                             startActivity(intent);
                         }
@@ -85,6 +87,7 @@ public class Cadastro extends AppCompatActivity {
             if (fieldValue.isEmpty()) {
                 field.setError(fieldNames[i] + errorMessage);
             } else {
+                field.setError(null);
                 switch (i) {
                     case 0:
                         request.setNome(fieldValue);

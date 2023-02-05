@@ -52,12 +52,16 @@ public class Pagamento extends AppCompatActivity {
         apostaRequest.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
-                startActivity(new Intent(Pagamento.this, TelaSucesso.class));
+                Intent intent = new Intent(Pagamento.this, TelaSucesso.class);
+                intent.putExtra("token", token);
+                intent.putExtra("email", email);
+                startActivity(intent);
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                startActivity(new Intent(Pagamento.this, TelaErro01.class));
+                Intent intent = new Intent(Pagamento.this, TelaErro01.class);
+                startActivity(intent);
             }
         });
     }
@@ -91,9 +95,9 @@ public class Pagamento extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        token = getIntent().getExtras().getString("token");
-        email = getIntent().getExtras().getString("email");
         Bundle bundle = getIntent().getExtras();
+        token = bundle.getString("token");
+        email = bundle.getString("email");
         cartelaDeApostasFinal = (List<ApostasUsuarioDto>) bundle.getSerializable("cartelaDeApostasFinal");
     }
 

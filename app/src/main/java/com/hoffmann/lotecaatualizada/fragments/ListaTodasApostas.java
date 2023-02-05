@@ -60,7 +60,7 @@ public class ListaTodasApostas extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_lista_todas_apostas, container, false);
         recyclerView = view.findViewById(R.id.recicleViewTodasApostas);
-        searchView = view.findViewById(R.id.search_view);
+        searchView = view.findViewById(R.id.home_search);
         return view;
     }
 

@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hoffmann.lotecaatualizada.MegaTola;
 import com.hoffmann.lotecaatualizada.R;
+import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
 public class Jogos extends Fragment {
 
     private Button megaTolaBotao;
+    private SharedViewModel model;
     private String token, email;
 
     public Jogos() {
@@ -23,18 +26,18 @@ public class Jogos extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        if (getArguments() != null) {
-            email = args.getString("email");
-            token = args.getString("token");
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jogos, container, false);
+
         megaTolaBotao = view.findViewById(R.id.game_mega_tola);
+
+        model = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
+        model.getEmail().observe(getViewLifecycleOwner(), this::getEmail);
+        model.getToken().observe(getViewLifecycleOwner(), this::getToken);
 
         megaTolaBotao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,5 +50,13 @@ public class Jogos extends Fragment {
         });
 
         return view;
+    }
+
+    private void getToken(String token) {
+        this.token = token;
+    }
+
+    private void getEmail(String email) {
+        this.email = email;
     }
 }
