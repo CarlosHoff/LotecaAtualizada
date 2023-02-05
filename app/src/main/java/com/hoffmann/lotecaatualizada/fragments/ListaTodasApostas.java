@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +21,9 @@ import com.hoffmann.lotecaatualizada.client.ApostaService;
 import com.hoffmann.lotecaatualizada.domain.response.TodasApostasResponse;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,8 +37,9 @@ public class ListaTodasApostas extends Fragment {
     private ListaDeApostasAdapter adapter;
 
     private RecyclerView recyclerView;
-    private String token, email;
+    private String token, email, textoBusca;
     private SharedViewModel model;
+    private SearchView searchView;
 
     public ListaTodasApostas() {
     }
@@ -56,6 +60,7 @@ public class ListaTodasApostas extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_lista_todas_apostas, container, false);
         recyclerView = view.findViewById(R.id.recicleViewTodasApostas);
+        searchView = view.findViewById(R.id.search_view);
         return view;
     }
 
@@ -72,12 +77,8 @@ public class ListaTodasApostas extends Fragment {
             @Override
             public void onResponse(Call<List<TodasApostasResponse>> call, Response<List<TodasApostasResponse>> response) {
 
-                adapter = new ListaDeApostasAdapter(getContext(), response.body());
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
-                        RecyclerView.VERTICAL, false);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                createAdapter(response.body());
+                buscaApostas(response);
             }
 
             @Override
@@ -85,6 +86,42 @@ public class ListaTodasApostas extends Fragment {
                 startActivity(new Intent(getContext(), TelaErro01.class));
             }
         });
+    }
+
+    private void buscaApostas(Response<List<TodasApostasResponse>> response) {
+        List<TodasApostasResponse> resultadosDaBusca = new ArrayList<>();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!textoBusca.isEmpty()) {
+                    resultadosDaBusca.clear();
+                    for (TodasApostasResponse item : Objects.requireNonNull(response.body())) {
+                        if (item.getUsuario().getApelido().equalsIgnoreCase(textoBusca)) {
+
+                            resultadosDaBusca.add(item);
+                        }
+                    }
+                    createAdapter(resultadosDaBusca);
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                textoBusca = newText;
+                return false;
+            }
+        });
+    }
+
+    private void createAdapter(List<TodasApostasResponse> todasApostasResponses) {
+        adapter = new ListaDeApostasAdapter(getContext(), todasApostasResponses);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
+                RecyclerView.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void getToken(String token) {
