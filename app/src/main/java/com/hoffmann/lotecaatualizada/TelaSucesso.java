@@ -13,7 +13,6 @@ import com.hoffmann.lotecaatualizada.fragments.Perfil;
 public class TelaSucesso extends AppCompatActivity {
 
     private Button botaoHome;
-    private String email, token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

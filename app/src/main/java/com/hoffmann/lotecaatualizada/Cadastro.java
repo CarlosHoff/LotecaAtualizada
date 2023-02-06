@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,12 +37,32 @@ public class Cadastro extends AppCompatActivity {
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestCadastro();
+                if (validarCampos()) {
+                    requestCadastro();
+                }
             }
         });
     }
 
+    private boolean validarCampos() {
+        TextView[] fields = {nome, apelido, email, celular, cpf, senha};
+        String[] fieldNames = {"Nome", "Apelido", "E-mail", "Celular", "CPF", "Senha"};
+
+        for (int i = 0; i < fields.length; i++) {
+            TextView field = fields[i];
+            String fieldValue = field.getText().toString().trim();
+
+            if (TextUtils.isEmpty(fieldValue)) {
+                Toast.makeText(this, fieldNames[i] + " é obrigatório", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private void requestCadastro() {
+        validateInputs();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(USER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -122,5 +143,21 @@ public class Cadastro extends AppCompatActivity {
         cpf = findViewById(R.id.cpf_cadastro);
         senha = findViewById(R.id.senha_cadastro);
         botaoCadastrar = findViewById(R.id.botao_cadastro);
+    }
+
+    private void validateInputs() {
+        TextView[] fields = {nome, apelido, email, celular, cpf, senha};
+        String[] fieldNames = {"Nome", "Apelido", "Email", "Celular", "CPF", "Senha"};
+
+        for (int i = 0; i < fields.length; i++) {
+            TextView field = fields[i];
+            String fieldValue = field.getText().toString().trim();
+
+            if (fieldValue.isEmpty()) {
+                field.setError(fieldNames[i] + " é obrigatório");
+            } else {
+                field.setError(null);
+            }
+        }
     }
 }
