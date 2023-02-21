@@ -35,6 +35,8 @@ public class Roletola extends AppCompatActivity {
 
         generateSectorDegress();
 
+        int[] valor = sectorDegress;
+
         botaoGirar.setOnClickListener(v -> {
             if (!spinning) {
                 spin();
@@ -62,9 +64,15 @@ public class Roletola extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                int valorDaRoleta = sectors[sectors.length - (index - 1)];
+                int valorDaRoleta;
+                if (index == 0) {
+                    valorDaRoleta = sectors[sectors.length - (index + 1)];
+                } else {
+                    valorDaRoleta = sectors[sectors.length - (index - 1)];
+                }
                 Log.i("Valor roleta:", String.valueOf(valorDaRoleta));
                 spinning = false;
+
             }
 
             @Override
