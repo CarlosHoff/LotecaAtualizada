@@ -11,11 +11,13 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/gradient_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/gradient_background"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/roletola"
@@ -32,7 +34,7 @@
 
     <ImageView
         android:id="@+id/roleta"
-        android:layout_width="3500dp"
+        android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -52,15 +54,105 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roletola"/>
 
+    <LinearLayout
+        android:id="@+id/primeira_linha_apostas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/belt"
+        android:layout_alignStart="@+id/belt"
+        android:layout_alignEnd="@+id/belt"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/roleta">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_01"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_01" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_02"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_02" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_03"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_03" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_04"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_04" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_05"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/primeira_linha_apostas">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_06"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_06" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_07"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_07" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_08"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_08" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_09"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_09" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/roletola_10"
+            style="@style/botao_redondo_roletola"
+            android:layout_marginEnd="20dp"
+            android:text="@string/_10" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/girar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GIRAR"
+        android:text="@string/girar"
+        android:textColor="@drawable/button_selector"
+        android:background="@drawable/botao_desativado_aposta"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roleta" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 

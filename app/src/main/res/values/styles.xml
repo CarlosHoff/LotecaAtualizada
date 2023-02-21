@@ -28,6 +28,15 @@
         <item name="android:textColor">@drawable/button_selector</item>
     </style>
 
+    <style name="botao_redondo_roletola">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:background">@drawable/botao_redondo_selector</item>
+        <item name="android:textColor">@drawable/button_selector</item>
+    </style>
+
     <style name="botao_redondo_cardview">
         <item name="android:layout_width">33dp</item>
         <item name="android:layout_height">33dp</item>
