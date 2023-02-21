@@ -54,6 +54,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roletola"/>
 
+    <ImageView
+        android:id="@+id/rodar_roleta"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/rodar"
+        android:enabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roletola"/>
+
     <LinearLayout
         android:id="@+id/primeira_linha_apostas"
         android:layout_width="match_parent"

@@ -22,7 +22,7 @@ public class Roletola extends AppCompatActivity {
     final int[] sectorDegress = new int[sectors.length];
     int index = 0;
     boolean spinning = false;
-    private ImageView roleta;
+    private ImageView roleta, rodarRoleta;
     Random random = new Random();
 
     @Override
@@ -80,10 +80,12 @@ public class Roletola extends AppCompatActivity {
                 spinning = true;
             }
         });
+
+        rodarRoleta.setOnClickListener(v -> botaoGirar.performClick());
     }
 
 
-    private void resetaBotoes() {
+    private void resetaBotoes(int numeroApostado) {
         List<Button> botoes = Arrays.asList(
                 roletola_numero_01,
                 roletola_numero_02,
@@ -97,14 +99,14 @@ public class Roletola extends AppCompatActivity {
                 roletola_numero_10);
 
         for (Button botao : botoes) {
-            if (!botao.isEnabled()) {
-                botao.setEnabled(true);
-            } else {
+            if (!botao.isClickable()) {
+                botao.setClickable(true);
                 botao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_normal)));
                 botao.setTextColor(getApplication().getColor(R.color.white));
                 botao.setClickable(true);
                 botaoGirar.setTextColor(getApplication().getColor(R.color.white));
                 botaoGirar.setEnabled(false);
+                rodarRoleta.setEnabled(false);
             }
         }
     }
@@ -115,31 +117,28 @@ public class Roletola extends AppCompatActivity {
         Button[] botoes = {roletola_numero_01, roletola_numero_02, roletola_numero_03, roletola_numero_04, roletola_numero_05,
                 roletola_numero_06, roletola_numero_07, roletola_numero_08, roletola_numero_09, roletola_numero_10};
 
-        boolean todosBotoesClicaveis = true;
-
         for (Button botaoIteracao : botoes) {
-            if (!botaoIteracao.isClickable()) {
-                todosBotoesClicaveis = false;
-                break;
+            if (botao.getText().equals(botaoIteracao.getText())) {
+                botaoIteracao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
+                botaoIteracao.setTextColor(getApplication().getColor(R.color.roxo));
+                botaoIteracao.setClickable(false);
+
+                botaoGirar.setEnabled(true);
+                botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
+                botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
+
+                rodarRoleta.setEnabled(true);
+            } else {
+                botaoIteracao.setClickable(false);
             }
-        }
-
-        if (todosBotoesClicaveis) {
-            botao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
-            botao.setTextColor(getApplication().getColor(R.color.roxo));
-            botao.setClickable(false);
-
-            botaoGirar.setEnabled(true);
-            botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
-            botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
-        } else {
-            botao.setEnabled(false);
         }
     }
 
     private void iniciaComponentes() {
         roleta = findViewById(R.id.roleta);
         botaoGirar = findViewById(R.id.girar);
+        rodarRoleta = findViewById(R.id.rodar_roleta);
+        rodarRoleta.setEnabled(false);
         roletola_numero_01 = findViewById(R.id.roletola_01);
         roletola_numero_02 = findViewById(R.id.roletola_02);
         roletola_numero_03 = findViewById(R.id.roletola_03);
@@ -175,7 +174,7 @@ public class Roletola extends AppCompatActivity {
                 int numeroApostado = getApostNumber();
 
                 validaAPosta(valorDaRoleta, numeroApostado);
-                resetaBotoes();
+                resetaBotoes(numeroApostado);
 
                 spinning = false;
             }
