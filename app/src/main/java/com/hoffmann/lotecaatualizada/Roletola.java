@@ -1,10 +1,6 @@
 package com.hoffmann.lotecaatualizada;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
@@ -14,12 +10,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Roletola extends AppCompatActivity {
 
     private Button botaoGirar, roletola_numero_01, roletola_numero_02, roletola_numero_03, roletola_numero_04, roletola_numero_05,
-    roletola_numero_06, roletola_numero_07, roletola_numero_08, roletola_numero_09, roletola_numero_10;
+            roletola_numero_06, roletola_numero_07, roletola_numero_08, roletola_numero_09, roletola_numero_10;
     final int[] sectors = {1, 4, 7, 2, 8, 5, 3, 6};
     final int[] sectorDegress = new int[sectors.length];
     int index = 0;
@@ -36,25 +34,45 @@ public class Roletola extends AppCompatActivity {
 
         generateSectorDegress();
 
-        roletola_numero_01.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_01);});
+        roletola_numero_01.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_01);
+        });
 
-        roletola_numero_02.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_02);});
+        roletola_numero_02.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_02);
+        });
 
-        roletola_numero_03.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_03);});
+        roletola_numero_03.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_03);
+        });
 
-        roletola_numero_04.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_04);});
+        roletola_numero_04.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_04);
+        });
 
-        roletola_numero_05.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_05);});
+        roletola_numero_05.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_05);
+        });
 
-        roletola_numero_06.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_06);});
+        roletola_numero_06.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_06);
+        });
 
-        roletola_numero_07.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_07);});
+        roletola_numero_07.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_07);
+        });
 
-        roletola_numero_08.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_08);});
+        roletola_numero_08.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_08);
+        });
 
-        roletola_numero_09.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_09);});
+        roletola_numero_09.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_09);
+        });
 
-        roletola_numero_10.setOnClickListener(v -> {regrasDeValidacao(roletola_numero_10);});
+        roletola_numero_10.setOnClickListener(v -> {
+            regrasDeValidacao(roletola_numero_10);
+        });
 
         botaoGirar.setOnClickListener(v -> {
             if (!spinning) {
@@ -64,21 +82,58 @@ public class Roletola extends AppCompatActivity {
         });
     }
 
+
+    private void resetaBotoes() {
+        List<Button> botoes = Arrays.asList(
+                roletola_numero_01,
+                roletola_numero_02,
+                roletola_numero_03,
+                roletola_numero_04,
+                roletola_numero_05,
+                roletola_numero_06,
+                roletola_numero_07,
+                roletola_numero_08,
+                roletola_numero_09,
+                roletola_numero_10);
+
+        for (Button botao : botoes) {
+            if (!botao.isEnabled()) {
+                botao.setEnabled(true);
+            } else {
+                botao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_normal)));
+                botao.setTextColor(getApplication().getColor(R.color.white));
+                botao.setClickable(true);
+                botaoGirar.setTextColor(getApplication().getColor(R.color.white));
+                botaoGirar.setEnabled(false);
+            }
+        }
+    }
+
+
     private void regrasDeValidacao(Button botao) {
 
-        if (!roletola_numero_01.isClickable() || !roletola_numero_02.isClickable() || !roletola_numero_03.isClickable() ||
-                !roletola_numero_04.isClickable() || !roletola_numero_05.isClickable() || !roletola_numero_06.isClickable() ||
-                !roletola_numero_07.isClickable() || !roletola_numero_08.isClickable() || !roletola_numero_09.isClickable() ||
-                !roletola_numero_10.isClickable()) {
-            botao.setEnabled(false);
-        } else {
+        Button[] botoes = {roletola_numero_01, roletola_numero_02, roletola_numero_03, roletola_numero_04, roletola_numero_05,
+                roletola_numero_06, roletola_numero_07, roletola_numero_08, roletola_numero_09, roletola_numero_10};
+
+        boolean todosBotoesClicaveis = true;
+
+        for (Button botaoIteracao : botoes) {
+            if (!botaoIteracao.isClickable()) {
+                todosBotoesClicaveis = false;
+                break;
+            }
+        }
+
+        if (todosBotoesClicaveis) {
             botao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
             botao.setTextColor(getApplication().getColor(R.color.roxo));
             botao.setClickable(false);
 
             botaoGirar.setEnabled(true);
             botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
-            botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
+            botaoGirar.setTextColor(getApplication().getColor(R.color.white));
+        } else {
+            botao.setEnabled(false);
         }
     }
 
@@ -120,6 +175,7 @@ public class Roletola extends AppCompatActivity {
                 int numeroApostado = getApostNumber();
 
                 validaAPosta(valorDaRoleta, numeroApostado);
+                resetaBotoes();
 
                 spinning = false;
             }
@@ -139,27 +195,40 @@ public class Roletola extends AppCompatActivity {
     }
 
     private int getApostNumber() {
+        int apostNumber = 0;
+        for (int i = 1; i <= 10; i++) {
+            if (!getRoletolaNumero(i).isClickable()) {
+                apostNumber = i;
+                break;
+            }
+        }
+        return apostNumber;
+    }
 
-        if (!roletola_numero_01.isClickable()){
-            return 1;
-        } else if (!roletola_numero_02.isClickable()) {
-            return 2;
-        } else if (!roletola_numero_03.isClickable()) {
-            return 3;
-        } else if (!roletola_numero_04.isClickable()) {
-            return 4;
-        } else if (!roletola_numero_05.isClickable()) {
-            return 5;
-        } else if (!roletola_numero_06.isClickable()) {
-            return 6;
-        } else if (!roletola_numero_07.isClickable()) {
-            return 7;
-        } else if (!roletola_numero_08.isClickable()) {
-            return 8;
-        } else if (!roletola_numero_09.isClickable()) {
-            return 9;
-        } else {
-            return 10;
+    private Button getRoletolaNumero(int i) {
+        switch (i) {
+            case 1:
+                return roletola_numero_01;
+            case 2:
+                return roletola_numero_02;
+            case 3:
+                return roletola_numero_03;
+            case 4:
+                return roletola_numero_04;
+            case 5:
+                return roletola_numero_05;
+            case 6:
+                return roletola_numero_06;
+            case 7:
+                return roletola_numero_07;
+            case 8:
+                return roletola_numero_08;
+            case 9:
+                return roletola_numero_09;
+            case 10:
+                return roletola_numero_10;
+            default:
+                throw new IllegalArgumentException("Número de roletola inválido: " + i);
         }
     }
 
@@ -168,10 +237,10 @@ public class Roletola extends AppCompatActivity {
     }
 
     private void generateSectorDegress() {
-        int sectorDegree = 360/sectors.length;
+        int sectorDegree = 360 / sectors.length;
 
         for (int i = 0; i < sectors.length; i++) {
-            sectorDegress[i] = (i+1) * sectorDegree;
+            sectorDegress[i] = (i + 1) * sectorDegree;
         }
     }
 }
