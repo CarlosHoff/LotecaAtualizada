@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/teste02"/>
+        android:src="@drawable/roleta"/>
 
     <ImageView
         android:id="@+id/belt"
@@ -24,6 +24,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/teste01"/>
+        android:src="@drawable/contorno_roleta"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

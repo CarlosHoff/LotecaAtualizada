@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class Roletola extends AppCompatActivity {
 
-    final int[] sectors = {1,4,7,2,8,5,3,6};
+    final int[] sectors = {1, 4, 7, 2, 8, 5, 3, 6};
     final int[] sectorDegress = new int[sectors.length];
     int index = 0;
     boolean spinning = false;
@@ -35,15 +35,12 @@ public class Roletola extends AppCompatActivity {
 
         generateSectorDegress();
 
-        int[] valor = sectorDegress;
-
         botaoGirar.setOnClickListener(v -> {
             if (!spinning) {
                 spin();
                 spinning = true;
             }
         });
-
     }
 
     private void spin() {
@@ -64,15 +61,9 @@ public class Roletola extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                int valorDaRoleta;
-                if (index == 0) {
-                    valorDaRoleta = sectors[sectors.length - (index + 1)];
-                } else {
-                    valorDaRoleta = sectors[sectors.length - (index - 1)];
-                }
+                int valorDaRoleta = sectors[sectors.length - (index + 1)];
                 Log.i("Valor roleta:", String.valueOf(valorDaRoleta));
                 spinning = false;
-
             }
 
             @Override

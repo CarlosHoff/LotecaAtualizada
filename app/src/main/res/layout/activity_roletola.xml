@@ -7,16 +7,6 @@
     android:orientation="vertical"
     tools:context=".Roletola">
 
-    <TextView
-        android:id="@+id/roletola"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ROLETOLA"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
@@ -27,27 +17,40 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/gradient_background"/>
 
+    <TextView
+        android:id="@+id/roletola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/roletola"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/roleta"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_width="3500dp"
+        android:layout_height="350dp"
         android:layout_gravity="center"
-        android:src="@drawable/teste02"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/roleta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roletola"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/roletola"/>
 
     <ImageView
         android:id="@+id/belt"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_gravity="center"
-        android:src="@drawable/teste01"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/contorno_roleta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roletola"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/roletola"/>
 
     <Button
         android:id="@+id/girar"
