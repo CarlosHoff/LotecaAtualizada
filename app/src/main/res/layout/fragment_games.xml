@@ -60,7 +60,7 @@
                 style="@style/image_view_games_style"
                 android:background="@drawable/shape_games"
                 android:drawableTop="@drawable/ic_game_50"
-                android:text="LOTO-TOLA"/>
+                android:text="ROLETOLA"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_quina_tola"
