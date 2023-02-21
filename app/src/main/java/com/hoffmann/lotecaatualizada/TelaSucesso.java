@@ -6,20 +6,15 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import com.hoffmann.lotecaatualizada.fragments.Perfil;
 
 public class TelaSucesso extends AppCompatActivity {
-
-    private Button botaoHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_sucesso);
 
-        botaoHome = findViewById(R.id.botao_home);
+        Button botaoHome = findViewById(R.id.botao_home);
 
         botaoHome.setOnClickListener(new View.OnClickListener() {
             @Override

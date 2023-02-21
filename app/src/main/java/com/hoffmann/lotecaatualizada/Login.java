@@ -5,7 +5,6 @@ import static com.hoffmann.lotecaatualizada.utilitario.Constantes.LOTECA_URL;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.hoffmann.lotecaatualizada.client.LoginService;
 import com.hoffmann.lotecaatualizada.domain.request.LoginRequest;
 import com.hoffmann.lotecaatualizada.domain.response.LoginResponse;
-import com.hoffmann.lotecaatualizada.fragments.Perfil;
 
 import java.util.Objects;
 

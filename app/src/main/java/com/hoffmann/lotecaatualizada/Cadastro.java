@@ -1,5 +1,13 @@
 package com.hoffmann.lotecaatualizada;
 
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.APELIDO;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.CELULAR;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.CPF;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.EMAIL;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.NOME;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.NOT_NULL;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.REGISTER_SUCCESS;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.SENHA;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.USER_URL;
 
 import android.content.Intent;
@@ -19,7 +27,6 @@ import com.hoffmann.lotecaatualizada.domain.request.CadastraUsuarioRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -47,14 +54,14 @@ public class Cadastro extends AppCompatActivity {
 
     private boolean validarCampos() {
         TextView[] fields = {nome, apelido, email, celular, cpf, senha};
-        String[] fieldNames = {"Nome", "Apelido", "E-mail", "Celular", "CPF", "Senha"};
+        String[] fieldNames = {NOME, APELIDO, EMAIL, CELULAR, CPF, SENHA};
 
         for (int i = 0; i < fields.length; i++) {
             TextView field = fields[i];
             String fieldValue = field.getText().toString().trim();
 
             if (TextUtils.isEmpty(fieldValue)) {
-                Toast.makeText(this, fieldNames[i] + " é obrigatório", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, fieldNames[i] + NOT_NULL, Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -79,7 +86,7 @@ public class Cadastro extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(Cadastro.this, "Cadastro realizado com sucesso, faça o login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Cadastro.this, REGISTER_SUCCESS, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Cadastro.this, Login.class);
                             startActivity(intent);
                         }
@@ -97,13 +104,13 @@ public class Cadastro extends AppCompatActivity {
     private CadastraUsuarioRequest createUsuarioRequest() {
         CadastraUsuarioRequest request = new CadastraUsuarioRequest();
         TextView[] fields = {nome, apelido, email, celular, cpf, senha};
-        String[] fieldNames = {"nome", "apelido", "email", "celular", "CPF", "senha"};
+        String[] fieldNames = {NOME, APELIDO, EMAIL, CELULAR, CPF, SENHA};
 
         for (int i = 0; i < fields.length; i++) {
             TextView field = fields[i];
             String fieldValue = field.getText().toString().trim();
 
-            SpannableString errorMessage = new SpannableString(" é obrigatório");
+            SpannableString errorMessage = new SpannableString(" " + NOT_NULL);
             field.setError(errorMessage);
 
             if (fieldValue.isEmpty()) {
@@ -148,14 +155,14 @@ public class Cadastro extends AppCompatActivity {
 
     private void validateInputs() {
         TextView[] fields = {nome, apelido, email, celular, cpf, senha};
-        String[] fieldNames = {"Nome", "Apelido", "Email", "Celular", "CPF", "Senha"};
+        String[] fieldNames = {NOME, APELIDO, EMAIL, CELULAR, CPF, SENHA};
 
         for (int i = 0; i < fields.length; i++) {
             TextView field = fields[i];
             String fieldValue = field.getText().toString().trim();
 
             if (fieldValue.isEmpty()) {
-                field.setError(fieldNames[i] + " é obrigatório");
+                field.setError(fieldNames[i] + " " + NOT_NULL);
             } else {
                 field.setError(null);
             }

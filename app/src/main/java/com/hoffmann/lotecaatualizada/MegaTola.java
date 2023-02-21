@@ -16,7 +16,6 @@ import java.util.List;
 
 public class MegaTola extends AppCompatActivity {
 
-    private final Long VALOR_APOSTA_UNICA = 50L;
     private TextView valorTotalAposta;
     private Button finalizarApostas, botaoApostar, um, dois, tres, quatro, cinco, seis, sete,
             oito, nove, dez, onze, doze, treze, quatorze,
@@ -139,6 +138,7 @@ public class MegaTola extends AppCompatActivity {
             finalizarApostas.setTextColor(getApplication().getColor(R.color.roxo));
         }
 
+        long VALOR_APOSTA_UNICA = 50L;
         long total = VALOR_APOSTA_UNICA * cartelaDeApostasFinal.size();
         valorTotalAposta.setText("R$ " + total + ",00");
     }

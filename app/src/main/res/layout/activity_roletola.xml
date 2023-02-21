@@ -142,11 +142,12 @@
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/girar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/girar"
+        android:layout_marginBottom="80dp"
         android:textColor="@drawable/button_selector"
         android:background="@drawable/botao_desativado_aposta"
         android:enabled="false"

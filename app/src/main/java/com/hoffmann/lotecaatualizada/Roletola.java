@@ -131,7 +131,7 @@ public class Roletola extends AppCompatActivity {
 
             botaoGirar.setEnabled(true);
             botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
-            botaoGirar.setTextColor(getApplication().getColor(R.color.white));
+            botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
         } else {
             botao.setEnabled(false);
         }

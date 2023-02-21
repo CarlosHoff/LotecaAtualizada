@@ -29,10 +29,10 @@
     </style>
 
     <style name="botao_redondo_roletola">
-        <item name="android:layout_width">45dp</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/botao_redondo_selector</item>
         <item name="android:textColor">@drawable/button_selector</item>
     </style>
