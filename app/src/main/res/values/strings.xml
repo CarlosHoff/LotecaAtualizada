@@ -101,4 +101,6 @@
     <string name="girar">GIRAR</string>
     <string name="numero_sorteado">Nº Sorteado</string>
     <string name="numero_apostado">Nº Apostado</string>
+    <string name="n_sorteado">Nº Sorteado</string>
+    <string name="n_apostado">Nº Apostado</string>
 </resources>

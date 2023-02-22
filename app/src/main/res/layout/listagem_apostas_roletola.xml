@@ -1,42 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:background="@drawable/gradient_background"
-        android:orientation="vertical"
-        android:layout_height="64dp"
-        android:layout_margin="0.5dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_background_transparent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/index"
-            android:background="@drawable/contorno_branco"
+            android:id="@+id/numeroSorteado"
             android:layout_width="70dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="5dp"
+            android:layout_height="30dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="14sp"
             android:textStyle="bold"
-            android:text="1"/>
+            android:background="@drawable/contorno_branco"
+            android:gravity="center"/>
 
         <TextView
-            android:id="@+id/ganho"
-            android:background="@drawable/contorno_branco"
+            android:id="@+id/numeroApostado"
             android:layout_width="70dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="5dp"
+            android:layout_height="30dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="14sp"
             android:textStyle="bold"
-            android:text="50,00"/>
+            android:background="@drawable/contorno_branco"
+            android:gravity="center"/>
 
 
     </LinearLayout>

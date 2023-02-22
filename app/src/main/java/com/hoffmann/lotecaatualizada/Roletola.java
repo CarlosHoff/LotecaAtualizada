@@ -33,6 +33,7 @@ public class Roletola extends AppCompatActivity {
     List<RoletolaStatusDto> apostas = new ArrayList<>();
     private RoletolaAdapter adapter;
     private RecyclerView recyclerView;
+    private int numeroApostaAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,6 @@ public class Roletola extends AppCompatActivity {
 
         for (Button botao : botoes) {
             if (!botao.isClickable()) {
-                botao.setClickable(true);
                 botao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_normal)));
                 botao.setTextColor(getApplication().getColor(R.color.white));
                 botao.setClickable(true);
@@ -131,6 +131,8 @@ public class Roletola extends AppCompatActivity {
                 botaoIteracao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
                 botaoIteracao.setTextColor(getApplication().getColor(R.color.roxo));
                 botaoIteracao.setClickable(false);
+
+                numeroApostaAtual = Integer.parseInt((String) botaoIteracao.getText());
 
                 botaoGirar.setEnabled(true);
                 botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
@@ -181,14 +183,11 @@ public class Roletola extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 int valorDaRoleta = sectors[sectors.length - (index + 1)];
 
-                int numeroApostado = getApostNumber();
-
-                validaAPosta(valorDaRoleta, numeroApostado);
-
+                validaAPosta(valorDaRoleta, numeroApostaAtual);
 
                 RoletolaStatusDto dto = new RoletolaStatusDto();
-                dto.setIndex(String.valueOf(numeroApostado));
-                dto.setGanhos(String.valueOf(numeroApostado));
+                dto.setNumeroSorteado(String.valueOf(valorDaRoleta));
+                dto.setNumeroApostado(String.valueOf(numeroApostaAtual));
                 apostas.add(dto);
 
                 adapter = new RoletolaAdapter(Roletola.this, apostas);
@@ -197,7 +196,6 @@ public class Roletola extends AppCompatActivity {
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-
 
                 resetaBotoes();
 
@@ -215,44 +213,6 @@ public class Roletola extends AppCompatActivity {
     private void validaAPosta(int valorDaRoleta, int numeroApostado) {
         if (valorDaRoleta == numeroApostado) {
             Toast.makeText(this, "Você ganhou !!!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private int getApostNumber() {
-        int apostNumber = 0;
-        for (int i = 1; i <= 10; i++) {
-            if (!getRoletolaNumero(i).isClickable()) {
-                apostNumber = i;
-                break;
-            }
-        }
-        return apostNumber;
-    }
-
-    private Button getRoletolaNumero(int i) {
-        switch (i) {
-            case 1:
-                return roletola_numero_01;
-            case 2:
-                return roletola_numero_02;
-            case 3:
-                return roletola_numero_03;
-            case 4:
-                return roletola_numero_04;
-            case 5:
-                return roletola_numero_05;
-            case 6:
-                return roletola_numero_06;
-            case 7:
-                return roletola_numero_07;
-            case 8:
-                return roletola_numero_08;
-            case 9:
-                return roletola_numero_09;
-            case 10:
-                return roletola_numero_10;
-            default:
-                throw new IllegalArgumentException("Número de roletola inválido: " + i);
         }
     }
 

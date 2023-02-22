@@ -35,8 +35,8 @@ public class RoletolaAdapter extends RecyclerView.Adapter<RoletolaAdapter.Roleto
     @Override
     public void onBindViewHolder(@NonNull RoletolaViewHolder holder, int position) {
         RoletolaStatusDto roletola = roletolaStatusDtos.get(position);
-        holder.index.setText(roletola.getIndex());
-        holder.ganhos.setText(roletola.getGanhos());
+        holder.numeroSorteado.setText(roletola.getNumeroSorteado());
+        holder.numeroApostado.setText(roletola.getNumeroApostado());
     }
 
     @Override
@@ -47,13 +47,13 @@ public class RoletolaAdapter extends RecyclerView.Adapter<RoletolaAdapter.Roleto
 
     public static class RoletolaViewHolder extends RecyclerView.ViewHolder {
 
-        TextView index, ganhos;
+        TextView numeroSorteado, numeroApostado;
 
         public RoletolaViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            index = itemView.findViewById(R.id.index);
-            ganhos = itemView.findViewById(R.id.ganho);
+            numeroSorteado = itemView.findViewById(R.id.numeroSorteado);
+            numeroApostado = itemView.findViewById(R.id.numeroApostado);
 
         }
     }
