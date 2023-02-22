@@ -9,7 +9,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.hoffmann.lotecaatualizada.adapters.RoletolaAdapter;
+import com.hoffmann.lotecaatualizada.domain.dto.RoletolaStatusDto;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -24,6 +30,9 @@ public class Roletola extends AppCompatActivity {
     boolean spinning = false;
     private ImageView roleta, rodarRoleta;
     Random random = new Random();
+    List<RoletolaStatusDto> apostas = new ArrayList<>();
+    private RoletolaAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +94,7 @@ public class Roletola extends AppCompatActivity {
     }
 
 
-    private void resetaBotoes(int numeroApostado) {
+    private void resetaBotoes() {
         List<Button> botoes = Arrays.asList(
                 roletola_numero_01,
                 roletola_numero_02,
@@ -139,6 +148,7 @@ public class Roletola extends AppCompatActivity {
         botaoGirar = findViewById(R.id.girar);
         rodarRoleta = findViewById(R.id.rodar_roleta);
         rodarRoleta.setEnabled(false);
+        recyclerView = findViewById(R.id.roletolaRecicleViewId);
         roletola_numero_01 = findViewById(R.id.roletola_01);
         roletola_numero_02 = findViewById(R.id.roletola_02);
         roletola_numero_03 = findViewById(R.id.roletola_03);
@@ -174,7 +184,22 @@ public class Roletola extends AppCompatActivity {
                 int numeroApostado = getApostNumber();
 
                 validaAPosta(valorDaRoleta, numeroApostado);
-                resetaBotoes(numeroApostado);
+
+
+                RoletolaStatusDto dto = new RoletolaStatusDto();
+                dto.setIndex(String.valueOf(numeroApostado));
+                dto.setGanhos(String.valueOf(numeroApostado));
+                apostas.add(dto);
+
+                adapter = new RoletolaAdapter(Roletola.this, apostas);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Roletola.this,
+                        RecyclerView.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+
+                resetaBotoes();
 
                 spinning = false;
             }
