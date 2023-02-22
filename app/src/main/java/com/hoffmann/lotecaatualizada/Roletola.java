@@ -23,7 +23,7 @@ import java.util.Random;
 public class Roletola extends AppCompatActivity {
 
     private Button botaoGirar, roletola_numero_01, roletola_numero_02, roletola_numero_03, roletola_numero_04, roletola_numero_05,
-            roletola_numero_06, roletola_numero_07, roletola_numero_08, roletola_numero_09, roletola_numero_10;
+            roletola_numero_06, roletola_numero_07, roletola_numero_08, valor10, valor30, valor50;
     final int[] sectors = {1, 4, 7, 2, 8, 5, 3, 6};
     final int[] sectorDegress = new int[sectors.length];
     int index = 0;
@@ -34,6 +34,7 @@ public class Roletola extends AppCompatActivity {
     private RoletolaAdapter adapter;
     private RecyclerView recyclerView;
     private int numeroApostaAtual;
+    private String valorSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +77,6 @@ public class Roletola extends AppCompatActivity {
             regrasDeValidacao(roletola_numero_08);
         });
 
-        roletola_numero_09.setOnClickListener(v -> {
-            regrasDeValidacao(roletola_numero_09);
-        });
-
-        roletola_numero_10.setOnClickListener(v -> {
-            regrasDeValidacao(roletola_numero_10);
-        });
-
         botaoGirar.setOnClickListener(v -> {
             if (!spinning) {
                 spin();
@@ -92,6 +85,37 @@ public class Roletola extends AppCompatActivity {
         });
 
         rodarRoleta.setOnClickListener(v -> botaoGirar.performClick());
+
+        valor10.setOnClickListener(v -> eventoBotoesValoresAposta(valor10));
+        valor30.setOnClickListener(v -> eventoBotoesValoresAposta(valor30));
+        valor50.setOnClickListener(v -> eventoBotoesValoresAposta(valor50));
+    }
+
+    private void eventoBotoesValoresAposta(Button botao) {
+        List<Button> botoesValores = Arrays.asList(valor10, valor30, valor50);
+        Button[] botoes = {roletola_numero_01, roletola_numero_02, roletola_numero_03, roletola_numero_04, roletola_numero_05,
+                roletola_numero_06, roletola_numero_07, roletola_numero_08};
+
+        for (Button botaoIteracao : botoesValores) {
+            if (botao.equals(botaoIteracao)){
+                botaoIteracao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
+                botaoIteracao.setTextColor(getApplication().getColor(R.color.roxo));
+                botaoIteracao.setClickable(false);
+                valorSelecionado = botaoIteracao.getText().toString();
+
+                for (Button botaoNumeroAposta : botoes) {
+                    int teste = Integer.parseInt(botaoNumeroAposta.getText().toString());
+                    if (teste == numeroApostaAtual) {
+                        botaoGirar.setEnabled(true);
+                        botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
+                        botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
+                        rodarRoleta.setEnabled(true);
+                    }
+                }
+            } else {
+                botaoIteracao.setClickable(false);
+            }
+        }
     }
 
 
@@ -104,9 +128,9 @@ public class Roletola extends AppCompatActivity {
                 roletola_numero_05,
                 roletola_numero_06,
                 roletola_numero_07,
-                roletola_numero_08,
-                roletola_numero_09,
-                roletola_numero_10);
+                roletola_numero_08);
+
+        List<Button> botoesValores = Arrays.asList(valor10, valor30, valor50);
 
         for (Button botao : botoes) {
             if (!botao.isClickable()) {
@@ -117,6 +141,18 @@ public class Roletola extends AppCompatActivity {
                 botaoGirar.setEnabled(false);
                 rodarRoleta.setEnabled(false);
             }
+
+            for (Button botaoValor : botoesValores) {
+                if (botaoValor.getText().equals(valorSelecionado)) {
+                    botaoValor.setBackground((getApplication().getDrawable(R.drawable.shape_botao_normal)));
+                    botaoValor.setTextColor(getApplication().getColor(R.color.white));
+                    botaoValor.setClickable(true);
+                } else {
+                    botaoValor.setClickable(true);
+                }
+            }
+            valorSelecionado = "";
+            numeroApostaAtual = 0;
         }
     }
 
@@ -124,7 +160,9 @@ public class Roletola extends AppCompatActivity {
     private void regrasDeValidacao(Button botao) {
 
         Button[] botoes = {roletola_numero_01, roletola_numero_02, roletola_numero_03, roletola_numero_04, roletola_numero_05,
-                roletola_numero_06, roletola_numero_07, roletola_numero_08, roletola_numero_09, roletola_numero_10};
+                roletola_numero_06, roletola_numero_07, roletola_numero_08};
+
+        List<Button> botoesValores = Arrays.asList(valor10, valor30, valor50);
 
         for (Button botaoIteracao : botoes) {
             if (botao.getText().equals(botaoIteracao.getText())) {
@@ -134,11 +172,14 @@ public class Roletola extends AppCompatActivity {
 
                 numeroApostaAtual = Integer.parseInt((String) botaoIteracao.getText());
 
-                botaoGirar.setEnabled(true);
-                botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
-                botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
-
-                rodarRoleta.setEnabled(true);
+                for (Button botaoValoresIteracao : botoesValores) {
+                    if (botaoValoresIteracao.getText().equals(valorSelecionado)){
+                        botaoGirar.setEnabled(true);
+                        botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
+                        botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
+                        rodarRoleta.setEnabled(true);
+                    }
+                }
             } else {
                 botaoIteracao.setClickable(false);
             }
@@ -159,8 +200,9 @@ public class Roletola extends AppCompatActivity {
         roletola_numero_06 = findViewById(R.id.roletola_06);
         roletola_numero_07 = findViewById(R.id.roletola_07);
         roletola_numero_08 = findViewById(R.id.roletola_08);
-        roletola_numero_09 = findViewById(R.id.roletola_09);
-        roletola_numero_10 = findViewById(R.id.roletola_10);
+        valor10 = findViewById(R.id.botao_10_roletola);
+        valor30 = findViewById(R.id.botao_30_roletola);
+        valor50 = findViewById(R.id.botao_50_roletola);
     }
 
     private void spin() {

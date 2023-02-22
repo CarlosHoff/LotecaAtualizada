@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/numeroSorteado"
-            android:layout_width="70dp"
+            android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/white"
@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/numeroApostado"
-            android:layout_width="70dp"
+            android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/white"

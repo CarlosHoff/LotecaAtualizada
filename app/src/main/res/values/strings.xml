@@ -103,4 +103,7 @@
     <string name="numero_apostado">Nº Apostado</string>
     <string name="n_sorteado">Nº Sorteado</string>
     <string name="n_apostado">Nº Apostado</string>
+    <string name="_10_00">10,00</string>
+    <string name="_30_00">30,00</string>
+    <string name="_50_00">50,00</string>
 </resources>
