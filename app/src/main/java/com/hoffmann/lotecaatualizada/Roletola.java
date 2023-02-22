@@ -1,11 +1,13 @@
 package com.hoffmann.lotecaatualizada;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import com.hoffmann.lotecaatualizada.domain.dto.RoletolaStatusDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class Roletola extends AppCompatActivity {
@@ -35,6 +38,8 @@ public class Roletola extends AppCompatActivity {
     private RecyclerView recyclerView;
     private int numeroApostaAtual;
     private String valorSelecionado;
+    private TextView saldoRoletola;
+    private int VALOR_APOSTA = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,6 +208,7 @@ public class Roletola extends AppCompatActivity {
         valor10 = findViewById(R.id.botao_10_roletola);
         valor30 = findViewById(R.id.botao_30_roletola);
         valor50 = findViewById(R.id.botao_50_roletola);
+        saldoRoletola = findViewById(R.id.saldoRoletola);
     }
 
     private void spin() {
@@ -253,10 +259,17 @@ public class Roletola extends AppCompatActivity {
     }
 
     private void validaAPosta(int valorDaRoleta, int numeroApostado) {
-        if (valorDaRoleta == numeroApostado) {
-            Toast.makeText(this, "Você ganhou !!!", Toast.LENGTH_SHORT).show();
+        try {
+            double valorApostado = Double.parseDouble(String.valueOf(valorSelecionado));
+            double saldoAtual = Double.parseDouble(saldoRoletola.getText().toString());
+            double ganhoOuPerda = (valorDaRoleta == numeroApostado) ? (VALOR_APOSTA * valorApostado) : -valorApostado;
+            saldoAtual += ganhoOuPerda;
+            saldoRoletola.setText(String.format(Locale.getDefault(), "%.2f", saldoAtual));
+        } catch (NumberFormatException e) {
+            // Tratar exceção aqui, se necessárioø¬
         }
     }
+
 
     private int geraNumeroRandom() {
         return (360 * sectors.length) + sectorDegress[index];
