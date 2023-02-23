@@ -36,6 +36,16 @@
         <item name="android:textColor">@drawable/button_selector</item>
     </style>
 
+    <style name="botao_quadrado_niquel">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:background">@drawable/borda_slots</item>
+    </style>
+
     <style name="botao_redondo_cardview">
         <item name="android:layout_width">33dp</item>
         <item name="android:layout_height">33dp</item>
