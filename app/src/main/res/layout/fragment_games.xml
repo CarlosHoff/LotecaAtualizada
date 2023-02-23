@@ -12,28 +12,18 @@
         android:layout_height="match_parent"
         android:background="@drawable/gradient_background">
 
-    <ImageView
-        android:id="@+id/iv_logo_games"
-        android:layout_width="match_parent"
-        android:layout_height="244dp"
-        android:layout_marginBottom="32dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/logotipo_app"
+    <TextView
+        android:id="@+id/lista_de_games"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lista_de_games"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/noot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/lista_de_games"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="@string/lista_de_games"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo_games" />
 
 
         <GridLayout

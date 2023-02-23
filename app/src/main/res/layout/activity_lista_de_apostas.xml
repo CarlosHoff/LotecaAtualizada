@@ -7,26 +7,19 @@
     android:background="@drawable/gradient_background"
     tools:context="com.hoffmann.lotecaatualizada.ListaDeApostas">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="244dp"
-        android:src="@drawable/logobetola"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <TextView
         android:id="@+id/texto_aposta_lista"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/lista_de_apostas"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textSize="35sp"
+        android:fontFamily="@font/noot"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/botaoIrPagamento"
@@ -46,13 +39,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recicleViewId"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/botaoIrPagamento"
         app:layout_constraintTop_toBottomOf="@+id/texto_aposta_lista"
-        tools:listitem="@layout/listagem_apostas"
-        tools:layout_editor_absoluteX="10dp" />
+        tools:layout_editor_absoluteX="10dp"
+        tools:listitem="@layout/listagem_apostas" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

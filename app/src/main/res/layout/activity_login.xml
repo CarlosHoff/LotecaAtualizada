@@ -21,7 +21,7 @@
         android:id="@+id/email_login"
         style="@style/texto_cadastro_style"
         android:hint="@string/username"
-        android:drawableRight="@drawable/ic_email"
+        android:drawableEnd="@drawable/ic_email"
         android:inputType="textEmailAddress"
         android:background="@drawable/edittext_background"/>
 
@@ -29,7 +29,7 @@
         android:id="@+id/senha_login"
         style="@style/texto_cadastro_style"
         android:hint="@string/password"
-        android:drawableRight="@drawable/ic_senha"
+        android:drawableEnd="@drawable/ic_senha"
         android:inputType="numberPassword"
         android:background="@drawable/edittext_background"/>
 
@@ -52,27 +52,25 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botao_entrar"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:textSize="16sp"
             android:textColor="@drawable/button_selector"
             android:background="@drawable/background_button_selector"
-            android:padding="16dp"
+            android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"/>
+            android:layout_marginEnd="8dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/texto_cadastro"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/register"
             android:textSize="16sp"
             android:textColor="@drawable/button_selector"
             android:background="@drawable/background_button_selector"
-            android:padding="16dp"
-            android:layout_weight="1"
+            android:padding="12dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"/>
 

@@ -7,35 +7,19 @@
     android:background="@drawable/gradient_background"
     tools:context="com.hoffmann.lotecaatualizada.Cadastro">
 
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="match_parent"
-        android:layout_height="244dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/logotipo_app"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/texto_cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cadastre_se"
-        android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@id/iv_logo"
-        app:layout_constraintStart_toStartOf="@id/iv_logo"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo"/>
-
-    <View
-        android:id="@+id/form_cadastro_view"
-        android:layout_width="wrap_content"
-        android:layout_height="370dp"
+        android:textSize="35sp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/noot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/texto_cadastro" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/nome_cadastro"
@@ -43,10 +27,13 @@
         android:hint="@string/digite_seu_nome"
         android:textAlignment="center"
         android:inputType="text"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/cadastro_shape"
-        app:layout_constraintStart_toStartOf="@id/form_cadastro_view"
-        app:layout_constraintEnd_toEndOf="@id/form_cadastro_view"
-        app:layout_constraintTop_toTopOf="@id/form_cadastro_view"/>
+        app:layout_constraintStart_toStartOf="@id/texto_cadastro"
+        app:layout_constraintEnd_toEndOf="@id/texto_cadastro"
+        app:layout_constraintTop_toBottomOf="@id/texto_cadastro"/>
 
     <EditText
         android:id="@+id/apelido_cadastro"
@@ -54,6 +41,7 @@
         android:hint="@string/digite_seu_apelido"
         android:textAlignment="center"
         android:inputType="text"
+        android:layout_margin="20dp"
         android:background="@drawable/cadastro_shape"
         app:layout_constraintStart_toStartOf="@id/nome_cadastro"
         app:layout_constraintEnd_toEndOf="@id/nome_cadastro"
@@ -65,6 +53,7 @@
         style="@style/texto_cadastro_style"
         android:inputType="textEmailAddress"
         android:maxLength="27"
+        android:layout_margin="20dp"
         android:background="@drawable/cadastro_shape"
         android:hint="@string/digite_seu_email" android:textAlignment="center"
         app:layout_constraintStart_toStartOf="@id/apelido_cadastro"
@@ -76,10 +65,11 @@
         android:id="@+id/celular_cadastro"
         style="@style/texto_cadastro_style"
         android:inputType="number"
+        android:layout_margin="20dp"
         android:background="@drawable/cadastro_shape"
         android:hint="@string/digite_seu_celular" android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/form_cadastro_view"
-        app:layout_constraintEnd_toEndOf="@id/form_cadastro_view"
+        app:layout_constraintStart_toStartOf="@id/email_cadastro"
+        app:layout_constraintEnd_toEndOf="@id/email_cadastro"
         app:layout_constraintTop_toBottomOf="@id/email_cadastro"
         />
 
@@ -87,10 +77,11 @@
         android:id="@+id/cpf_cadastro"
         style="@style/texto_cadastro_style"
         android:inputType="number"
+        android:layout_margin="20dp"
         android:background="@drawable/cadastro_shape"
         android:hint="@string/digite_seu_cpf" android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/form_cadastro_view"
-        app:layout_constraintEnd_toEndOf="@id/form_cadastro_view"
+        app:layout_constraintStart_toStartOf="@id/celular_cadastro"
+        app:layout_constraintEnd_toEndOf="@id/celular_cadastro"
         app:layout_constraintTop_toBottomOf="@id/celular_cadastro"
         />
 
@@ -101,8 +92,9 @@
         android:background="@drawable/cadastro_shape"
         android:hint="@string/digite_sua_senha"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/form_cadastro_view"
-        app:layout_constraintEnd_toEndOf="@id/form_cadastro_view"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="@id/cpf_cadastro"
+        app:layout_constraintEnd_toEndOf="@id/cpf_cadastro"
         app:layout_constraintTop_toBottomOf="@id/cpf_cadastro"
         />
 
@@ -110,16 +102,16 @@
         android:id="@+id/botao_cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="144dp"
         android:layout_weight="1"
         android:background="@drawable/background_button_selector"
         android:padding="16dp"
         android:text="@string/botao_cadastrar"
         android:textColor="@drawable/button_selector"
+        android:layout_marginTop="50dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/form_cadastro_view" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/senha_cadastro" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
