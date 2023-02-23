@@ -25,13 +25,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
         <GridLayout
             android:id="@+id/grid"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:rowCount="4"
+            android:rowCount="2"
             android:columnCount="2"
+            android:layout_margin="30dp"
             app:layout_constraintTop_toBottomOf="@+id/lista_de_games"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,31 +40,23 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_mega_tola"
                 style="@style/image_view_games_style"
-                android:background="@drawable/shape_games"
-                android:drawableTop="@drawable/ic_game_50"
-                android:text="MEGA-TOLA"
+                android:background="@drawable/megatola"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_loto_tola"
                 style="@style/image_view_games_style"
-                android:background="@drawable/shape_games"
-                android:drawableTop="@drawable/ic_game_50"
-                android:text="ROLETOLA"/>
+                android:background="@drawable/roletola"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_quina_tola"
                 style="@style/image_view_games_style"
-                android:background="@drawable/shape_games"
-                android:drawableTop="@drawable/ic_game_50"
-                android:text="QUINA-TOLA"/>
+                android:background="@drawable/niquel"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/game_bicho_tola"
                 style="@style/image_view_games_style"
-                android:background="@drawable/shape_games"
-                android:drawableTop="@drawable/ic_game_50"
-                android:text="BICHO-TOLA"/>
+                android:background="@drawable/blackjack"/>
         </GridLayout>
 
         <androidx.appcompat.widget.AppCompatButton

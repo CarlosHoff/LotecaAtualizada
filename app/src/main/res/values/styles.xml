@@ -60,7 +60,7 @@
     </style>
 
     <style name="image_view_games_style">
-        <item name="android:layout_margin">22dp</item>
+        <item name="android:layout_margin">10dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_rowWeight">1</item>
