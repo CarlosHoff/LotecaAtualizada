@@ -22,7 +22,7 @@
             android:name=".Roletola"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".Niquel"
             android:exported="false" />
         <activity
             android:name=".Menu"
@@ -55,7 +55,7 @@
             android:name=".fragments.Perfil"
             android:exported="false" />
         <activity
-            android:name=".Niquel"
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -39,12 +39,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recicleViewId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="550dp"
         android:layout_marginTop="5dp"
+        android:layout_gravity="top"
         app:layout_constraintBottom_toTopOf="@+id/botaoIrPagamento"
-        app:layout_constraintTop_toBottomOf="@+id/texto_aposta_lista"
-        tools:layout_editor_absoluteX="10dp"
-        tools:listitem="@layout/listagem_apostas" />
+        app:layout_constraintTop_toBottomOf="@+id/texto_aposta_lista"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

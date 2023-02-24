@@ -149,7 +149,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/girar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:background="@drawable/botao_desativado_aposta"
         android:enabled="false"
         android:text="@string/girar"
@@ -226,7 +226,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botao_10_roletola"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_button_selector"
@@ -237,7 +237,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botao_30_roletola"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_button_selector"
@@ -248,7 +248,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botao_50_roletola"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_button_selector"

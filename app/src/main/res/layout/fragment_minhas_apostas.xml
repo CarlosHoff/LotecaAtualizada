@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_background">
-/>
 
         <TextView
             android:id="@+id/minhas_apostas"
@@ -30,12 +29,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recicleViewMinhasApostas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="600dp"
             android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/minhas_apostas"
-            tools:layout_editor_absoluteX="10dp"
-            tools:listitem="@layout/listagem_apostas" />
+            app:layout_constraintTop_toBottomOf="@+id/minhas_apostas"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
