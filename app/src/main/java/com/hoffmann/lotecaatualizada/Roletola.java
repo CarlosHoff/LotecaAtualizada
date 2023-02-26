@@ -1,21 +1,27 @@
 package com.hoffmann.lotecaatualizada;
 
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.ROLETOLA_EXPLICACAO;
+
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hoffmann.lotecaatualizada.adapters.RoletolaAdapter;
 import com.hoffmann.lotecaatualizada.domain.dto.RoletolaStatusDto;
+import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +45,7 @@ public class Roletola extends AppCompatActivity {
     private int numeroApostaAtual;
     private String valorSelecionado;
     private TextView saldoRoletola;
-    private int VALOR_APOSTA = 5;
+    private final Utils utils = new Utils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,11 @@ public class Roletola extends AppCompatActivity {
         setContentView(R.layout.activity_roletola);
 
         iniciaComponentes();
+
+        Dialog dialog = utils.createAlertDialog(this, ROLETOLA_EXPLICACAO, "", OK);
+        dialog.show();
+        TextView botaoPositivo = dialog.findViewById(R.id.botao_positive);
+        botaoPositivo.setOnClickListener(v -> dialog.dismiss());
 
         generateSectorDegress();
 
@@ -103,7 +114,7 @@ public class Roletola extends AppCompatActivity {
 
         for (Button botaoIteracao : botoesValores) {
             if (botao.equals(botaoIteracao)){
-                botaoIteracao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
+                botaoIteracao.setBackground((AppCompatResources.getDrawable(Roletola.this, R.drawable.shape_botao_redondo_selecionado)));
                 botaoIteracao.setTextColor(getApplication().getColor(R.color.roxo));
                 botaoIteracao.setClickable(false);
                 valorSelecionado = botaoIteracao.getText().toString();
@@ -112,7 +123,7 @@ public class Roletola extends AppCompatActivity {
                     int teste = Integer.parseInt(botaoNumeroAposta.getText().toString());
                     if (teste == numeroApostaAtual) {
                         botaoGirar.setEnabled(true);
-                        botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
+                        botaoGirar.setBackground(AppCompatResources.getDrawable(Roletola.this, R.drawable.botao_desativado_aposta));
                         botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
                         rodarRoleta.setEnabled(true);
                     }
@@ -139,7 +150,7 @@ public class Roletola extends AppCompatActivity {
 
         for (Button botao : botoes) {
             if (!botao.isClickable()) {
-                botao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_normal)));
+                botao.setBackground((AppCompatResources.getDrawable(Roletola.this, R.drawable.shape_botao_redondo_normal)));
                 botao.setTextColor(getApplication().getColor(R.color.white));
                 botao.setClickable(true);
                 botaoGirar.setTextColor(getApplication().getColor(R.color.white));
@@ -149,7 +160,7 @@ public class Roletola extends AppCompatActivity {
 
             for (Button botaoValor : botoesValores) {
                 if (botaoValor.getText().equals(valorSelecionado)) {
-                    botaoValor.setBackground((getApplication().getDrawable(R.drawable.shape_botao_normal)));
+                    botaoValor.setBackground((AppCompatResources.getDrawable(Roletola.this, R.drawable.shape_botao_normal)));
                     botaoValor.setTextColor(getApplication().getColor(R.color.white));
                     botaoValor.setClickable(true);
                 } else {
@@ -171,7 +182,7 @@ public class Roletola extends AppCompatActivity {
 
         for (Button botaoIteracao : botoes) {
             if (botao.getText().equals(botaoIteracao.getText())) {
-                botaoIteracao.setBackground((getApplication().getDrawable(R.drawable.shape_botao_redondo_selecionado)));
+                botaoIteracao.setBackground((AppCompatResources.getDrawable(Roletola.this, R.drawable.shape_botao_redondo_selecionado)));
                 botaoIteracao.setTextColor(getApplication().getColor(R.color.roxo));
                 botaoIteracao.setClickable(false);
 
@@ -180,7 +191,7 @@ public class Roletola extends AppCompatActivity {
                 for (Button botaoValoresIteracao : botoesValores) {
                     if (botaoValoresIteracao.getText().equals(valorSelecionado)){
                         botaoGirar.setEnabled(true);
-                        botaoGirar.setBackground(getApplication().getDrawable(R.drawable.botao_desativado_aposta));
+                        botaoGirar.setBackground(AppCompatResources.getDrawable(Roletola.this, R.drawable.botao_desativado_aposta));
                         botaoGirar.setTextColor(getApplication().getColor(R.color.roxo));
                         rodarRoleta.setEnabled(true);
                     }
@@ -262,11 +273,12 @@ public class Roletola extends AppCompatActivity {
         try {
             double valorApostado = Double.parseDouble(String.valueOf(valorSelecionado));
             double saldoAtual = Double.parseDouble(saldoRoletola.getText().toString());
+            int VALOR_APOSTA = 5;
             double ganhoOuPerda = (valorDaRoleta == numeroApostado) ? (VALOR_APOSTA * valorApostado) : -valorApostado;
             saldoAtual += ganhoOuPerda;
             saldoRoletola.setText(String.format(Locale.getDefault(), "%.2f", saldoAtual));
         } catch (NumberFormatException e) {
-            // Tratar exceção aqui, se necessárioø¬
+            Log.d("validaAPosta() ", e.getMessage());
         }
     }
 

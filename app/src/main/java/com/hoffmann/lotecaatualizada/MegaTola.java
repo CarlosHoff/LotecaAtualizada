@@ -1,5 +1,10 @@
 package com.hoffmann.lotecaatualizada;
 
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.MEGATOLA_EXPLICACAO;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.ROLETOLA_EXPLICACAO;
+
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
+import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,6 +37,7 @@ public class MegaTola extends AppCompatActivity {
     List<Long> cartelaDeApostas = new ArrayList<>();
     List<ApostasUsuarioDto> cartelaDeApostasFinal;
     private String email, token;
+    private final Utils utils = new Utils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,12 @@ public class MegaTola extends AppCompatActivity {
         setContentView(R.layout.activity_mega_tola);
 
         iniciarComponentes();
+
+        Dialog dialog = utils.createAlertDialog(this, MEGATOLA_EXPLICACAO, "", OK);
+        dialog.show();
+        TextView botaoPositivo = dialog.findViewById(R.id.botao_positive);
+        botaoPositivo.setOnClickListener(v -> dialog.dismiss());
+
         CarregaOsComponentes();
 
         botaoApostar.setOnClickListener(new View.OnClickListener() {

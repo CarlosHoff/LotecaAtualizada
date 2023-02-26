@@ -112,4 +112,6 @@
     <string name="ca_a_niquel">CAÇA NIQUEL</string>
     <string name="apostar">APOSTAR</string>
     <string name="pagar_apostas">PAGAR APOSTA(S)</string>
+    <string name="aten_o">ATENÇÃO !!!</string>
+    <string name="sim">Sim</string>
 </resources>
