@@ -3,7 +3,9 @@ package com.hoffmann.lotecaatualizada;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.ROLETOLA_EXPLICACAO;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +48,7 @@ public class Roletola extends AppCompatActivity {
     private String valorSelecionado;
     private TextView saldoRoletola;
     private final Utils utils = new Utils();
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,14 @@ public class Roletola extends AppCompatActivity {
 
         iniciaComponentes();
 
-        Dialog dialog = utils.createAlertDialog(this, ROLETOLA_EXPLICACAO, "", OK);
-        dialog.show();
-        TextView botaoPositivo = dialog.findViewById(R.id.botao_positive);
-        botaoPositivo.setOnClickListener(v -> dialog.dismiss());
+        sharedPreferences = getSharedPreferences("ROLETOLA", MODE_PRIVATE);
+        if (!sharedPreferences.contains("hasVisitedActivity")) {
+            Dialog dialog = utils.createAlertDialog(this, ROLETOLA_EXPLICACAO, "", OK);
+            dialog.show();
+            TextView botaoPositivo = dialog.findViewById(R.id.botao_positive);
+            botaoPositivo.setOnClickListener(v -> dialog.dismiss());
+        }
+        sharedPreferences.edit().putBoolean("hasVisitedActivity", true).apply();
 
         generateSectorDegress();
 
@@ -238,6 +245,7 @@ public class Roletola extends AppCompatActivity {
             public void onAnimationStart(Animation animation) {
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onAnimationEnd(Animation animation) {
                 int valorDaRoleta = sectors[sectors.length - (index + 1)];

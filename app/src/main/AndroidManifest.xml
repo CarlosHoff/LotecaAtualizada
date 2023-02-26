@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Splash"
+            android:name=".Roletola"
             android:exported="false" />
         <activity
             android:name=".Niquel"
@@ -55,7 +55,7 @@
             android:name=".fragments.Perfil"
             android:exported="false" />
         <activity
-            android:name=".Roletola"
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

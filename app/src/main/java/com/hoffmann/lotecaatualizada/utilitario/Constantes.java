@@ -3,6 +3,7 @@ package com.hoffmann.lotecaatualizada.utilitario;
 public class Constantes {
 
     /* TODO - CAMPOS DO PROJETO  */
+    public static final long VALOR_APOSTA_MEGA_TOLA = 50;
     public static final String NOME = "Nome";
     public static final String APELIDO = "Apelido";
     public static final String EMAIL = "E-mail";
