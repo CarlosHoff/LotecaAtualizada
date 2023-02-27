@@ -52,7 +52,7 @@
             android:name=".TelaErro01"
             android:exported="false" />
         <activity
-            android:name=".fragments.Perfil"
+            android:name=".fragments.Profile"
             android:exported="false" />
         <activity
             android:name=".Splash"

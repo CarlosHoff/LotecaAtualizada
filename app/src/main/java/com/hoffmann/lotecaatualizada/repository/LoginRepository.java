@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginRepository {
 
-    private LoginService loginService;
+    private final LoginService loginService;
 
     public LoginRepository() {
         Retrofit retrofit = new Retrofit.Builder()

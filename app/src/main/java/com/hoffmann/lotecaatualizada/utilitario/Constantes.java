@@ -4,13 +4,8 @@ public class Constantes {
 
     /* TODO - CAMPOS DO PROJETO  */
     public static final long VALOR_APOSTA_MEGA_TOLA = 50;
-    public static final String NOME = "Nome";
-    public static final String APELIDO = "Apelido";
-    public static final String EMAIL = "E-mail";
-    public static final String CELULAR = "Celular";
-    public static final String CPF = "CPF";
-    public static final String SENHA = "Senha";
-    public static final String NOT_NULL = "é obrigatório";
+    public static final String PROFILE = "PROFILE";
+    public static final String FIRST_ACCESS_FRAGMENT = "hasVisitedFragment";
     public static final String REGISTER_SUCCESS = "Cadastro realizado com sucesso, faça o login";
 
     /* TODO - URI DOS ENDPOINTS  */

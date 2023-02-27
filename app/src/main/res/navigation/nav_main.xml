@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/menu_perfil"
-        android:name="com.hoffmann.lotecaatualizada.fragments.Perfil"
+        android:name="com.hoffmann.lotecaatualizada.fragments.Profile"
         android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/menu_jogos"
