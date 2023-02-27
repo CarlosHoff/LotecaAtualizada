@@ -38,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Perfil extends Fragment {
 
     private TextView nome, emailTela, celular;
-    private String token, email;
+    private String email;
 
     private final Utils utils = new Utils();
     SharedPreferences sharedPreferences;
@@ -116,7 +116,6 @@ public class Perfil extends Fragment {
     }
 
     private void getToken(String token) {
-        this.token = token;
         if (token != null) {
             carregaPerfilUsuario(token, email);
         }
