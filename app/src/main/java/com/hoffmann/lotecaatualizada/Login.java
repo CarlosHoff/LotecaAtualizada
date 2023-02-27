@@ -38,14 +38,11 @@ public class Login extends AppCompatActivity {
         enterButton.setOnClickListener(view -> loginViewModel.login(email.getText().toString(), password.getText().toString()).observe(Login.this, loginResponse -> {
             if (loginResponse != null) {
                 progressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent menu = new Intent(Login.this, Menu.class);
-                        menu.putExtra("token", loginResponse.getToken());
-                        menu.putExtra("email", loginResponse.getNome());
-                        startActivity(menu);
-                    }
+                new Handler().postDelayed(() -> {
+                    Intent menu = new Intent(Login.this, Menu.class);
+                    menu.putExtra("token", loginResponse.getToken());
+                    menu.putExtra("email", loginResponse.getNome());
+                    startActivity(menu);
                 }, 1000);
             } else {
                 startActivity(new Intent(Login.this, TelaErro01.class));

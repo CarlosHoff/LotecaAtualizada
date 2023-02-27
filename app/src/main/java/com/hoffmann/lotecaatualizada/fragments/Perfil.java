@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.hoffmann.lotecaatualizada.Login;
 import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.TelaErro01;
-import com.hoffmann.lotecaatualizada.client.UsuarioService;
+import com.hoffmann.lotecaatualizada.client.UserService;
 import com.hoffmann.lotecaatualizada.domain.response.UsuarioResponse;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
@@ -86,8 +86,8 @@ public class Perfil extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        UsuarioService usuarioService = retrofit.create(UsuarioService.class);
-        Call<UsuarioResponse> requestCadastro = usuarioService.buscaUsuario(token, email);
+        UserService userService = retrofit.create(UserService.class);
+        Call<UsuarioResponse> requestCadastro = userService.buscaUsuario(token, email);
 
         requestCadastro.enqueue(new Callback<UsuarioResponse>() {
             @Override
