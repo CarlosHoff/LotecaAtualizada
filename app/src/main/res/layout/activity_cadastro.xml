@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context="com.hoffmann.lotecaatualizada.Cadastro">
+    tools:context="com.hoffmann.lotecaatualizada.Register">
 
     <TextView
         android:id="@+id/texto_cadastro"

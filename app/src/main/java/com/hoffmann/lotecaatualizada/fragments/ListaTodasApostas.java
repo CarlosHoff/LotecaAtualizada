@@ -96,7 +96,7 @@ public class ListaTodasApostas extends Fragment {
                 if (!textoBusca.isEmpty()) {
                     resultadosDaBusca.clear();
                     for (TodasApostasResponse item : Objects.requireNonNull(response.body())) {
-                        if (item.getUsuario().getSurname().equalsIgnoreCase(textoBusca)) {
+                        if (item.getUsuario().getApelido().equalsIgnoreCase(textoBusca)) {
 
                             resultadosDaBusca.add(item);
                         }

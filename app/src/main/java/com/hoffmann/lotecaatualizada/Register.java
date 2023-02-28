@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.hoffmann.lotecaatualizada.viewmodel.RegisterViewModel;
 
-public class Cadastro extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     private TextView name, surname, email, cellphone, cpf, password;
     private Button registerButton;
     private RegisterViewModel registerViewModel;
@@ -29,8 +29,8 @@ public class Cadastro extends AppCompatActivity {
         registerButton.setOnClickListener(view -> {
             registerViewModel.register(name.getText().toString(), surname.getText().toString(),
                     email.getText().toString(), cellphone.getText().toString(), cpf.getText().toString(), password.getText().toString());
-            Toast.makeText(Cadastro.this, REGISTER_SUCCESS, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Cadastro.this, Login.class);
+            Toast.makeText(Register.this, REGISTER_SUCCESS, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Register.this, Login.class);
             startActivity(intent);
         });
     }

@@ -31,7 +31,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".Splash"
             android:exported="false" />
         <activity
             android:name=".TelaSucesso"
@@ -46,7 +46,7 @@
             android:name=".MegaTola"
             android:exported="false" />
         <activity
-            android:name=".Cadastro"
+            android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".TelaErro01"
@@ -55,7 +55,7 @@
             android:name=".fragments.Profile"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

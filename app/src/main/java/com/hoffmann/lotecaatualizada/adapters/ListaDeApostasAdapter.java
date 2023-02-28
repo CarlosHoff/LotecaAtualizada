@@ -51,8 +51,8 @@ public class ListaDeApostasAdapter extends RecyclerView.Adapter<ListaDeApostasAd
     }
 
     private String formataNome(TodasApostasResponse aposta) {
-        String nome = aposta.getUsuario().getName().toUpperCase(Locale.ROOT);
-        String apelido = aposta.getUsuario().getSurname();
+        String nome = aposta.getUsuario().getNome().toUpperCase(Locale.ROOT);
+        String apelido = aposta.getUsuario().getApelido();
         return String.format("%s (%s)", nome, apelido);
     }
 

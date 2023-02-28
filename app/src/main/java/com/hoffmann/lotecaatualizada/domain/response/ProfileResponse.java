@@ -4,28 +4,28 @@ import java.io.Serializable;
 
 public class ProfileResponse implements Serializable {
 
-    private String name;
-    private String surname;
+    private String nome;
+    private String apelido;
     private String email;
-    private String cellphone;
+    private String celular;
 
     public ProfileResponse() {
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getApelido() {
+        return apelido;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
     }
 
     public String getEmail() {
@@ -36,11 +36,11 @@ public class ProfileResponse implements Serializable {
         this.email = email;
     }
 
-    public String getCellphone() {
-        return cellphone;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setCellphone(String cellphone) {
-        this.cellphone = cellphone;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 }

@@ -60,15 +60,15 @@ public class Profile extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        startComponents(inflater.inflate(R.layout.fragment_profile, container, false));
+        startComponents(view);
 
         PerfilViewModel perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         perfilViewModel.loadProfile(token, email).observe(getViewLifecycleOwner(), profileResponse -> {
             if (profileResponse != null) {
                 ProfileResponse user = new ProfileResponse();
-                user.setName(Objects.requireNonNull(profileResponse.getName()));
-                user.setSurname(Objects.requireNonNull(profileResponse.getSurname()));
-                user.setCellphone(Objects.requireNonNull(profileResponse.getCellphone()));
+                user.setNome(Objects.requireNonNull(profileResponse.getNome()));
+                user.setApelido(Objects.requireNonNull(profileResponse.getApelido()));
+                user.setCelular(Objects.requireNonNull(profileResponse.getCelular()));
                 user.setEmail(Objects.requireNonNull(profileResponse.getEmail()));
                 fillScreen(user);
             } else {
@@ -95,9 +95,9 @@ public class Profile extends Fragment {
     }
 
     private void fillScreen(ProfileResponse profileResponse) {
-        name.setText(profileResponse.getName());
+        name.setText(profileResponse.getNome());
         emailScreen.setText(profileResponse.getEmail());
-        cellphone.setText(profileResponse.getCellphone());
+        cellphone.setText(profileResponse.getCelular());
     }
 
     private void showAlertDialog() {

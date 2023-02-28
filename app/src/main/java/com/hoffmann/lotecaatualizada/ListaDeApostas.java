@@ -1,64 +1,53 @@
 package com.hoffmann.lotecaatualizada;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
 import com.hoffmann.lotecaatualizada.adapters.ApostaAdapter;
+import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
+import com.hoffmann.lotecaatualizada.viewmodel.ListaDeApostasViewModel;
 
-import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 
 public class ListaDeApostas extends AppCompatActivity {
 
-    private Button botaoIrPagamento;
-    private List<ApostasUsuarioDto> cartelaDeApostasFinal;
     private ApostaAdapter adapter;
-    private String email, token;
     private RecyclerView recyclerView;
     private ActionMode actionMode;
+    private ListaDeApostasViewModel viewModel;
+    List<ApostasUsuarioDto> apostasList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_apostas);
 
-        inciaComponente();
+        startComponents();
 
-        adapter = new ApostaAdapter(ListaDeApostas.this, cartelaDeApostasFinal);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListaDeApostas.this,
                 RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new ApostaAdapter(getBaseContext(), apostasList);
         recyclerView.setAdapter(adapter);
 
-        botaoIrPagamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaDeApostas.this, Pagamento.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("cartelaDeApostasFinal", (Serializable) cartelaDeApostasFinal);
-                bundle.putString("email", getIntent().getExtras().getString("email"));
-                bundle.putString("token", getIntent().getExtras().getString("token"));
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
+        viewModel = new ViewModelProvider(this).get(ListaDeApostasViewModel.class);
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHandler(0, ItemTouchHelper.LEFT)){
-        };
-
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHandler(0, ItemTouchHelper.LEFT));
         helper.attachToRecyclerView(recyclerView);
 
         adapter.setListener(new ApostaAdapter.ApostaAdapterListener() {
@@ -72,6 +61,12 @@ public class ListaDeApostas extends AppCompatActivity {
                 enableActionMode(position);
             }
         });
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
     }
 
     private void enableActionMode(int position) {
@@ -97,7 +92,7 @@ public class ListaDeApostas extends AppCompatActivity {
                     }
                     return false;
                 }
-                @Override
+
                 public void onDestroyActionMode(ActionMode mode) {
                     adapter.getSelectedItems().clear();
                     List<ApostasUsuarioDto> apostasUsuarioDtos = adapter.getApostasUsuarios();
@@ -122,20 +117,6 @@ public class ListaDeApostas extends AppCompatActivity {
         }
     }
 
-    private void inciaComponente() {
-        recyclerView = findViewById(R.id.recicleViewId);
-        botaoIrPagamento = findViewById(R.id.botaoIrPagamento);
-        Bundle bundle = getIntent().getExtras();
-        cartelaDeApostasFinal = (List<ApostasUsuarioDto>) bundle.getSerializable("cartelaDeApostasFinal");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        token = getIntent().getExtras().getString("token");
-        email = getIntent().getExtras().getString("email");
-    }
-
     private  class ItemTouchHandler extends ItemTouchHelper.SimpleCallback {
         public ItemTouchHandler(int dragDirs, int swipeDirs) {
             super(dragDirs, swipeDirs);
@@ -145,7 +126,7 @@ public class ListaDeApostas extends AppCompatActivity {
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             int from = viewHolder.getPosition();
             int to = viewHolder.getAdapterPosition();
-            Collections.swap(adapter.getApostasUsuarios(), from, to);
+            viewModel.swapItems(from, to);
             adapter.notifyItemMoved(from, to);
 
             return true;
@@ -156,5 +137,14 @@ public class ListaDeApostas extends AppCompatActivity {
             adapter.getApostasUsuarios().remove(viewHolder.getAdapterPosition());
             adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
         }
+    }
+
+
+    private void startComponents() {
+        recyclerView = findViewById(R.id.recicleViewId);
+        //botaoIrPagamento = findViewById(R.id.botaoIrPagamento);
+        Bundle bundle = getIntent().getExtras();
+        apostasList = bundle.getParcelableArrayList("cartelaDeApostasFinal");
+
     }
 }

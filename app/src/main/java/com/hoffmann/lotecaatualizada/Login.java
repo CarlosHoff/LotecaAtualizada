@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
         startComponents();
 
         registerButton.setOnClickListener(view -> {
-            Intent intent = new Intent(Login.this, Cadastro.class);
+            Intent intent = new Intent(Login.this, Register.class);
             startActivity(intent);
         });
 
