@@ -1,39 +1,34 @@
 package com.hoffmann.lotecaatualizada;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hoffmann.lotecaatualizada.adapters.ApostaAdapter;
-import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
-import com.hoffmann.lotecaatualizada.viewmodel.ListaDeApostasViewModel;
+import com.hoffmann.lotecaatualizada.adapters.BetAdapter;
+import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
+import com.hoffmann.lotecaatualizada.viewmodel.BetsListViewModel;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class ListaDeApostas extends AppCompatActivity {
+public class ListBets extends AppCompatActivity {
     private String email, token;
-    private Button botaoIrPagamento;
-    private ApostaAdapter adapter;
-    private RecyclerView recyclerView;
+    private Button paymentButton;
+    private BetAdapter adapter;
     private ActionMode actionMode;
-    private ListaDeApostasViewModel viewModel;
-    List<ApostasUsuarioDto> apostasList;
+    private BetsListViewModel viewModel;
+    List<BetUserDto> betUserList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +39,19 @@ public class ListaDeApostas extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recicleViewId);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ApostaAdapter(this, apostasList);
+        adapter = new BetAdapter(this, betUserList);
         recyclerView.setAdapter(adapter);
 
-        viewModel = new ViewModelProvider(this).get(ListaDeApostasViewModel.class);
-        viewModel.getCartelaDeApostas().observe(this, apostasList -> {
-            adapter.setApostasUsuarios(apostasList);
+        viewModel = new ViewModelProvider(this).get(BetsListViewModel.class);
+        viewModel.getBettingCards().observe(this, betList -> {
+            adapter.setUserBets(betList);
             adapter.notifyDataSetChanged();
         });
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHandler(0, ItemTouchHelper.LEFT));
         helper.attachToRecyclerView(recyclerView);
 
-        adapter.setListener(new ApostaAdapter.ApostaAdapterListener() {
+        adapter.setListener(new BetAdapter.BetAdapterListener() {
             @Override
             public void onItemClick(int position) {
                 enableActionMode(position);
@@ -68,14 +63,14 @@ public class ListaDeApostas extends AppCompatActivity {
             }
         });
 
-        botaoIrPagamento.setOnClickListener(new View.OnClickListener() {
+        paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListaDeApostas.this, Pagamento.class);
+                Intent intent = new Intent(ListBets.this, Pagamento.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("cartelaDeApostasFinal", (Serializable) apostasList);
-                bundle.putString("email", getIntent().getExtras().getString("email"));
-                bundle.putString("token", getIntent().getExtras().getString("token"));
+                bundle.putSerializable("cartelaDeApostasFinal", (Serializable) betUserList);
+                bundle.putString("email", email);
+                bundle.putString("token", token);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -106,7 +101,7 @@ public class ListaDeApostas extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete){
-                        adapter.deletaApostas();
+                        adapter.deleteBets();
                         mode.finish();
                         return true;
                     }
@@ -115,10 +110,10 @@ public class ListaDeApostas extends AppCompatActivity {
 
                 public void onDestroyActionMode(ActionMode mode) {
                     adapter.getSelectedItems().clear();
-                    List<ApostasUsuarioDto> apostasUsuarioDtos = adapter.getApostasUsuarios();
-                    for (ApostasUsuarioDto aposta : apostasUsuarioDtos){
-                        if (aposta.isSelected()){
-                            aposta.setSelected(false);
+                    List<BetUserDto> betUserDtos = adapter.getUserBets();
+                    for (BetUserDto betUser : betUserDtos){
+                        if (betUser.isSelected()){
+                            betUser.setSelected(false);
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -154,17 +149,17 @@ public class ListaDeApostas extends AppCompatActivity {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            adapter.getApostasUsuarios().remove(viewHolder.getAdapterPosition());
+            adapter.getUserBets().remove(viewHolder.getAdapterPosition());
             adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
         }
     }
 
 
     private void startComponents() {
-        recyclerView = findViewById(R.id.recicleViewId);
-        botaoIrPagamento = findViewById(R.id.botaoIrPagamento);
+        RecyclerView recyclerView = findViewById(R.id.recicleViewId);
+        paymentButton = findViewById(R.id.botaoIrPagamento);
         Bundle bundle = getIntent().getExtras();
-        apostasList = bundle.getParcelableArrayList("cartelaDeApostasFinal");
+        betUserList = bundle.getParcelableArrayList("cartelaDeApostasFinal");
 
     }
 }

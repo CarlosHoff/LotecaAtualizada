@@ -40,7 +40,7 @@
             android:name=".Pagamento"
             android:exported="false" />
         <activity
-            android:name=".ListaDeApostas"
+            android:name=".ListBets"
             android:exported="false" />
         <activity
             android:name=".MegaTola"

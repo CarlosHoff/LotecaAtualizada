@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hoffmann.lotecaatualizada.client.ApostaService;
-import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
+import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.domain.request.ApostaRequest;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Pagamento extends AppCompatActivity {
-    private List<ApostasUsuarioDto> cartelaDeApostasFinal;
+    private List<BetUserDto> cartelaDeApostasFinal;
     private String email, token;
 
     @Override
@@ -73,20 +73,20 @@ public class Pagamento extends AppCompatActivity {
         return request;
     }
 
-    private List<Long[]> converteRequestParaOCore(List<ApostasUsuarioDto> cartelaDeApostasFinal) {
+    private List<Long[]> converteRequestParaOCore(List<BetUserDto> cartelaDeApostasFinal) {
         List<Long[]> listaDeApostas = new ArrayList<>();
-        for (ApostasUsuarioDto apostasUsuarioDto : cartelaDeApostasFinal) {
+        for (BetUserDto betUserDto : cartelaDeApostasFinal) {
             Long[] mapper = {
-                    apostasUsuarioDto.getDezenas()[0],
-                    apostasUsuarioDto.getDezenas()[1],
-                    apostasUsuarioDto.getDezenas()[2],
-                    apostasUsuarioDto.getDezenas()[3],
-                    apostasUsuarioDto.getDezenas()[4],
-                    apostasUsuarioDto.getDezenas()[5],
-                    apostasUsuarioDto.getDezenas()[6],
-                    apostasUsuarioDto.getDezenas()[7],
-                    apostasUsuarioDto.getDezenas()[8],
-                    apostasUsuarioDto.getDezenas()[9]};
+                    betUserDto.getDezenas()[0],
+                    betUserDto.getDezenas()[1],
+                    betUserDto.getDezenas()[2],
+                    betUserDto.getDezenas()[3],
+                    betUserDto.getDezenas()[4],
+                    betUserDto.getDezenas()[5],
+                    betUserDto.getDezenas()[6],
+                    betUserDto.getDezenas()[7],
+                    betUserDto.getDezenas()[8],
+                    betUserDto.getDezenas()[9]};
             listaDeApostas.add(mapper);
         }
         return listaDeApostas;
@@ -98,7 +98,7 @@ public class Pagamento extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         email = bundle.getString("email");
-        cartelaDeApostasFinal = (List<ApostasUsuarioDto>) bundle.getSerializable("cartelaDeApostasFinal");
+        cartelaDeApostasFinal = (List<BetUserDto>) bundle.getSerializable("cartelaDeApostasFinal");
     }
 
 }

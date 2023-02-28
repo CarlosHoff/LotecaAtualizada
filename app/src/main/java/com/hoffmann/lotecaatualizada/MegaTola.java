@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import com.hoffmann.lotecaatualizada.domain.dto.ApostasUsuarioDto;
+import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
 import java.text.NumberFormat;
@@ -36,7 +36,7 @@ public class MegaTola extends AppCompatActivity {
 
 
     List<Long> cartelaDeApostas = new ArrayList<>();
-    List<ApostasUsuarioDto> cartelaDeApostasFinal;
+    List<BetUserDto> cartelaDeApostasFinal;
     private final Utils utils = new Utils();
     SharedPreferences sharedPreferences;
 
@@ -65,9 +65,9 @@ public class MegaTola extends AppCompatActivity {
 
         finalizarApostas.setOnClickListener(view -> {
             long[] mapper = createMapper(cartelaDeApostas);
-            cartelaDeApostasFinal.add(new ApostasUsuarioDto(mapper));
+            cartelaDeApostasFinal.add(new BetUserDto(mapper));
 
-            Intent intent = new Intent(MegaTola.this, ListaDeApostas.class);
+            Intent intent = new Intent(MegaTola.this, ListBets.class);
             intent.putExtra("email", getIntent().getStringExtra("email"));
             intent.putExtra("token", getIntent().getStringExtra("token"));
 
@@ -266,7 +266,7 @@ public class MegaTola extends AppCompatActivity {
                 cartelaDeApostas.get(8),
                 cartelaDeApostas.get(9),
         };
-        cartelaDeApostasFinal.add(new ApostasUsuarioDto(mapper));
+        cartelaDeApostasFinal.add(new BetUserDto(mapper));
     }
 
     private void atualizarTela() {

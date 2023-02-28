@@ -3,19 +3,15 @@ package com.hoffmann.lotecaatualizada.domain.dto;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import java.io.Serializable;
-
-public class ApostasUsuarioDto implements Parcelable {
+public class BetUserDto implements Parcelable {
 
     private long[] dezenas;
     private boolean selected;
 
-    public ApostasUsuarioDto() {
+    public BetUserDto() {
     }
 
-    public ApostasUsuarioDto(long[] dezenas) {
+    public BetUserDto(long[] dezenas) {
         this.dezenas = dezenas;
     }
 
@@ -46,19 +42,19 @@ public class ApostasUsuarioDto implements Parcelable {
         dest.writeByte((byte) (selected ? 1 : 0));
     }
 
-    public static final Creator<ApostasUsuarioDto> CREATOR = new Creator<ApostasUsuarioDto>() {
+    public static final Creator<BetUserDto> CREATOR = new Creator<BetUserDto>() {
         @Override
-        public ApostasUsuarioDto createFromParcel(Parcel in) {
-            return new ApostasUsuarioDto(in);
+        public BetUserDto createFromParcel(Parcel in) {
+            return new BetUserDto(in);
         }
 
         @Override
-        public ApostasUsuarioDto[] newArray(int size) {
-            return new ApostasUsuarioDto[size];
+        public BetUserDto[] newArray(int size) {
+            return new BetUserDto[size];
         }
     };
 
-    private ApostasUsuarioDto(Parcel in) {
+    private BetUserDto(Parcel in) {
         dezenas = in.createLongArray();
         selected = in.readByte() != 0;
     }
