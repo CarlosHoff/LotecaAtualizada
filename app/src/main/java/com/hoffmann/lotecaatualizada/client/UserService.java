@@ -17,12 +17,13 @@ import retrofit2.http.Query;
 public interface UserService {
 
     @POST(CADASTRA_USUARIO)
-    Call<Void> cadastraUsuario(
+    @Headers("Content-Type: application/json")
+    Call<Void> registerUser(
             @Body UserRegisterRequest request);
 
     @GET(BUSCA_USUARIO)
     @Headers("Content-Type: application/json")
-    Call<ProfileResponse> buscaUsuario(
+    Call<ProfileResponse> getUser(
             @Header("Authorization") String token,
             @Query("email") String email);
 }

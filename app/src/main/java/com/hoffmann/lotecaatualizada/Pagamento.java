@@ -9,9 +9,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hoffmann.lotecaatualizada.client.ApostaService;
+import com.hoffmann.lotecaatualizada.client.BetsService;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
-import com.hoffmann.lotecaatualizada.domain.request.ApostaRequest;
+import com.hoffmann.lotecaatualizada.domain.request.BetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +46,8 @@ public class Pagamento extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ApostaService apostaService = retrofit.create(ApostaService.class);
-        Call<Void> apostaRequest = apostaService.cadastraApostas(token, createApostaRequest());
+        BetsService betsService = retrofit.create(BetsService.class);
+        Call<Void> apostaRequest = betsService.registerBet(token, createApostaRequest());
 
         apostaRequest.enqueue(new Callback<Void>() {
             @Override
@@ -66,8 +66,8 @@ public class Pagamento extends AppCompatActivity {
         });
     }
 
-    private ApostaRequest createApostaRequest() {
-        ApostaRequest request = new ApostaRequest();
+    private BetRequest createApostaRequest() {
+        BetRequest request = new BetRequest();
         request.setNumeros(converteRequestParaOCore(cartelaDeApostasFinal));
         request.setEmail(email);
         return request;

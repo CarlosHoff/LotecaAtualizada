@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/menu_todas_apostas"
-        android:name="com.hoffmann.lotecaatualizada.fragments.ListaTodasApostas"
+        android:name="com.hoffmann.lotecaatualizada.fragments.ListAllBets"
         android:label="fragment_lista_todas_apostas"
         tools:layout="@layout/fragment_lista_todas_apostas" />
 

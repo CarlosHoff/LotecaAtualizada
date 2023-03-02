@@ -4,20 +4,20 @@ public class UserRegisterRequest {
 
     private String name;
     private String cpf;
-    private String surname;
-    private String password;
-    private String cellphone;
+    private String apelido;
+    private String senha;
+    private String celular;
     private String email;
 
     public UserRegisterRequest() {
     }
 
-    public UserRegisterRequest(String name, String cpf, String surname, String password, String cellphone, String email) {
+    public UserRegisterRequest(String name, String cpf, String apelido, String senha, String celular, String email) {
         this.name = name;
         this.cpf = cpf;
-        this.surname = surname;
-        this.password = password;
-        this.cellphone = cellphone;
+        this.apelido = apelido;
+        this.senha = senha;
+        this.celular = celular;
         this.email = email;
     }
 
@@ -37,28 +37,28 @@ public class UserRegisterRequest {
         this.cpf = cpf;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getApelido() {
+        return apelido;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getCellphone() {
-        return cellphone;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setCellphone(String cellphone) {
-        this.cellphone = cellphone;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public String getEmail() {

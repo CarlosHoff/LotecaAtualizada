@@ -18,6 +18,10 @@
         android:theme="@style/Theme.LotecaAtualizada"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true"/>
+
         <activity
             android:name=".Roletola"
             android:exported="false" />

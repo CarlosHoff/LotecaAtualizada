@@ -2,7 +2,7 @@ package com.hoffmann.lotecaatualizada.domain.response;
 
 import java.io.Serializable;
 
-public class TodasApostasResponse implements Serializable {
+public class AllBetsResponse implements Serializable {
 
     private Long dezenaUm;
     private Long dezenaDois;
@@ -16,7 +16,7 @@ public class TodasApostasResponse implements Serializable {
     private Long dezenaDez;
     private Long qtdAcertos;
 
-    private ProfileResponse usuario;
+    private ProfileResponse user;
 
 
     public Long getDezenaUm() {
@@ -107,11 +107,11 @@ public class TodasApostasResponse implements Serializable {
         this.qtdAcertos = qtdAcertos;
     }
 
-    public ProfileResponse getUsuario() {
-        return usuario;
+    public ProfileResponse getUser() {
+        return user;
     }
 
-    public void setUsuario(ProfileResponse usuario) {
-        this.usuario = usuario;
+    public void setUser(ProfileResponse user) {
+        this.user = user;
     }
 }

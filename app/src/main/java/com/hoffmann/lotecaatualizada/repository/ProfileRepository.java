@@ -28,7 +28,7 @@ public class ProfileRepository {
 
     public LiveData<ProfileResponse> loadProfile(String token, String email) {
         MutableLiveData<ProfileResponse> profileResponseLiveData = new MutableLiveData<>();
-        Call<ProfileResponse> profileRequest = userService.buscaUsuario(token, email);
+        Call<ProfileResponse> profileRequest = userService.getUser(token, email);
         profileRequest.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {

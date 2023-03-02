@@ -156,7 +156,6 @@ public class ListBets extends AppCompatActivity {
 
 
     private void startComponents() {
-        RecyclerView recyclerView = findViewById(R.id.recicleViewId);
         paymentButton = findViewById(R.id.botaoIrPagamento);
         Bundle bundle = getIntent().getExtras();
         betUserList = bundle.getParcelableArrayList("cartelaDeApostasFinal");

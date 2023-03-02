@@ -28,7 +28,7 @@ public class RegisterRepository {
 
     public LiveData<Void> register(String nome, String apelido, String email, String celular, String cpf, String senha){
         MutableLiveData<Void> registerResponseLiveData = new MutableLiveData<>();
-        Call<Void> userRequest = userService.cadastraUsuario(createUserRequest(nome, apelido, email, celular, cpf, senha));
+        Call<Void> userRequest = userService.registerUser(createUserRequest(nome, apelido, email, celular, cpf, senha));
         userRequest.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -56,19 +56,19 @@ public class RegisterRepository {
                         request.setName(fieldValue);
                         break;
                     case 1:
-                        request.setSurname(fieldValue);
+                        request.setApelido(fieldValue);
                         break;
                     case 2:
                         request.setEmail(fieldValue);
                         break;
                     case 3:
-                        request.setCellphone(fieldValue);
+                        request.setCelular(fieldValue);
                         break;
                     case 4:
                         request.setCpf(fieldValue);
                         break;
                     case 5:
-                        request.setPassword(fieldValue);
+                        request.setSenha(fieldValue);
                         break;
                 }
         }

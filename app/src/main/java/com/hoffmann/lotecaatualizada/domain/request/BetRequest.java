@@ -2,16 +2,16 @@ package com.hoffmann.lotecaatualizada.domain.request;
 
 import java.util.List;
 
-public class ApostaRequest {
+public class BetRequest {
 
     private List<Long[]> numeros;
     private String email;
 
-    public ApostaRequest() {
+    public BetRequest() {
 
     }
 
-    public ApostaRequest(List<Long[]> numeros, String email) {
+    public BetRequest(List<Long[]> numeros, String email) {
         this.numeros = numeros;
         this.email = email;
     }

@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.TelaErro01;
 import com.hoffmann.lotecaatualizada.adapters.MinhasApostasAdapter;
-import com.hoffmann.lotecaatualizada.client.ApostaService;
-import com.hoffmann.lotecaatualizada.domain.response.TodasApostasResponse;
+import com.hoffmann.lotecaatualizada.client.BetsService;
+import com.hoffmann.lotecaatualizada.domain.response.AllBetsResponse;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
 import java.util.List;
@@ -64,11 +64,11 @@ public class MinhasApostas extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ApostaService listaApostas = retrofit.create(ApostaService.class);
-        Call<List<TodasApostasResponse>> requestListaMinhasApostas = listaApostas.minhasApostas(token, email);
-        requestListaMinhasApostas.enqueue(new Callback<List<TodasApostasResponse>>() {
+        BetsService listaApostas = retrofit.create(BetsService.class);
+        Call<List<AllBetsResponse>> requestListaMinhasApostas = listaApostas.getMyBets(token, email);
+        requestListaMinhasApostas.enqueue(new Callback<List<AllBetsResponse>>() {
             @Override
-            public void onResponse(Call<List<TodasApostasResponse>> call, Response<List<TodasApostasResponse>> response) {
+            public void onResponse(Call<List<AllBetsResponse>> call, Response<List<AllBetsResponse>> response) {
                 adapter = new MinhasApostasAdapter(getContext(), response.body());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
                         RecyclerView.VERTICAL, false);
@@ -78,7 +78,7 @@ public class MinhasApostas extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<TodasApostasResponse>> call, Throwable t) {
+            public void onFailure(Call<List<AllBetsResponse>> call, Throwable t) {
                 startActivity(new Intent(getContext(), TelaErro01.class));
             }
         });
