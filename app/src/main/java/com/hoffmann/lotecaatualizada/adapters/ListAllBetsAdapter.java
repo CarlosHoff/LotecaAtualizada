@@ -51,8 +51,8 @@ public class ListAllBetsAdapter extends RecyclerView.Adapter<ListAllBetsAdapter.
     }
 
     private String formatName(AllBetsResponse bet) {
-        String name = bet.getUser().getNome().toUpperCase(Locale.ROOT);
-        String surname = bet.getUser().getApelido();
+        String name = bet.getUsuario().getNome().toUpperCase(Locale.ROOT);
+        String surname = bet.getUsuario().getApelido();
         return String.format("%s (%s)", name, surname);
     }
 

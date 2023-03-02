@@ -16,7 +16,7 @@ public class AllBetsResponse implements Serializable {
     private Long dezenaDez;
     private Long qtdAcertos;
 
-    private ProfileResponse user;
+    private ProfileResponse usuario;
 
 
     public Long getDezenaUm() {
@@ -107,11 +107,11 @@ public class AllBetsResponse implements Serializable {
         this.qtdAcertos = qtdAcertos;
     }
 
-    public ProfileResponse getUser() {
-        return user;
+    public ProfileResponse getUsuario() {
+        return usuario;
     }
 
-    public void setUser(ProfileResponse user) {
-        this.user = user;
+    public void setUsuario(ProfileResponse usuario) {
+        this.usuario = usuario;
     }
 }

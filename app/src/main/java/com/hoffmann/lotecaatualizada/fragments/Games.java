@@ -1,6 +1,5 @@
 package com.hoffmann.lotecaatualizada.fragments;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -18,15 +16,11 @@ import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.Roletola;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
-import java.util.Objects;
+public class Games extends Fragment {
 
-public class Jogos extends Fragment {
-
-    private Button megaTolaBotao, roletola, niquel;
-    private SharedViewModel model;
     private String token, email;
 
-    public Jogos() {
+    public Games() {
     }
 
     @Override
@@ -39,22 +33,22 @@ public class Jogos extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jogos, container, false);
 
-        megaTolaBotao = view.findViewById(R.id.game_mega_tola);
-        roletola = view.findViewById(R.id.game_roletola);
-        niquel = view.findViewById(R.id.game_niquel);
+        Button megaTolaBotao = view.findViewById(R.id.game_mega_tola);
+        Button roletola = view.findViewById(R.id.game_roletola);
+        Button niquel = view.findViewById(R.id.game_niquel);
 
-        model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         model.getEmail().observe(getViewLifecycleOwner(), this::getEmail);
         model.getToken().observe(getViewLifecycleOwner(), this::getToken);
 
-        megaTolaBotao.setOnClickListener(v -> abrirActivity(MegaTola.class));
-        roletola.setOnClickListener(v -> abrirActivity(Roletola.class));
-        niquel.setOnClickListener(v -> abrirActivity(Niquel.class));
+        megaTolaBotao.setOnClickListener(v -> goActivity(MegaTola.class));
+        roletola.setOnClickListener(v -> goActivity(Roletola.class));
+        niquel.setOnClickListener(v -> goActivity(Niquel.class));
 
         return view;
     }
 
-    private void abrirActivity(Class<?> activityClass) {
+    private void goActivity(Class<?> activityClass) {
         Intent intent = new Intent(getActivity(), activityClass);
         intent.putExtra("email", email);
         intent.putExtra("token", token);

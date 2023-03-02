@@ -25,7 +25,7 @@ public class ListAllBetsViewModel extends ViewModel {
         }
 
         for (AllBetsResponse item : allBets) {
-            if (item.getUser().getApelido().equalsIgnoreCase(query)) {
+            if (item.getUsuario().getApelido().equalsIgnoreCase(query)) {
                 newAllBetsResponse.add(item);
             }
         }

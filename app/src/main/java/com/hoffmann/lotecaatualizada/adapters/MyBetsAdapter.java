@@ -14,12 +14,12 @@ import com.hoffmann.lotecaatualizada.domain.response.AllBetsResponse;
 
 import java.util.List;
 
-public class MinhasApostasAdapter extends RecyclerView.Adapter<MinhasApostasAdapter.MyBetsViewHolder>{
+public class MyBetsAdapter extends RecyclerView.Adapter<MyBetsAdapter.MyBetsViewHolder>{
 
     private Context context;
     private List<AllBetsResponse> myBets;
 
-    public MinhasApostasAdapter(Context context, List<AllBetsResponse> myBets) {
+    public MyBetsAdapter(Context context, List<AllBetsResponse> myBets) {
         this.context = context;
         this.myBets = myBets;
     }
@@ -89,5 +89,9 @@ public class MinhasApostasAdapter extends RecyclerView.Adapter<MinhasApostasAdap
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public void setMyBets(List<AllBetsResponse> myBets) {
+        this.myBets = myBets;
     }
 }
