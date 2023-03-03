@@ -23,8 +23,8 @@ import java.util.List;
 
 public class MegaTola extends AppCompatActivity {
 
-    private TextView valorTotalAposta;
-    private Button finalizarApostas, botaoApostar, um, dois, tres, quatro, cinco, seis, sete,
+    private TextView betsTotalValues;
+    private Button finalizeBets, betButton, um, dois, tres, quatro, cinco, seis, sete,
             oito, nove, dez, onze, doze, treze, quatorze,
             quinze, dezessis, dezessete, dezoito, dezenove, vinte, vinte1,
             vinte2, vinte3, vinte4, vinte5, vinte6, vinte7, vinte8,
@@ -35,8 +35,8 @@ public class MegaTola extends AppCompatActivity {
             cinquenta7, cinquenta8, cinquenta9, sessenta;
 
 
-    List<Long> cartelaDeApostas = new ArrayList<>();
-    List<BetUserDto> cartelaDeApostasFinal;
+    List<Long> cardsBets = new ArrayList<>();
+    List<BetUserDto> cardsBetsFinal;
     private final Utils utils = new Utils();
     SharedPreferences sharedPreferences;
 
@@ -45,34 +45,34 @@ public class MegaTola extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mega_tola);
 
-        iniciarComponentes();
+        initComponents();
 
         sharedPreferences = getSharedPreferences("MEGATOLA", MODE_PRIVATE);
         if (!sharedPreferences.contains("hasVisitedActivity")) {
             Dialog dialog = utils.createAlertDialog(this, MEGATOLA_EXPLICACAO, "", OK);
             dialog.show();
-            TextView botaoPositivo = dialog.findViewById(R.id.botao_positive);
-            botaoPositivo.setOnClickListener(v -> dialog.dismiss());
+            TextView positiveButton = dialog.findViewById(R.id.botao_positive);
+            positiveButton.setOnClickListener(v -> dialog.dismiss());
         }
         sharedPreferences.edit().putBoolean("hasVisitedActivity", true).apply();
 
-        CarregaOsComponentes();
+        startComponents();
 
-        botaoApostar.setOnClickListener(v -> {
-            adicionarApostasAoCarrinho();
-            atualizarTela();
+        betButton.setOnClickListener(v -> {
+            addBet();
+            refreshScreen();
         });
 
-        finalizarApostas.setOnClickListener(view -> {
-            long[] mapper = createMapper(cartelaDeApostas);
-            cartelaDeApostasFinal.add(new BetUserDto(mapper));
+        finalizeBets.setOnClickListener(view -> {
+            long[] mapper = createMapper(cardsBets);
+            cardsBetsFinal.add(new BetUserDto(mapper));
 
             Intent intent = new Intent(MegaTola.this, ListBets.class);
             intent.putExtra("email", getIntent().getStringExtra("email"));
             intent.putExtra("token", getIntent().getStringExtra("token"));
 
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cartelaDeApostasFinal));
+            bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
             intent.putExtras(bundle);
 
             startActivity(intent);
@@ -80,25 +80,25 @@ public class MegaTola extends AppCompatActivity {
             });
         }
 
-    private void validaNumerosApostados(long numeroAposta, Button button) {
-        if (cartelaDeApostas.size() == 10) {
+    private void validateBetNumbers(long betNumber, Button button) {
+        if (cardsBets.size() == 10) {
             button.setClickable(false);
-        } else if (cartelaDeApostas.contains(numeroAposta)) {
-            eventoBotoes(button, R.drawable.shape_botao_redondo_normal, R.color.white, 12);
-            cartelaDeApostas.remove(numeroAposta);
+        } else if (cardsBets.contains(betNumber)) {
+            applyEventButtons(button, R.drawable.shape_botao_redondo_normal, R.color.white, 12);
+            cardsBets.remove(betNumber);
         } else {
-            eventoBotoes(button, R.drawable.shape_botao_redondo_selecionado, R.color.roxo, 12);
-            cartelaDeApostas.add(numeroAposta);
-            if (cartelaDeApostas.size() == 10){
-                eventoBotoes(botaoApostar, R.drawable.botao_desativado_aposta, R.color.roxo, null);
-                eventoBotoes(finalizarApostas, R.drawable.botao_desativado_aposta, R.color.roxo, null);
-                botaoApostar.setEnabled(true);
-                finalizarApostas.setEnabled(true);
+            applyEventButtons(button, R.drawable.shape_botao_redondo_selecionado, R.color.roxo, 12);
+            cardsBets.add(betNumber);
+            if (cardsBets.size() == 10){
+                applyEventButtons(betButton, R.drawable.botao_desativado_aposta, R.color.roxo, null);
+                applyEventButtons(finalizeBets, R.drawable.botao_desativado_aposta, R.color.roxo, null);
+                betButton.setEnabled(true);
+                finalizeBets.setEnabled(true);
             }
         }
     }
 
-    private void eventoBotoes(Button button, int backgroundDrawable, int textColor, Integer textSize) {
+    private void applyEventButtons(Button button, int backgroundDrawable, int textColor, Integer textSize) {
         button.setBackground(AppCompatResources.getDrawable(MegaTola.this, backgroundDrawable));
         button.setTextColor(getApplication().getColor(textColor));
         if (textSize != null) {
@@ -110,172 +110,172 @@ public class MegaTola extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        cartelaDeApostasFinal = getIntent().getParcelableArrayListExtra("cartelaDeApostasFinal");
+        cardsBetsFinal = getIntent().getParcelableArrayListExtra("cartelaDeApostasFinal");
 
-        if (cartelaDeApostasFinal == null) {
-            cartelaDeApostasFinal = new ArrayList<>();
+        if (cardsBetsFinal == null) {
+            cardsBetsFinal = new ArrayList<>();
         } else {
-            finalizarApostas.setEnabled(true);
-            finalizarApostas.setBackground(AppCompatResources.getDrawable(MegaTola.this, R.drawable.botao_desativado_aposta));
-            finalizarApostas.setTextColor(getApplication().getColor(R.color.roxo));
+            finalizeBets.setEnabled(true);
+            finalizeBets.setBackground(AppCompatResources.getDrawable(MegaTola.this, R.drawable.botao_desativado_aposta));
+            finalizeBets.setTextColor(getApplication().getColor(R.color.roxo));
         }
-        valorTotalAposta.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cartelaDeApostasFinal.size()));
+        betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
     }
 
-    private long[] createMapper(List<Long> cartelaDeApostas) {
+    private long[] createMapper(List<Long> cardBets) {
         long[] mapper = new long[10];
         for (int i = 0; i < 10; i++) {
-            mapper[i] = cartelaDeApostas.get(i);
+            mapper[i] = cardBets.get(i);
         }
         return mapper;
     }
 
 
-    private void CarregaOsComponentes(){
-        um.setOnClickListener(view -> validaNumerosApostados(1L, um));
+    private void startComponents(){
+        um.setOnClickListener(view -> validateBetNumbers(1L, um));
 
-        dois.setOnClickListener(view -> validaNumerosApostados(2L, dois));
+        dois.setOnClickListener(view -> validateBetNumbers(2L, dois));
 
-        tres.setOnClickListener(view -> validaNumerosApostados(3L, tres));
+        tres.setOnClickListener(view -> validateBetNumbers(3L, tres));
 
-        quatro.setOnClickListener(view -> validaNumerosApostados(4L, quatro));
+        quatro.setOnClickListener(view -> validateBetNumbers(4L, quatro));
 
-        cinco.setOnClickListener(view -> validaNumerosApostados(5L, cinco));
+        cinco.setOnClickListener(view -> validateBetNumbers(5L, cinco));
 
-        seis.setOnClickListener(view -> validaNumerosApostados(6L, seis));
+        seis.setOnClickListener(view -> validateBetNumbers(6L, seis));
 
-        sete.setOnClickListener(view -> validaNumerosApostados(7L, sete));
+        sete.setOnClickListener(view -> validateBetNumbers(7L, sete));
 
-        oito.setOnClickListener(view -> validaNumerosApostados(8L, oito));
+        oito.setOnClickListener(view -> validateBetNumbers(8L, oito));
 
-        nove.setOnClickListener(view -> validaNumerosApostados(9L, nove));
+        nove.setOnClickListener(view -> validateBetNumbers(9L, nove));
 
-        dez.setOnClickListener(view -> validaNumerosApostados(10L, dez));
+        dez.setOnClickListener(view -> validateBetNumbers(10L, dez));
 
-        onze.setOnClickListener(view -> validaNumerosApostados(11L, onze));
+        onze.setOnClickListener(view -> validateBetNumbers(11L, onze));
 
-        doze.setOnClickListener(view -> validaNumerosApostados(12L, doze));
+        doze.setOnClickListener(view -> validateBetNumbers(12L, doze));
 
-        treze.setOnClickListener(view -> validaNumerosApostados(13L, treze));
+        treze.setOnClickListener(view -> validateBetNumbers(13L, treze));
 
-        quatorze.setOnClickListener(view -> validaNumerosApostados(14L, quatorze));
+        quatorze.setOnClickListener(view -> validateBetNumbers(14L, quatorze));
 
-        quinze.setOnClickListener(view -> validaNumerosApostados(15L, quinze));
+        quinze.setOnClickListener(view -> validateBetNumbers(15L, quinze));
 
-        dezessis.setOnClickListener(view -> validaNumerosApostados(16L, dezessis));
+        dezessis.setOnClickListener(view -> validateBetNumbers(16L, dezessis));
 
-        dezessete.setOnClickListener(view -> validaNumerosApostados(17L, dezessete));
+        dezessete.setOnClickListener(view -> validateBetNumbers(17L, dezessete));
 
-        dezoito.setOnClickListener(view -> validaNumerosApostados(18L, dezoito));
+        dezoito.setOnClickListener(view -> validateBetNumbers(18L, dezoito));
 
-        dezenove.setOnClickListener(view -> validaNumerosApostados(19L, dezenove));
+        dezenove.setOnClickListener(view -> validateBetNumbers(19L, dezenove));
 
-        vinte.setOnClickListener(view -> validaNumerosApostados(20L, vinte));
+        vinte.setOnClickListener(view -> validateBetNumbers(20L, vinte));
 
-        vinte1.setOnClickListener(view -> validaNumerosApostados(21L, vinte1));
+        vinte1.setOnClickListener(view -> validateBetNumbers(21L, vinte1));
 
-        vinte2.setOnClickListener(view -> validaNumerosApostados(22L, vinte2));
+        vinte2.setOnClickListener(view -> validateBetNumbers(22L, vinte2));
 
-        vinte3.setOnClickListener(view -> validaNumerosApostados(23L, vinte3));
+        vinte3.setOnClickListener(view -> validateBetNumbers(23L, vinte3));
 
-        vinte4.setOnClickListener(view -> validaNumerosApostados(24L, vinte4));
+        vinte4.setOnClickListener(view -> validateBetNumbers(24L, vinte4));
 
-        vinte5.setOnClickListener(view -> validaNumerosApostados(25L, vinte5));
+        vinte5.setOnClickListener(view -> validateBetNumbers(25L, vinte5));
 
-        vinte6.setOnClickListener(view -> validaNumerosApostados(26L, vinte6));
+        vinte6.setOnClickListener(view -> validateBetNumbers(26L, vinte6));
 
-        vinte7.setOnClickListener(view -> validaNumerosApostados(27L, vinte7));
+        vinte7.setOnClickListener(view -> validateBetNumbers(27L, vinte7));
 
-        vinte8.setOnClickListener(view -> validaNumerosApostados(28L, vinte8));
+        vinte8.setOnClickListener(view -> validateBetNumbers(28L, vinte8));
 
-        vinte9.setOnClickListener(view -> validaNumerosApostados(29L, vinte9));
+        vinte9.setOnClickListener(view -> validateBetNumbers(29L, vinte9));
 
-        trinta.setOnClickListener(view -> validaNumerosApostados(30L, trinta));
+        trinta.setOnClickListener(view -> validateBetNumbers(30L, trinta));
 
-        trinta1.setOnClickListener(view -> validaNumerosApostados(31L, trinta1));
+        trinta1.setOnClickListener(view -> validateBetNumbers(31L, trinta1));
 
-        trinta2.setOnClickListener(view -> validaNumerosApostados(32L, trinta2));
+        trinta2.setOnClickListener(view -> validateBetNumbers(32L, trinta2));
 
-        trinta3.setOnClickListener(view -> validaNumerosApostados(33L, trinta3));
+        trinta3.setOnClickListener(view -> validateBetNumbers(33L, trinta3));
 
-        trinta4.setOnClickListener(view -> validaNumerosApostados(34L, trinta4));
+        trinta4.setOnClickListener(view -> validateBetNumbers(34L, trinta4));
 
-        trinta5.setOnClickListener(view -> validaNumerosApostados(35L, trinta5));
+        trinta5.setOnClickListener(view -> validateBetNumbers(35L, trinta5));
 
-        trinta6.setOnClickListener(view -> validaNumerosApostados(36L, trinta6));
+        trinta6.setOnClickListener(view -> validateBetNumbers(36L, trinta6));
 
-        trinta7.setOnClickListener(view -> validaNumerosApostados(37L, trinta7));
+        trinta7.setOnClickListener(view -> validateBetNumbers(37L, trinta7));
 
-        trinta8.setOnClickListener(view -> validaNumerosApostados(38L, trinta8));
+        trinta8.setOnClickListener(view -> validateBetNumbers(38L, trinta8));
 
-        trinta9.setOnClickListener(view -> validaNumerosApostados(39L, trinta9));
+        trinta9.setOnClickListener(view -> validateBetNumbers(39L, trinta9));
 
-        quarenta.setOnClickListener(view -> validaNumerosApostados(40L, quarenta));
+        quarenta.setOnClickListener(view -> validateBetNumbers(40L, quarenta));
 
-        quarenta1.setOnClickListener(view -> validaNumerosApostados(41L, quarenta1));
+        quarenta1.setOnClickListener(view -> validateBetNumbers(41L, quarenta1));
 
-        quarenta2.setOnClickListener(view -> validaNumerosApostados(42L, quarenta2));
+        quarenta2.setOnClickListener(view -> validateBetNumbers(42L, quarenta2));
 
-        quarenta3.setOnClickListener(view -> validaNumerosApostados(43L, quarenta3));
+        quarenta3.setOnClickListener(view -> validateBetNumbers(43L, quarenta3));
 
-        quarenta4.setOnClickListener(view -> validaNumerosApostados(44L, quarenta4));
+        quarenta4.setOnClickListener(view -> validateBetNumbers(44L, quarenta4));
 
-        quarenta5.setOnClickListener(view -> validaNumerosApostados(45L, quarenta5));
+        quarenta5.setOnClickListener(view -> validateBetNumbers(45L, quarenta5));
 
-        quarenta6.setOnClickListener(view -> validaNumerosApostados(46L, quarenta6));
+        quarenta6.setOnClickListener(view -> validateBetNumbers(46L, quarenta6));
 
-        quarenta7.setOnClickListener(view -> validaNumerosApostados(47L, quarenta7));
+        quarenta7.setOnClickListener(view -> validateBetNumbers(47L, quarenta7));
 
-        quarenta8.setOnClickListener(view -> validaNumerosApostados(48L, quarenta8));
+        quarenta8.setOnClickListener(view -> validateBetNumbers(48L, quarenta8));
 
-        quarenta9.setOnClickListener(view -> validaNumerosApostados(49L, quarenta9));
+        quarenta9.setOnClickListener(view -> validateBetNumbers(49L, quarenta9));
 
-        cinquenta.setOnClickListener(view -> validaNumerosApostados(50L, cinquenta));
+        cinquenta.setOnClickListener(view -> validateBetNumbers(50L, cinquenta));
 
-        cinquenta1.setOnClickListener(view -> validaNumerosApostados(51L, cinquenta1));
+        cinquenta1.setOnClickListener(view -> validateBetNumbers(51L, cinquenta1));
 
-        cinquenta2.setOnClickListener(view -> validaNumerosApostados(52L, cinquenta2));
+        cinquenta2.setOnClickListener(view -> validateBetNumbers(52L, cinquenta2));
 
-        cinquenta3.setOnClickListener(view -> validaNumerosApostados(53L, cinquenta3));
+        cinquenta3.setOnClickListener(view -> validateBetNumbers(53L, cinquenta3));
 
-        cinquenta4.setOnClickListener(view -> validaNumerosApostados(54L, cinquenta4));
+        cinquenta4.setOnClickListener(view -> validateBetNumbers(54L, cinquenta4));
 
-        cinquenta5.setOnClickListener(view -> validaNumerosApostados(55L, cinquenta5));
+        cinquenta5.setOnClickListener(view -> validateBetNumbers(55L, cinquenta5));
 
-        cinquenta6.setOnClickListener(view -> validaNumerosApostados(56L, cinquenta6));
+        cinquenta6.setOnClickListener(view -> validateBetNumbers(56L, cinquenta6));
 
-        cinquenta7.setOnClickListener(view -> validaNumerosApostados(57L, cinquenta7));
+        cinquenta7.setOnClickListener(view -> validateBetNumbers(57L, cinquenta7));
 
-        cinquenta8.setOnClickListener(view -> validaNumerosApostados(58L, cinquenta8));
+        cinquenta8.setOnClickListener(view -> validateBetNumbers(58L, cinquenta8));
 
-        cinquenta9.setOnClickListener(view -> validaNumerosApostados(59L, cinquenta9));
+        cinquenta9.setOnClickListener(view -> validateBetNumbers(59L, cinquenta9));
 
-        sessenta.setOnClickListener(view -> validaNumerosApostados(60L, sessenta));
+        sessenta.setOnClickListener(view -> validateBetNumbers(60L, sessenta));
     }
 
-    private void adicionarApostasAoCarrinho() {
+    private void addBet() {
         long[] mapper = {
-                cartelaDeApostas.get(0),
-                cartelaDeApostas.get(1),
-                cartelaDeApostas.get(2),
-                cartelaDeApostas.get(3),
-                cartelaDeApostas.get(4),
-                cartelaDeApostas.get(5),
-                cartelaDeApostas.get(6),
-                cartelaDeApostas.get(7),
-                cartelaDeApostas.get(8),
-                cartelaDeApostas.get(9),
+                cardsBets.get(0),
+                cardsBets.get(1),
+                cardsBets.get(2),
+                cardsBets.get(3),
+                cardsBets.get(4),
+                cardsBets.get(5),
+                cardsBets.get(6),
+                cardsBets.get(7),
+                cardsBets.get(8),
+                cardsBets.get(9),
         };
-        cartelaDeApostasFinal.add(new BetUserDto(mapper));
+        cardsBetsFinal.add(new BetUserDto(mapper));
     }
 
-    private void atualizarTela() {
+    private void refreshScreen() {
         Intent refresh = new Intent(MegaTola.this, MegaTola.class);
         refresh.putExtra("email", getIntent().getExtras().getString("email"));
         refresh.putExtra("token", getIntent().getExtras().getString("token"));
 
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cartelaDeApostasFinal));
+        bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
         refresh.putExtras(bundle);
 
         finish();
@@ -284,10 +284,10 @@ public class MegaTola extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
-    private void iniciarComponentes() {
-        valorTotalAposta = findViewById(R.id.valor_total_aposta);
-        botaoApostar = findViewById(R.id.botao_apostar);
-        finalizarApostas = findViewById(R.id.botao_finalizar_apostas);
+    private void initComponents() {
+        betsTotalValues = findViewById(R.id.valor_total_aposta);
+        betButton = findViewById(R.id.botao_apostar);
+        finalizeBets = findViewById(R.id.botao_finalizar_apostas);
         um = findViewById(R.id.button1);
         dois = findViewById(R.id.button2);
         tres = findViewById(R.id.button3);
