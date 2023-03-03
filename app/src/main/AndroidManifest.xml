@@ -23,7 +23,7 @@
             android:value="true"/>
 
         <activity
-            android:name=".Roletola"
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".Niquel"
@@ -59,7 +59,7 @@
             android:name=".fragments.Profile"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".Roletola"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
