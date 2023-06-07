@@ -1,5 +1,6 @@
-package com.hoffmann.lotecaatualizada;
+package com.hoffmann.lotecaatualizada.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.MEGATOLA_EXPLICACAO;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.VALOR_APOSTA_MEGA_TOLA;
@@ -8,22 +9,26 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.hoffmann.lotecaatualizada.ListBets;
+import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
-import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MegaTola extends AppCompatActivity {
+public class MegaTola extends Fragment {
 
     private TextView betsTotalValues;
     private Button finalizeBets, betButton, um, dois, tres, quatro, cinco, seis, sete,
@@ -41,22 +46,44 @@ public class MegaTola extends AppCompatActivity {
     private final Utils utils = new Utils();
     SharedPreferences sharedPreferences;
 
+    public MegaTola() {
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mega_tola);
 
-        //SharedViewModel sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
-        token = getIntent().getStringExtra("token");
-        email = getIntent().getStringExtra("email");
-        nome = getIntent().getStringExtra("nome");
-        celular = getIntent().getStringExtra("celular");
 
-        initComponents();
+        if (getArguments() != null) {
+            cardsBetsFinal = getArguments().getParcelableArrayList("cartelaDeApostasFinal");
+        } else if (cardsBetsFinal ==  null) {
+            cardsBetsFinal = new ArrayList<>();
+        } else {
+            finalizeBets.setEnabled(true);
+            finalizeBets.setBackground(AppCompatResources.getDrawable(requireContext(), R.drawable.botao_desativado_aposta));
+            finalizeBets.setTextColor(requireActivity().getColor(R.color.roxo));
+        }
+        //betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
 
-        sharedPreferences = getSharedPreferences("MEGATOLA", MODE_PRIVATE);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_mega_tola, container, false);
+
+        token = requireActivity().getIntent().getStringExtra("token");
+        email = requireActivity().getIntent().getStringExtra("email");
+        nome = requireActivity().getIntent().getStringExtra("nome");
+        celular = requireActivity().getIntent().getStringExtra("celular");
+        //cardsBetsFinal = requireActivity().getIntent().getParcelableArrayListExtra("cartelaDeApostasFinal");
+
+        initComponents(view);
+
+        sharedPreferences = requireActivity().getSharedPreferences("MEGATOLA", MODE_PRIVATE);
         if (!sharedPreferences.contains("hasVisitedActivity")) {
-            Dialog dialog = utils.createAlertDialog(this, MEGATOLA_EXPLICACAO, "", OK);
+            Dialog dialog = utils.createAlertDialog(requireActivity(), MEGATOLA_EXPLICACAO, "", OK);
             dialog.show();
             TextView positiveButton = dialog.findViewById(R.id.botao_positive);
             positiveButton.setOnClickListener(v -> dialog.dismiss());
@@ -70,11 +97,11 @@ public class MegaTola extends AppCompatActivity {
             refreshScreen();
         });
 
-        finalizeBets.setOnClickListener(view -> {
+        finalizeBets.setOnClickListener(v -> {
             long[] mapper = createMapper(cardsBets);
             cardsBetsFinal.add(new BetUserDto(mapper));
 
-            Intent intent = new Intent(MegaTola.this, ListBets.class);
+            Intent intent = new Intent(requireContext(), ListBets.class);
             intent.putExtra("email", email);
             intent.putExtra("token", token);
             intent.putExtra("nome", nome);
@@ -84,8 +111,10 @@ public class MegaTola extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivity(intent);
 
-            });
-        }
+        });
+
+        return view;
+    }
 
     private void validateBetNumbers(long betNumber, Button button) {
         if (cardsBets.size() == 10) {
@@ -96,7 +125,7 @@ public class MegaTola extends AppCompatActivity {
         } else {
             applyEventButtons(button, R.drawable.shape_botao_redondo_selecionado, R.color.roxo, 12);
             cardsBets.add(betNumber);
-            if (cardsBets.size() == 10){
+            if (cardsBets.size() == 10) {
                 applyEventButtons(betButton, R.drawable.botao_desativado_aposta, R.color.roxo, null);
                 applyEventButtons(finalizeBets, R.drawable.botao_desativado_aposta, R.color.roxo, null);
                 betButton.setEnabled(true);
@@ -106,27 +135,11 @@ public class MegaTola extends AppCompatActivity {
     }
 
     private void applyEventButtons(Button button, int backgroundDrawable, int textColor, Integer textSize) {
-        button.setBackground(AppCompatResources.getDrawable(MegaTola.this, backgroundDrawable));
-        button.setTextColor(getApplication().getColor(textColor));
+        button.setBackground(AppCompatResources.getDrawable(requireContext(), backgroundDrawable));
+        button.setTextColor(requireActivity().getColor(textColor));
         if (textSize != null) {
             button.setTextSize(textSize);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        cardsBetsFinal = getIntent().getParcelableArrayListExtra("cartelaDeApostasFinal");
-
-        if (cardsBetsFinal == null) {
-            cardsBetsFinal = new ArrayList<>();
-        } else {
-            finalizeBets.setEnabled(true);
-            finalizeBets.setBackground(AppCompatResources.getDrawable(MegaTola.this, R.drawable.botao_desativado_aposta));
-            finalizeBets.setTextColor(getApplication().getColor(R.color.roxo));
-        }
-        betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
     }
 
     private long[] createMapper(List<Long> cardBets) {
@@ -137,8 +150,7 @@ public class MegaTola extends AppCompatActivity {
         return mapper;
     }
 
-
-    private void startComponents(){
+    private void startComponents() {
         um.setOnClickListener(view -> validateBetNumbers(1L, um));
         dois.setOnClickListener(view -> validateBetNumbers(2L, dois));
         tres.setOnClickListener(view -> validateBetNumbers(3L, tres));
@@ -213,86 +225,86 @@ public class MegaTola extends AppCompatActivity {
                 cardsBets.get(6),
                 cardsBets.get(7),
                 cardsBets.get(8),
-                cardsBets.get(9),
-        };
+                cardsBets.get(9)};
         cardsBetsFinal.add(new BetUserDto(mapper));
     }
 
     private void refreshScreen() {
-        Intent refresh = new Intent(MegaTola.this, MegaTola.class);
+        MegaTola fragment = new MegaTola();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
-        refresh.putExtras(bundle);
+        bundle.putString("nome", nome);
+        bundle.putString("celular", celular);
+        fragment.setArguments(bundle);
 
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(refresh);
-        overridePendingTransition(0, 0);
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_mega_tola, fragment);
+        transaction.commit();
     }
 
-    private void initComponents() {
-        betsTotalValues = findViewById(R.id.valor_total_aposta);
-        betButton = findViewById(R.id.botao_apostar);
-        finalizeBets = findViewById(R.id.botao_finalizar_apostas);
-        um = findViewById(R.id.button1);
-        dois = findViewById(R.id.button2);
-        tres = findViewById(R.id.button3);
-        quatro = findViewById(R.id.button4);
-        cinco = findViewById(R.id.button5);
-        seis = findViewById(R.id.button6);
-        sete = findViewById(R.id.button7);
-        oito = findViewById(R.id.button8);
-        nove = findViewById(R.id.button9);
-        dez = findViewById(R.id.button10);
-        onze = findViewById(R.id.button11);
-        doze = findViewById(R.id.button12);
-        treze = findViewById(R.id.button13);
-        quatorze = findViewById(R.id.button14);
-        quinze = findViewById(R.id.button15);
-        dezessis = findViewById(R.id.button16);
-        dezessete = findViewById(R.id.button17);
-        dezoito = findViewById(R.id.button18);
-        dezenove = findViewById(R.id.button19);
-        vinte = findViewById(R.id.button20);
-        vinte1 = findViewById(R.id.button21);
-        vinte2 = findViewById(R.id.button22);
-        vinte3 = findViewById(R.id.button23);
-        vinte4 = findViewById(R.id.button24);
-        vinte5 = findViewById(R.id.button25);
-        vinte6 = findViewById(R.id.button26);
-        vinte7 = findViewById(R.id.button27);
-        vinte8 = findViewById(R.id.button28);
-        vinte9 = findViewById(R.id.button29);
-        trinta = findViewById(R.id.button30);
-        trinta1 = findViewById(R.id.button31);
-        trinta2 = findViewById(R.id.button32);
-        trinta3 = findViewById(R.id.button33);
-        trinta4 = findViewById(R.id.button34);
-        trinta5 = findViewById(R.id.button35);
-        trinta6 = findViewById(R.id.button36);
-        trinta7 = findViewById(R.id.button37);
-        trinta8 = findViewById(R.id.button38);
-        trinta9 = findViewById(R.id.button39);
-        quarenta = findViewById(R.id.button40);
-        quarenta1 = findViewById(R.id.button41);
-        quarenta2 = findViewById(R.id.button42);
-        quarenta3 = findViewById(R.id.button43);
-        quarenta4 = findViewById(R.id.button44);
-        quarenta5 = findViewById(R.id.button45);
-        quarenta6 = findViewById(R.id.button46);
-        quarenta7 = findViewById(R.id.button47);
-        quarenta8 = findViewById(R.id.button48);
-        quarenta9 = findViewById(R.id.button49);
-        cinquenta = findViewById(R.id.button50);
-        cinquenta1 = findViewById(R.id.button51);
-        cinquenta2 = findViewById(R.id.button52);
-        cinquenta3 = findViewById(R.id.button53);
-        cinquenta4 = findViewById(R.id.button54);
-        cinquenta5 = findViewById(R.id.button55);
-        cinquenta6 = findViewById(R.id.button56);
-        cinquenta7 = findViewById(R.id.button57);
-        cinquenta8 = findViewById(R.id.button58);
-        cinquenta9 = findViewById(R.id.button59);
-        sessenta = findViewById(R.id.button60);
+    private void initComponents(View view) {
+        betsTotalValues = view.findViewById(R.id.valor_total_aposta);
+        betButton = view.findViewById(R.id.botao_apostar);
+        finalizeBets = view.findViewById(R.id.botao_finalizar_apostas);
+        um = view.findViewById(R.id.button1);
+        dois = view.findViewById(R.id.button2);
+        tres = view.findViewById(R.id.button3);
+        quatro = view.findViewById(R.id.button4);
+        cinco = view.findViewById(R.id.button5);
+        seis = view.findViewById(R.id.button6);
+        sete = view.findViewById(R.id.button7);
+        oito = view.findViewById(R.id.button8);
+        nove = view.findViewById(R.id.button9);
+        dez = view.findViewById(R.id.button10);
+        onze = view.findViewById(R.id.button11);
+        doze = view.findViewById(R.id.button12);
+        treze = view.findViewById(R.id.button13);
+        quatorze = view.findViewById(R.id.button14);
+        quinze = view.findViewById(R.id.button15);
+        dezessis = view.findViewById(R.id.button16);
+        dezessete = view.findViewById(R.id.button17);
+        dezoito = view.findViewById(R.id.button18);
+        dezenove = view.findViewById(R.id.button19);
+        vinte = view.findViewById(R.id.button20);
+        vinte1 = view.findViewById(R.id.button21);
+        vinte2 = view.findViewById(R.id.button22);
+        vinte3 = view.findViewById(R.id.button23);
+        vinte4 = view.findViewById(R.id.button24);
+        vinte5 = view.findViewById(R.id.button25);
+        vinte6 = view.findViewById(R.id.button26);
+        vinte7 = view.findViewById(R.id.button27);
+        vinte8 = view.findViewById(R.id.button28);
+        vinte9 = view.findViewById(R.id.button29);
+        trinta = view.findViewById(R.id.button30);
+        trinta1 = view.findViewById(R.id.button31);
+        trinta2 = view.findViewById(R.id.button32);
+        trinta3 = view.findViewById(R.id.button33);
+        trinta4 = view.findViewById(R.id.button34);
+        trinta5 = view.findViewById(R.id.button35);
+        trinta6 = view.findViewById(R.id.button36);
+        trinta7 = view.findViewById(R.id.button37);
+        trinta8 = view.findViewById(R.id.button38);
+        trinta9 = view.findViewById(R.id.button39);
+        quarenta = view.findViewById(R.id.button40);
+        quarenta1 = view.findViewById(R.id.button41);
+        quarenta2 = view.findViewById(R.id.button42);
+        quarenta3 = view.findViewById(R.id.button43);
+        quarenta4 = view.findViewById(R.id.button44);
+        quarenta5 = view.findViewById(R.id.button45);
+        quarenta6 = view.findViewById(R.id.button46);
+        quarenta7 = view.findViewById(R.id.button47);
+        quarenta8 = view.findViewById(R.id.button48);
+        quarenta9 = view.findViewById(R.id.button49);
+        cinquenta = view.findViewById(R.id.button50);
+        cinquenta1 = view.findViewById(R.id.button51);
+        cinquenta2 = view.findViewById(R.id.button52);
+        cinquenta3 = view.findViewById(R.id.button53);
+        cinquenta4 = view.findViewById(R.id.button54);
+        cinquenta5 = view.findViewById(R.id.button55);
+        cinquenta6 = view.findViewById(R.id.button56);
+        cinquenta7 = view.findViewById(R.id.button57);
+        cinquenta8 = view.findViewById(R.id.button58);
+        cinquenta9 = view.findViewById(R.id.button59);
+        sessenta = view.findViewById(R.id.button60);
     }
 }

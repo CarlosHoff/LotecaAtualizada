@@ -44,9 +44,6 @@
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".MegaTola"
-            android:exported="false" />
-        <activity
             android:name=".TelaErro01"
             android:exported="false" />
         <activity
@@ -54,6 +51,9 @@
             android:exported="false" />
         <activity
             android:name=".fragments.Roleta"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.MegaTola"
             android:exported="false" />
         <activity
             android:name=".Splash"

@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hoffmann.lotecaatualizada.MegaTola;
 import com.hoffmann.lotecaatualizada.Niquel;
 import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
@@ -44,11 +43,20 @@ public class Games extends Fragment {
         model.getNome().observe(getViewLifecycleOwner(), this::getName);
         model.getCelular().observe(getViewLifecycleOwner(), this::getCelular);
 
-        megaTolaBotao.setOnClickListener(v -> goActivity(MegaTola.class));
+        megaTolaBotao.setOnClickListener(v -> goMegaTola());
         roletola.setOnClickListener(v -> goFragment());
         niquel.setOnClickListener(v -> goActivity(Niquel.class));
 
         return view;
+    }
+
+    private void goMegaTola() {
+        Fragment megatola = new MegaTola();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_games, megatola);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void goFragment() {
