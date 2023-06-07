@@ -32,10 +32,7 @@
             android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Splash"
+            android:name=".Roletola"
             android:exported="false" />
         <activity
             android:name=".TelaSucesso"
@@ -47,10 +44,10 @@
             android:name=".ListBets"
             android:exported="false" />
         <activity
-            android:name=".MegaTola"
+            android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".MegaTola"
             android:exported="false" />
         <activity
             android:name=".TelaErro01"
@@ -59,7 +56,7 @@
             android:name=".fragments.Profile"
             android:exported="false" />
         <activity
-            android:name=".Roletola"
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

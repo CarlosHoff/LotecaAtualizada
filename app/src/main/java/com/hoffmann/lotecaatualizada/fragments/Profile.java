@@ -33,7 +33,7 @@ import java.util.Objects;
 public class Profile extends Fragment {
 
     private TextView name, emailScreen, cellphone;
-    private String email, token;
+    private String email, token, nome, cell;
     private final Utils utils = new Utils();
     SharedPreferences sharedPreferences;
 
@@ -53,6 +53,8 @@ public class Profile extends Fragment {
         SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         email = model.getEmail().getValue();
         token = model.getToken().getValue();
+        nome = model.getNome().getValue();
+        cell = model.getCelular().getValue();
     }
 
     @Override
@@ -66,10 +68,14 @@ public class Profile extends Fragment {
         perfilViewModel.loadProfile(token, email).observe(getViewLifecycleOwner(), profileResponse -> {
             if (profileResponse != null) {
                 ProfileResponse user = new ProfileResponse();
-                user.setNome(Objects.requireNonNull(profileResponse.getNome()));
-                user.setApelido(Objects.requireNonNull(profileResponse.getApelido()));
-                user.setCelular(Objects.requireNonNull(profileResponse.getCelular()));
-                user.setEmail(Objects.requireNonNull(profileResponse.getEmail()));
+                SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+                model.setNome(profileResponse.getApelido());
+                model.setCelular(profileResponse.getCelular());
+
+                user.setNome(Objects.requireNonNull(profileResponse.getApelido()));
+                user.setCelular(Objects.requireNonNull(profileResponse.getApelido()));
+                user.setEmail(Objects.requireNonNull(email));
                 fillScreen(user);
             } else {
                 startActivity(new Intent(getContext(), TelaErro01.class));

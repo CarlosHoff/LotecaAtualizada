@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
+import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
 import java.text.NumberFormat;
@@ -33,8 +35,7 @@ public class MegaTola extends AppCompatActivity {
             quarenta3, quarenta4, quarenta5, quarenta6, quarenta7, quarenta8, quarenta9,
             cinquenta, cinquenta1, cinquenta2, cinquenta3, cinquenta4, cinquenta5, cinquenta6,
             cinquenta7, cinquenta8, cinquenta9, sessenta;
-
-
+    private String token, email;
     List<Long> cardsBets = new ArrayList<>();
     List<BetUserDto> cardsBetsFinal;
     private final Utils utils = new Utils();
@@ -44,6 +45,10 @@ public class MegaTola extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mega_tola);
+
+        //SharedViewModel sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        token = getIntent().getStringExtra("token");
+        email = getIntent().getStringExtra("email");
 
         initComponents();
 
@@ -68,13 +73,11 @@ public class MegaTola extends AppCompatActivity {
             cardsBetsFinal.add(new BetUserDto(mapper));
 
             Intent intent = new Intent(MegaTola.this, ListBets.class);
-            intent.putExtra("email", getIntent().getStringExtra("email"));
-            intent.putExtra("token", getIntent().getStringExtra("token"));
-
+            intent.putExtra("email", email);
+            intent.putExtra("token", token);
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
             intent.putExtras(bundle);
-
             startActivity(intent);
 
             });
@@ -133,124 +136,66 @@ public class MegaTola extends AppCompatActivity {
 
     private void startComponents(){
         um.setOnClickListener(view -> validateBetNumbers(1L, um));
-
         dois.setOnClickListener(view -> validateBetNumbers(2L, dois));
-
         tres.setOnClickListener(view -> validateBetNumbers(3L, tres));
-
         quatro.setOnClickListener(view -> validateBetNumbers(4L, quatro));
-
         cinco.setOnClickListener(view -> validateBetNumbers(5L, cinco));
-
         seis.setOnClickListener(view -> validateBetNumbers(6L, seis));
-
         sete.setOnClickListener(view -> validateBetNumbers(7L, sete));
-
         oito.setOnClickListener(view -> validateBetNumbers(8L, oito));
-
         nove.setOnClickListener(view -> validateBetNumbers(9L, nove));
-
         dez.setOnClickListener(view -> validateBetNumbers(10L, dez));
-
         onze.setOnClickListener(view -> validateBetNumbers(11L, onze));
-
         doze.setOnClickListener(view -> validateBetNumbers(12L, doze));
-
         treze.setOnClickListener(view -> validateBetNumbers(13L, treze));
-
         quatorze.setOnClickListener(view -> validateBetNumbers(14L, quatorze));
-
         quinze.setOnClickListener(view -> validateBetNumbers(15L, quinze));
-
         dezessis.setOnClickListener(view -> validateBetNumbers(16L, dezessis));
-
         dezessete.setOnClickListener(view -> validateBetNumbers(17L, dezessete));
-
         dezoito.setOnClickListener(view -> validateBetNumbers(18L, dezoito));
-
         dezenove.setOnClickListener(view -> validateBetNumbers(19L, dezenove));
-
         vinte.setOnClickListener(view -> validateBetNumbers(20L, vinte));
-
         vinte1.setOnClickListener(view -> validateBetNumbers(21L, vinte1));
-
         vinte2.setOnClickListener(view -> validateBetNumbers(22L, vinte2));
-
         vinte3.setOnClickListener(view -> validateBetNumbers(23L, vinte3));
-
         vinte4.setOnClickListener(view -> validateBetNumbers(24L, vinte4));
-
         vinte5.setOnClickListener(view -> validateBetNumbers(25L, vinte5));
-
         vinte6.setOnClickListener(view -> validateBetNumbers(26L, vinte6));
-
         vinte7.setOnClickListener(view -> validateBetNumbers(27L, vinte7));
-
         vinte8.setOnClickListener(view -> validateBetNumbers(28L, vinte8));
-
         vinte9.setOnClickListener(view -> validateBetNumbers(29L, vinte9));
-
         trinta.setOnClickListener(view -> validateBetNumbers(30L, trinta));
-
         trinta1.setOnClickListener(view -> validateBetNumbers(31L, trinta1));
-
         trinta2.setOnClickListener(view -> validateBetNumbers(32L, trinta2));
-
         trinta3.setOnClickListener(view -> validateBetNumbers(33L, trinta3));
-
         trinta4.setOnClickListener(view -> validateBetNumbers(34L, trinta4));
-
         trinta5.setOnClickListener(view -> validateBetNumbers(35L, trinta5));
-
         trinta6.setOnClickListener(view -> validateBetNumbers(36L, trinta6));
-
         trinta7.setOnClickListener(view -> validateBetNumbers(37L, trinta7));
-
         trinta8.setOnClickListener(view -> validateBetNumbers(38L, trinta8));
-
         trinta9.setOnClickListener(view -> validateBetNumbers(39L, trinta9));
-
         quarenta.setOnClickListener(view -> validateBetNumbers(40L, quarenta));
-
         quarenta1.setOnClickListener(view -> validateBetNumbers(41L, quarenta1));
-
         quarenta2.setOnClickListener(view -> validateBetNumbers(42L, quarenta2));
-
         quarenta3.setOnClickListener(view -> validateBetNumbers(43L, quarenta3));
-
         quarenta4.setOnClickListener(view -> validateBetNumbers(44L, quarenta4));
-
         quarenta5.setOnClickListener(view -> validateBetNumbers(45L, quarenta5));
-
         quarenta6.setOnClickListener(view -> validateBetNumbers(46L, quarenta6));
-
         quarenta7.setOnClickListener(view -> validateBetNumbers(47L, quarenta7));
-
         quarenta8.setOnClickListener(view -> validateBetNumbers(48L, quarenta8));
-
         quarenta9.setOnClickListener(view -> validateBetNumbers(49L, quarenta9));
-
         cinquenta.setOnClickListener(view -> validateBetNumbers(50L, cinquenta));
-
         cinquenta1.setOnClickListener(view -> validateBetNumbers(51L, cinquenta1));
-
         cinquenta2.setOnClickListener(view -> validateBetNumbers(52L, cinquenta2));
-
         cinquenta3.setOnClickListener(view -> validateBetNumbers(53L, cinquenta3));
-
         cinquenta4.setOnClickListener(view -> validateBetNumbers(54L, cinquenta4));
-
         cinquenta5.setOnClickListener(view -> validateBetNumbers(55L, cinquenta5));
-
         cinquenta6.setOnClickListener(view -> validateBetNumbers(56L, cinquenta6));
-
         cinquenta7.setOnClickListener(view -> validateBetNumbers(57L, cinquenta7));
-
         cinquenta8.setOnClickListener(view -> validateBetNumbers(58L, cinquenta8));
-
         cinquenta9.setOnClickListener(view -> validateBetNumbers(59L, cinquenta9));
-
         sessenta.setOnClickListener(view -> validateBetNumbers(60L, sessenta));
+
     }
 
     private void addBet() {
@@ -271,9 +216,6 @@ public class MegaTola extends AppCompatActivity {
 
     private void refreshScreen() {
         Intent refresh = new Intent(MegaTola.this, MegaTola.class);
-        refresh.putExtra("email", getIntent().getExtras().getString("email"));
-        refresh.putExtra("token", getIntent().getExtras().getString("token"));
-
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
         refresh.putExtras(bundle);

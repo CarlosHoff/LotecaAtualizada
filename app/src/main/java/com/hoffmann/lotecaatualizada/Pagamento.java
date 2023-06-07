@@ -98,7 +98,7 @@ public class Pagamento extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         email = bundle.getString("email");
-        cartelaDeApostasFinal = bundle.getParcelable("cartelaDeApostasFinal");
+        cartelaDeApostasFinal = bundle.getParcelableArrayList("cartelaDeApostasFinal");
     }
 
 }
