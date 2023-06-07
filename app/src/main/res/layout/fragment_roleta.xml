@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.Roleta">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gradient_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/roletola"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roletola"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/noot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/roleta"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/roleta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roletola"/>
+
+        <ImageView
+            android:id="@+id/belt"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/contorno_roleta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roletola"/>
+
+        <ImageView
+            android:id="@+id/rodar_roleta"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/rodar"
+            android:enabled="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roletola"/>
+
+        <LinearLayout
+            android:id="@+id/primeira_linha_apostas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/belt"
+            android:layout_alignStart="@+id/belt"
+            android:layout_alignEnd="@+id/belt"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/roleta">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_01"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_01" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_02"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_02" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_03"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_03" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_04"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_04" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/primeira_linha_apostas">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_05"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_05" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_06"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_06" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_07"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_07" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/roletola_08"
+                style="@style/botao_redondo_roletola"
+                android:layout_marginEnd="20dp"
+                android:text="@string/_08" />
+
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/girar"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/botao_desativado_aposta"
+            android:enabled="false"
+            android:text="@string/girar"
+            android:textColor="@drawable/button_selector"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/linear_layout_linha_roletola"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/girar">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/contorno_branco"
+                    android:gravity="center"
+                    android:text="@string/n_sorteado"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/contorno_branco"
+                    android:gravity="center"
+                    android:text="@string/n_apostado"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/roletolaRecicleViewId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/listagem_apostas_roletola" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutValores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/botao_10_roletola"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_button_selector"
+                android:text="@string/_10_00"
+                android:textColor="@drawable/button_selector"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/botao_30_roletola"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_button_selector"
+                android:text="@string/_30_00"
+                android:textColor="@drawable/button_selector"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/botao_50_roletola"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/background_button_selector"
+                android:text="@string/_50_00"
+                android:textColor="@drawable/button_selector"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/linear_layout_linha_roletola"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutValores">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:text="@string/saldo"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/saldoRoletola"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="@string/_1250_00"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

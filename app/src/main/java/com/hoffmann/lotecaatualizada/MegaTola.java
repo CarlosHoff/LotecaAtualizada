@@ -35,7 +35,7 @@ public class MegaTola extends AppCompatActivity {
             quarenta3, quarenta4, quarenta5, quarenta6, quarenta7, quarenta8, quarenta9,
             cinquenta, cinquenta1, cinquenta2, cinquenta3, cinquenta4, cinquenta5, cinquenta6,
             cinquenta7, cinquenta8, cinquenta9, sessenta;
-    private String token, email;
+    private String token, email, nome, celular;
     List<Long> cardsBets = new ArrayList<>();
     List<BetUserDto> cardsBetsFinal;
     private final Utils utils = new Utils();
@@ -49,6 +49,8 @@ public class MegaTola extends AppCompatActivity {
         //SharedViewModel sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         token = getIntent().getStringExtra("token");
         email = getIntent().getStringExtra("email");
+        nome = getIntent().getStringExtra("nome");
+        celular = getIntent().getStringExtra("celular");
 
         initComponents();
 
@@ -75,6 +77,8 @@ public class MegaTola extends AppCompatActivity {
             Intent intent = new Intent(MegaTola.this, ListBets.class);
             intent.putExtra("email", email);
             intent.putExtra("token", token);
+            intent.putExtra("nome", nome);
+            intent.putExtra("celular", celular);
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
             intent.putExtras(bundle);

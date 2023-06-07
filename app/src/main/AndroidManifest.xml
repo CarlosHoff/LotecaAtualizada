@@ -32,9 +32,6 @@
             android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".Roletola"
-            android:exported="false" />
-        <activity
             android:name=".TelaSucesso"
             android:exported="false" />
         <activity
@@ -54,6 +51,9 @@
             android:exported="false" />
         <activity
             android:name=".fragments.Profile"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.Roleta"
             android:exported="false" />
         <activity
             android:name=".Splash"

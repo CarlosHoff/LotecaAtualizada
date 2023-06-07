@@ -22,6 +22,8 @@ public class TelaSucesso extends AppCompatActivity {
                 Intent intent = new Intent(TelaSucesso.this, Menu.class);
                 intent.putExtra("token", getIntent().getExtras().getString("token"));
                 intent.putExtra("email", getIntent().getExtras().getString("email"));
+                intent.putExtra("nome", getIntent().getExtras().getString("nome"));
+                intent.putExtra("celular", getIntent().getExtras().getString("celular"));
                 startActivity(intent);
             }
         });

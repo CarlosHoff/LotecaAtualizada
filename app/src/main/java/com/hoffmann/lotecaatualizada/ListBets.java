@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ListBets extends AppCompatActivity {
-    private String email, token;
+    private String email, token, nome, celular;
     private Button paymentButton;
     private BetAdapter adapter;
     private ActionMode actionMode;
@@ -71,6 +71,8 @@ public class ListBets extends AppCompatActivity {
                 bundle.putSerializable("cartelaDeApostasFinal", (Serializable) betUserList);
                 bundle.putString("email", email);
                 bundle.putString("token", token);
+                bundle.putString("nome", nome);
+                bundle.putString("celular", celular);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -82,6 +84,8 @@ public class ListBets extends AppCompatActivity {
         super.onStart();
         token = getIntent().getExtras().getString("token");
         email = getIntent().getExtras().getString("email");
+        nome = getIntent().getExtras().getString("nome");
+        celular = getIntent().getExtras().getString("celular");
     }
 
     private void enableActionMode(int position) {

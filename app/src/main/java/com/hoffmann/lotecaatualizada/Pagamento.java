@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Pagamento extends AppCompatActivity {
     private List<BetUserDto> cartelaDeApostasFinal;
-    private String email, token;
+    private String email, token, nome, celular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class Pagamento extends AppCompatActivity {
                 Intent intent = new Intent(Pagamento.this, TelaSucesso.class);
                 intent.putExtra("token", token);
                 intent.putExtra("email", email);
+                intent.putExtra("nome", nome);
+                intent.putExtra("celular", celular);
                 startActivity(intent);
             }
 
@@ -98,6 +100,8 @@ public class Pagamento extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         email = bundle.getString("email");
+        nome = bundle.getString("nome");
+        celular = bundle.getString("celular");
         cartelaDeApostasFinal = bundle.getParcelableArrayList("cartelaDeApostasFinal");
     }
 
