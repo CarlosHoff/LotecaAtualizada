@@ -3,7 +3,6 @@ package com.hoffmann.lotecaatualizada.fragments;
 import static android.content.Context.MODE_PRIVATE;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.MEGATOLA_EXPLICACAO;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
-import static com.hoffmann.lotecaatualizada.utilitario.Constantes.VALOR_APOSTA_MEGA_TOLA;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -19,12 +18,10 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.hoffmann.lotecaatualizada.ListBets;
 import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 

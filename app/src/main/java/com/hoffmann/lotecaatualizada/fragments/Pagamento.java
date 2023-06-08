@@ -1,14 +1,19 @@
-package com.hoffmann.lotecaatualizada;
+package com.hoffmann.lotecaatualizada.fragments;
 
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.LOTECA_URL;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import com.hoffmann.lotecaatualizada.R;
+import com.hoffmann.lotecaatualizada.TelaErro01;
+import com.hoffmann.lotecaatualizada.TelaSucesso;
 import com.hoffmann.lotecaatualizada.client.BetsService;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.domain.request.BetRequest;
@@ -21,23 +26,39 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Pagamento extends AppCompatActivity {
+public class Pagamento extends Fragment {
+
     private List<BetUserDto> cartelaDeApostasFinal;
     private String email, token, nome, celular;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pagamento);
+    public Pagamento() {
+    }
 
-        Button botaoPagamento = findViewById(R.id.botao_pagar);
-        botaoPagamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestCadastraAposta();
-                startActivity(new Intent(Pagamento.this, TelaSucesso.class));
-            }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            token = getArguments().getString("token");
+            email = getArguments().getString("email");
+            nome = getArguments().getString("nome");
+            celular = getArguments().getString("celular");
+            cartelaDeApostasFinal = getArguments().getParcelableArrayList("cartelaDeApostasFinal");
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pagamento, container, false);
+
+        Button botaoPagamento = view.findViewById(R.id.botao_pagar);
+        botaoPagamento.setOnClickListener(v -> {
+            requestCadastraAposta();
+            startActivity(new Intent(requireContext(), TelaSucesso.class));
         });
+
+        return view;
     }
 
     private void requestCadastraAposta() {
@@ -52,7 +73,7 @@ public class Pagamento extends AppCompatActivity {
         apostaRequest.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
-                Intent intent = new Intent(Pagamento.this, TelaSucesso.class);
+                Intent intent = new Intent(requireContext(), TelaSucesso.class);
                 intent.putExtra("token", token);
                 intent.putExtra("email", email);
                 intent.putExtra("nome", nome);
@@ -62,7 +83,7 @@ public class Pagamento extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Intent intent = new Intent(Pagamento.this, TelaErro01.class);
+                Intent intent = new Intent(requireContext(), TelaErro01.class);
                 startActivity(intent);
             }
         });
@@ -92,17 +113,6 @@ public class Pagamento extends AppCompatActivity {
             listaDeApostas.add(mapper);
         }
         return listaDeApostas;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Bundle bundle = getIntent().getExtras();
-        token = bundle.getString("token");
-        email = bundle.getString("email");
-        nome = bundle.getString("nome");
-        celular = bundle.getString("celular");
-        cartelaDeApostasFinal = bundle.getParcelableArrayList("cartelaDeApostasFinal");
     }
 
 }

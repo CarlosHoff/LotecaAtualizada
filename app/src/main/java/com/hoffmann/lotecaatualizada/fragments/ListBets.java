@@ -1,20 +1,25 @@
-package com.hoffmann.lotecaatualizada;
+package com.hoffmann.lotecaatualizada.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.adapters.BetAdapter;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.viewmodel.BetsListViewModel;
@@ -22,33 +27,48 @@ import com.hoffmann.lotecaatualizada.viewmodel.BetsListViewModel;
 import java.io.Serializable;
 import java.util.List;
 
-public class ListBets extends AppCompatActivity {
+public class ListBets extends Fragment {
+
     private String email, token, nome, celular;
     private Button paymentButton;
     private BetAdapter adapter;
     private ActionMode actionMode;
     private BetsListViewModel viewModel;
     List<BetUserDto> betUserList;
+    RecyclerView recyclerView;
+
+    public ListBets() {
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_de_apostas);
+        if (getArguments() != null) {
+            token = requireActivity().getIntent().getExtras().getString("token");
+            email = requireActivity().getIntent().getExtras().getString("email");
+            nome = requireActivity().getIntent().getExtras().getString("nome");
+            celular = requireActivity().getIntent().getExtras().getString("celular");
+        }
+    }
 
-        startComponents();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_list_bets, container, false);
 
-        RecyclerView recyclerView = findViewById(R.id.recicleViewId);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BetAdapter(this, betUserList);
+        startComponents(view);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapter = new BetAdapter(requireContext(), betUserList);
         recyclerView.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(BetsListViewModel.class);
-        viewModel.getBettingCards().observe(this, betList -> {
+        viewModel.getBettingCards().observe(getViewLifecycleOwner(), betList -> {
             adapter.setUserBets(betList);
             adapter.notifyDataSetChanged();
         });
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHandler(0, ItemTouchHelper.LEFT));
+        ItemTouchHelper helper = new ItemTouchHelper(new ListBets.ItemTouchHandler(0, ItemTouchHelper.LEFT));
         helper.attachToRecyclerView(recyclerView);
 
         adapter.setListener(new BetAdapter.BetAdapterListener() {
@@ -63,34 +83,25 @@ public class ListBets extends AppCompatActivity {
             }
         });
 
-        paymentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListBets.this, Pagamento.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("cartelaDeApostasFinal", (Serializable) betUserList);
-                bundle.putString("email", email);
-                bundle.putString("token", token);
-                bundle.putString("nome", nome);
-                bundle.putString("celular", celular);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+        paymentButton.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), Pagamento.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("cartelaDeApostasFinal", (Serializable) betUserList);
+            bundle.putString("email", email);
+            bundle.putString("token", token);
+            bundle.putString("nome", nome);
+            bundle.putString("celular", celular);
+            intent.putExtras(bundle);
+            startActivity(intent);
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        token = getIntent().getExtras().getString("token");
-        email = getIntent().getExtras().getString("email");
-        nome = getIntent().getExtras().getString("nome");
-        celular = getIntent().getExtras().getString("celular");
+        return view;
     }
 
     private void enableActionMode(int position) {
-        if (actionMode == null){
-            actionMode = startSupportActionMode(new ActionMode.Callback() {
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        if (actionMode == null) {
+            actionMode = activity.startSupportActionMode(new ActionMode.Callback() {
                 @Override
                 public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                     mode.getMenuInflater().inflate(R.menu.menu_delete, menu);
@@ -104,7 +115,7 @@ public class ListBets extends AppCompatActivity {
 
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                    if (item.getItemId() == R.id.action_delete){
+                    if (item.getItemId() == R.id.action_delete) {
                         adapter.deleteBets();
                         mode.finish();
                         return true;
@@ -112,11 +123,12 @@ public class ListBets extends AppCompatActivity {
                     return false;
                 }
 
+                @Override
                 public void onDestroyActionMode(ActionMode mode) {
                     adapter.getSelectedItems().clear();
                     List<BetUserDto> betUserDtos = adapter.getUserBets();
-                    for (BetUserDto betUser : betUserDtos){
-                        if (betUser.isSelected()){
+                    for (BetUserDto betUser : betUserDtos) {
+                        if (betUser.isSelected()) {
                             betUser.setSelected(false);
                         }
                     }
@@ -127,14 +139,14 @@ public class ListBets extends AppCompatActivity {
         }
         adapter.toggleSelection(position);
         final int size = adapter.getSelectedItems().size();
-        if (size == 0){
+        if (size == 0) {
             actionMode.finish();
-
         } else {
-            actionMode.setTitle(size + "");
+            actionMode.setTitle(String.valueOf(size));
             actionMode.invalidate();
         }
     }
+
 
     private  class ItemTouchHandler extends ItemTouchHelper.SimpleCallback {
         public ItemTouchHandler(int dragDirs, int swipeDirs) {
@@ -159,10 +171,11 @@ public class ListBets extends AppCompatActivity {
     }
 
 
-    private void startComponents() {
-        paymentButton = findViewById(R.id.botaoIrPagamento);
-        Bundle bundle = getIntent().getExtras();
+    private void startComponents(View view) {
+        paymentButton = view.findViewById(R.id.botaoIrPagamento);
+        Bundle bundle = requireActivity().getIntent().getExtras();
         betUserList = bundle.getParcelableArrayList("cartelaDeApostasFinal");
+        recyclerView = view.findViewById(R.id.recicleViewId);
 
     }
 }

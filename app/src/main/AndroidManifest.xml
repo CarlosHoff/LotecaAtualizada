@@ -26,19 +26,10 @@
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".Niquel"
-            android:exported="false" />
-        <activity
             android:name=".Menu"
             android:exported="false" />
         <activity
             android:name=".TelaSucesso"
-            android:exported="false" />
-        <activity
-            android:name=".Pagamento"
-            android:exported="false" />
-        <activity
-            android:name=".ListBets"
             android:exported="false" />
         <activity
             android:name=".Register"
@@ -54,6 +45,12 @@
             android:exported="false" />
         <activity
             android:name=".fragments.MegaTola"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.SlotMachine"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.ListBets"
             android:exported="false" />
         <activity
             android:name=".Splash"
