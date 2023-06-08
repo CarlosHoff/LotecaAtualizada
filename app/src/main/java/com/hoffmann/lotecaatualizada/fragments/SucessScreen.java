@@ -38,7 +38,7 @@ public class SucessScreen extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sucess_screen, container, false);
 
-        new Handler().postDelayed(() -> replaceFragment(new Profile()), 5000);
+        new Handler().postDelayed(() -> replaceFragment(new Games()), 4000);
         return view;
     }
 
