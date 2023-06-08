@@ -3,6 +3,7 @@ package com.hoffmann.lotecaatualizada.fragments;
 import static android.content.Context.MODE_PRIVATE;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.MEGATOLA_EXPLICACAO;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.VALOR_APOSTA_MEGA_TOLA;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
@@ -22,6 +23,7 @@ import com.hoffmann.lotecaatualizada.R;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,11 +65,6 @@ public class MegaTola extends Fragment {
         if (cardsBetsFinal == null) {
             cardsBetsFinal = new ArrayList<>();
         }
-
-
-//        if (cardsBetsFinal != null){
-//            betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
-//        }
     }
 
     @Override
@@ -76,6 +73,8 @@ public class MegaTola extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mega_tola, container, false);
 
         initComponents(view);
+
+        betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
 
         sharedPreferences = requireActivity().getSharedPreferences("MEGATOLA", MODE_PRIVATE);
         if (!sharedPreferences.contains("hasVisitedActivity")) {
