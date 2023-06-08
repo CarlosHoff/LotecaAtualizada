@@ -2,7 +2,6 @@ package com.hoffmann.lotecaatualizada.fragments;
 
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.LOTECA_URL;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.hoffmann.lotecaatualizada.R;
-import com.hoffmann.lotecaatualizada.TelaErro01;
-import com.hoffmann.lotecaatualizada.TelaSucesso;
 import com.hoffmann.lotecaatualizada.client.BetsService;
 import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.domain.request.BetRequest;
@@ -44,7 +43,6 @@ public class Pagamento extends Fragment {
             celular = getArguments().getString("celular");
             cartelaDeApostasFinal = getArguments().getParcelableArrayList("cartelaDeApostasFinal");
         }
-
     }
 
     @Override
@@ -55,9 +53,8 @@ public class Pagamento extends Fragment {
         Button botaoPagamento = view.findViewById(R.id.botao_pagar);
         botaoPagamento.setOnClickListener(v -> {
             requestCadastraAposta();
-            startActivity(new Intent(requireContext(), TelaSucesso.class));
+            replaceFragment(new SucessScreen());
         });
-
         return view;
     }
 
@@ -73,18 +70,14 @@ public class Pagamento extends Fragment {
         apostaRequest.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
-                Intent intent = new Intent(requireContext(), TelaSucesso.class);
-                intent.putExtra("token", token);
-                intent.putExtra("email", email);
-                intent.putExtra("nome", nome);
-                intent.putExtra("celular", celular);
-                startActivity(intent);
+                if (response.isSuccessful()) {
+                    replaceFragment(new SucessScreen());
+                }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Intent intent = new Intent(requireContext(), TelaErro01.class);
-                startActivity(intent);
+                replaceFragment(new ErrorScreen());
             }
         });
     }
@@ -113,6 +106,20 @@ public class Pagamento extends Fragment {
             listaDeApostas.add(mapper);
         }
         return listaDeApostas;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("email", email);
+        args.putString("token", token);
+        args.putString("nome", nome);
+        args.putString("celular", celular);
+        fragment.setArguments(args);
+        fragmentTransaction.replace(R.id.fragment_pagamento, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 }

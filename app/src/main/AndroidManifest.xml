@@ -29,13 +29,7 @@
             android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".TelaSucesso"
-            android:exported="false" />
-        <activity
             android:name=".Register"
-            android:exported="false" />
-        <activity
-            android:name=".TelaErro01"
             android:exported="false" />
         <activity
             android:name=".fragments.Profile"
@@ -51,6 +45,12 @@
             android:exported="false" />
         <activity
             android:name=".fragments.ListBets"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.SucessScreen"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.ErrorScreen"
             android:exported="false" />
         <activity
             android:name=".Splash"

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.hoffmann.lotecaatualizada.fragments.ErrorScreen;
 import com.hoffmann.lotecaatualizada.viewmodel.LoginViewModel;
 
 public class Login extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class Login extends AppCompatActivity {
                     startActivity(menu);
                 }, 1000);
             } else {
-                startActivity(new Intent(Login.this, TelaErro01.class));
+                startActivity(new Intent(Login.this, ErrorScreen.class));
             }
         }));
     }

@@ -18,11 +18,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hoffmann.lotecaatualizada.Login;
 import com.hoffmann.lotecaatualizada.R;
-import com.hoffmann.lotecaatualizada.TelaErro01;
 import com.hoffmann.lotecaatualizada.domain.response.ProfileResponse;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 import com.hoffmann.lotecaatualizada.utilitario.Utils;
@@ -33,7 +34,7 @@ import java.util.Objects;
 public class Profile extends Fragment {
 
     private TextView name, emailScreen, cellphone;
-    private String email, token, nome, cell;
+    private String email, token;
     private final Utils utils = new Utils();
     SharedPreferences sharedPreferences;
 
@@ -53,8 +54,6 @@ public class Profile extends Fragment {
         SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         email = model.getEmail().getValue();
         token = model.getToken().getValue();
-        nome = model.getNome().getValue();
-        cell = model.getCelular().getValue();
     }
 
     @Override
@@ -78,7 +77,7 @@ public class Profile extends Fragment {
                 user.setEmail(Objects.requireNonNull(email));
                 fillScreen(user);
             } else {
-                startActivity(new Intent(getContext(), TelaErro01.class));
+                replaceFragment(new ErrorScreen());
             }
         });
         return view;
@@ -114,6 +113,14 @@ public class Profile extends Fragment {
 
         TextView negativeButton = dialog.findViewById(R.id.botao_negative);
         negativeButton.setOnClickListener(v -> startActivity(new Intent(getContext(), Login.class)));
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_perfil, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 }
