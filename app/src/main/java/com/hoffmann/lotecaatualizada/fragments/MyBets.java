@@ -46,6 +46,7 @@ public class MyBets extends Fragment {
 
         viewModel.getBets(token, email).observe(getViewLifecycleOwner(), allBetsResponses -> {
             adapter.setMyBets(allBetsResponses);
+            adapter.notifyDataSetChanged();
         });
 
         return view;
