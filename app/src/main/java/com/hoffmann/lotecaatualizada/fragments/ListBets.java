@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ import com.hoffmann.lotecaatualizada.domain.dto.BetUserDto;
 import com.hoffmann.lotecaatualizada.viewmodel.BetsListViewModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListBets extends Fragment {
@@ -44,10 +47,11 @@ public class ListBets extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            token = requireActivity().getIntent().getExtras().getString("token");
-            email = requireActivity().getIntent().getExtras().getString("email");
-            nome = requireActivity().getIntent().getExtras().getString("nome");
-            celular = requireActivity().getIntent().getExtras().getString("celular");
+            betUserList = getArguments().getParcelableArrayList("cartelaDeApostasFinal");
+            token = getArguments().getString("token");
+            email = getArguments().getString("email");
+            nome = getArguments().getString("nome");
+            celular = getArguments().getString("celular");
         }
     }
 
@@ -84,15 +88,19 @@ public class ListBets extends Fragment {
         });
 
         paymentButton.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), Pagamento.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("cartelaDeApostasFinal", (Serializable) betUserList);
-            bundle.putString("email", email);
-            bundle.putString("token", token);
-            bundle.putString("nome", nome);
-            bundle.putString("celular", celular);
-            intent.putExtras(bundle);
-            startActivity(intent);
+            Fragment payment = new Pagamento();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Bundle args = new Bundle();
+            args.putString("email", email);
+            args.putString("token", token);
+            args.putString("nome", nome);
+            args.putString("celular", celular);
+            args.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(betUserList));
+            payment.setArguments(args);
+            fragmentTransaction.replace(R.id.fragmennt_list_bets, payment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
 
         return view;
@@ -173,8 +181,6 @@ public class ListBets extends Fragment {
 
     private void startComponents(View view) {
         paymentButton = view.findViewById(R.id.botaoIrPagamento);
-        Bundle bundle = requireActivity().getIntent().getExtras();
-        betUserList = bundle.getParcelableArrayList("cartelaDeApostasFinal");
         recyclerView = view.findViewById(R.id.recicleViewId);
 
     }

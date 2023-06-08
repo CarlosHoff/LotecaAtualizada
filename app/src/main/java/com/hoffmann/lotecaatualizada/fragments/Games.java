@@ -42,47 +42,25 @@ public class Games extends Fragment {
         model.getNome().observe(getViewLifecycleOwner(), this::getName);
         model.getCelular().observe(getViewLifecycleOwner(), this::getCelular);
 
-        megaTolaBotao.setOnClickListener(v -> goMegaTola());
-        roletola.setOnClickListener(v -> goRoleta());
-        niquel.setOnClickListener(v -> goSlotMachine());
+        megaTolaBotao.setOnClickListener(v -> replaceFragment(new MegaTola()));
+        roletola.setOnClickListener(v -> replaceFragment(new Roleta()));
+        niquel.setOnClickListener(v -> replaceFragment(new SlotMachine()));
 
         return view;
     }
 
-    private void goSlotMachine() {
-        Fragment slotMachine = new SlotMachine();
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_games, slotMachine);
+        Bundle args = new Bundle();
+        args.putString("email", email);
+        args.putString("token", token);
+        args.putString("nome", nome);
+        args.putString("celular", celular);
+        fragment.setArguments(args);
+        fragmentTransaction.replace(R.id.fragment_games, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-    }
-
-    private void goMegaTola() {
-        Fragment megatola = new MegaTola();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_games, megatola);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-    private void goRoleta() {
-        Fragment roleta = new Roleta();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_games, roleta);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-    private void goActivity(Class<?> activityClass) {
-        Intent intent = new Intent(getActivity(), activityClass);
-        intent.putExtra("email", email);
-        intent.putExtra("token", token);
-        intent.putExtra("nome", nome);
-        intent.putExtra("celular", celular);
-        startActivity(intent);
     }
 
     private void getToken(String token) {

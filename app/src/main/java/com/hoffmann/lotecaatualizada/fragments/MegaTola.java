@@ -5,7 +5,6 @@ import static com.hoffmann.lotecaatualizada.utilitario.Constantes.MEGATOLA_EXPLI
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.OK;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.hoffmann.lotecaatualizada.R;
@@ -54,27 +54,26 @@ public class MegaTola extends Fragment {
 
         if (getArguments() != null) {
             cardsBetsFinal = getArguments().getParcelableArrayList("cartelaDeApostasFinal");
-        } else if (cardsBetsFinal ==  null) {
-            cardsBetsFinal = new ArrayList<>();
-        } else {
-            finalizeBets.setEnabled(true);
-            finalizeBets.setBackground(AppCompatResources.getDrawable(requireContext(), R.drawable.botao_desativado_aposta));
-            finalizeBets.setTextColor(requireActivity().getColor(R.color.roxo));
+            token = getArguments().getString("token");
+            email = getArguments().getString("email");
+            nome = getArguments().getString("nome");
+            celular = getArguments().getString("celular");
         }
-        //betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
 
+        if (cardsBetsFinal == null) {
+            cardsBetsFinal = new ArrayList<>();
+        }
+
+
+//        if (cardsBetsFinal != null){
+//            betsTotalValues.setText(NumberFormat.getCurrencyInstance().format(VALOR_APOSTA_MEGA_TOLA * cardsBetsFinal.size()));
+//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mega_tola, container, false);
-
-        token = requireActivity().getIntent().getStringExtra("token");
-        email = requireActivity().getIntent().getStringExtra("email");
-        nome = requireActivity().getIntent().getStringExtra("nome");
-        celular = requireActivity().getIntent().getStringExtra("celular");
-        //cardsBetsFinal = requireActivity().getIntent().getParcelableArrayListExtra("cartelaDeApostasFinal");
 
         initComponents(view);
 
@@ -98,16 +97,19 @@ public class MegaTola extends Fragment {
             long[] mapper = createMapper(cardsBets);
             cardsBetsFinal.add(new BetUserDto(mapper));
 
-            Intent intent = new Intent(requireContext(), ListBets.class);
-            intent.putExtra("email", email);
-            intent.putExtra("token", token);
-            intent.putExtra("nome", nome);
-            intent.putExtra("celular", celular);
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
-            intent.putExtras(bundle);
-            startActivity(intent);
-
+            Fragment listBets = new ListBets();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Bundle args = new Bundle();
+            args.putString("email", email);
+            args.putString("token", token);
+            args.putString("nome", nome);
+            args.putString("celular", celular);
+            args.putParcelableArrayList("cartelaDeApostasFinal", new ArrayList<>(cardsBetsFinal));
+            listBets.setArguments(args);
+            fragmentTransaction.replace(R.id.fragment_mega_tola, listBets);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
 
         return view;
