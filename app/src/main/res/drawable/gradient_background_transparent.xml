@@ -9,6 +9,4 @@
         android:type="linear">
     </gradient>
 
-    <corners android:radius="20dp"/>
-
 </shape>

@@ -224,7 +224,7 @@ public class Roleta extends Fragment {
 
         for (Button iterationButton : valueButtons) {
             if (botao.equals(iterationButton)) {
-                iterationButton.setBackground((AppCompatResources.getDrawable(requireContext(), R.drawable.shape_botao_redondo_selecionado)));
+                iterationButton.setBackground((AppCompatResources.getDrawable(requireContext(), R.drawable.shape_botao_selecionado)));
                 iterationButton.setTextColor(requireActivity().getApplication().getColor(R.color.roxo));
                 iterationButton.setClickable(false);
                 viewModel.setSelectedValue(iterationButton.getText().toString());
