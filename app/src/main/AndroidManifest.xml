@@ -40,9 +40,10 @@
         <activity
             android:name=".fragments.MegaTola"
             android:exported="false" />
-        <activity
-            android:name=".fragments.SlotMachine"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".fragments.SlotMachine"-->
+<!--            android:exported="false"-->
+<!--            android:screenOrientation="landscape"/>-->
         <activity
             android:name=".fragments.ListBets"
             android:exported="false" />
@@ -52,12 +53,16 @@
         <activity
             android:name=".fragments.ErrorScreen"
             android:exported="false" />
+
+        <activity
+            android:name=".fragments.SlotMachine"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
         <activity
             android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
