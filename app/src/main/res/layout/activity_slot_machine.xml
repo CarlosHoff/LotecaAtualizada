@@ -12,18 +12,18 @@
 
         <TextView
             android:id="@+id/txt_score"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/frame_bar"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shape_botao_normal"
-            android:padding="16dp"
-            android:layout_marginTop="12dp"
+            android:padding="6dp"
+            android:layout_marginTop="10dp"
             android:text="1000"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <FrameLayout
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/background_slot_machine">
+            android:background="@drawable/frame">
 
 
             <LinearLayout
@@ -78,16 +78,16 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_voltar"
-            android:layout_width="140dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shape_botao_normal"
             android:text="VOLTAR"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
 
