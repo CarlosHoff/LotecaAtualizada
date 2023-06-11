@@ -45,8 +45,14 @@ public class Games extends Fragment {
 
         megaTolaBotao.setOnClickListener(v -> replaceFragment(new MegaTola()));
         roletola.setOnClickListener(v -> replaceFragment(new Roleta()));
-        niquel.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), SlotMachine.class)));
+        niquel.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SlotMachine.class);
+            intent.putExtra("email", email);
+            intent.putExtra("token", token);
+            intent.putExtra("nome", nome);
+            intent.putExtra("celular", celular);
+            startActivity(intent);
+        });
 
         return view;
     }
