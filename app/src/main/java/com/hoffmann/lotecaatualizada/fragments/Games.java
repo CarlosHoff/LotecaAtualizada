@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hoffmann.lotecaatualizada.R;
+import com.hoffmann.lotecaatualizada.SlotMachine;
 import com.hoffmann.lotecaatualizada.utilitario.SharedViewModel;
 
 public class Games extends Fragment {
@@ -44,7 +45,8 @@ public class Games extends Fragment {
 
         megaTolaBotao.setOnClickListener(v -> replaceFragment(new MegaTola()));
         roletola.setOnClickListener(v -> replaceFragment(new Roleta()));
-        niquel.setOnClickListener(v -> replaceFragment(new SlotMachine()));
+        niquel.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), SlotMachine.class)));
 
         return view;
     }
