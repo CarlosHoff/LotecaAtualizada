@@ -17,22 +17,20 @@
             android:layout_alignTop="@+id/frame_bar"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/shape_botao_normal"
-            android:padding="6dp"
-            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:fontFamily="@font/noot"
+            android:layout_marginTop="25dp"
             android:text="1000"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textSize="35sp"/>
 
         <FrameLayout
             android:id="@+id/frame_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="580dp"
+            android:layout_height="220dp"
             android:layout_centerInParent="true"
             android:background="@drawable/frame">
-
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -78,16 +76,16 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_voltar"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shape_botao_normal"
-            android:text="VOLTAR"
-            android:layout_marginBottom="15dp"
+            android:text="@string/voltar"
+            android:layout_marginBottom="25dp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
 
