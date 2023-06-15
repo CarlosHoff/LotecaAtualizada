@@ -20,7 +20,7 @@
             android:padding="2dp"
             android:fontFamily="@font/noot"
             android:layout_marginTop="25dp"
-            android:text="1000"
+            android:text="@string/_1000"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="35sp"/>
