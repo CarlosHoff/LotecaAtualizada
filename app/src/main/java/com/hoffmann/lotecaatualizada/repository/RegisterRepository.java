@@ -26,20 +26,20 @@ public class RegisterRepository {
         userService = retrofit.create(UserService.class);
     }
 
-    public LiveData<Void> register(String nome, String apelido, String email, String celular, String cpf, String senha){
-        MutableLiveData<Void> registerResponseLiveData = new MutableLiveData<>();
+    public LiveData<Boolean> register(String nome, String apelido, String email, String celular, String cpf, String senha){
+        MutableLiveData<Boolean> registerResponseLiveData = new MutableLiveData<>();
         Call<Void> userRequest = userService.registerUser(createUserRequest(nome, apelido, email, celular, cpf, senha));
         userRequest.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    registerResponseLiveData.setValue(response.body());
+                    registerResponseLiveData.setValue(true);
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                registerResponseLiveData.setValue(null);
+                registerResponseLiveData.setValue(false);
             }
         });
         return registerResponseLiveData;

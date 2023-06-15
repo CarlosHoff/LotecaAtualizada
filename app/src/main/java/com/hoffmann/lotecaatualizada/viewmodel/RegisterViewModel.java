@@ -13,7 +13,7 @@ public class RegisterViewModel extends ViewModel {
         registerRepository = new RegisterRepository();
     }
 
-    public LiveData<Void> register(String nome, String apelido, String email, String celular, String cpf, String senha){
+    public LiveData<Boolean> register(String nome, String apelido, String email, String celular, String cpf, String senha){
         return registerRepository.register(nome, apelido, email, celular, cpf, senha);
     }
 }

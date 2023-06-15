@@ -4,13 +4,18 @@ import static com.hoffmann.lotecaatualizada.utilitario.Constantes.REGISTER_SUCCE
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.hoffmann.lotecaatualizada.fragments.ErrorScreen;
 import com.hoffmann.lotecaatualizada.viewmodel.RegisterViewModel;
 
 public class Register extends AppCompatActivity {
@@ -26,13 +31,20 @@ public class Register extends AppCompatActivity {
         startComponents();
 
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        registerButton.setOnClickListener(view -> {
-            registerViewModel.register(name.getText().toString(), surname.getText().toString(),
-                    email.getText().toString(), cellphone.getText().toString(), cpf.getText().toString(), password.getText().toString());
-            Toast.makeText(Register.this, REGISTER_SUCCESS, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Register.this, Login.class);
-            startActivity(intent);
-        });
+        registerButton.setOnClickListener(view -> registerViewModel.register(name.getText().toString(), surname.getText().toString(),
+                email.getText().toString(), cellphone.getText().toString(), cpf.getText().toString(), password.getText().toString()).observe(Register.this, registerResponse -> {
+            if (registerResponse) {
+                Toast.makeText(Register.this, REGISTER_SUCCESS, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+            } else {
+                ErrorScreen errorScreen = new ErrorScreen();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                int containerId = R.id.activity_cadastro;
+                fragmentTransaction.replace(containerId, errorScreen);
+                fragmentTransaction.commit();
+            }}));
     }
 
     private void startComponents() {
