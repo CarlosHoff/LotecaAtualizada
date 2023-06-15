@@ -26,7 +26,7 @@ public class ErrorScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_error_screen, container, false);
-        new Handler().postDelayed(this::replaceActivity, 5000);
+        new Handler().postDelayed(this::replaceActivity, 4000);
         return view;
     }
 

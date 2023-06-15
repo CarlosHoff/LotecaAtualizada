@@ -38,6 +38,7 @@ public class Register extends AppCompatActivity {
                 Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
             } else {
+                registerButton.setVisibility(View.INVISIBLE);
                 ErrorScreen errorScreen = new ErrorScreen();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
