@@ -1,5 +1,6 @@
 package com.hoffmann.lotecaatualizada.repository;
 
+import static com.hoffmann.lotecaatualizada.utilitario.Constantes.LOGIN_URL;
 import static com.hoffmann.lotecaatualizada.utilitario.Constantes.LOTECA_URL;
 
 import androidx.lifecycle.LiveData;
@@ -21,7 +22,7 @@ public class LoginRepository {
 
     public LoginRepository() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LOTECA_URL)
+                .baseUrl(LOGIN_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         loginService = retrofit.create(LoginService.class);

@@ -3,11 +3,11 @@ package com.hoffmann.lotecaatualizada.domain.request;
 public class UserRegisterRequest {
 
     private String name;
-    private String cpf;
     private String apelido;
-    private String senha;
-    private String celular;
     private String email;
+    private String celular;
+    private String cpf;
+    private String senha;
 
     public UserRegisterRequest() {
     }
